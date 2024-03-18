@@ -1,5 +1,7 @@
+'use client'
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,9 +14,11 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${inter.className} bg-primaria`}>
-        <div className="flex justify-center min-h-screen">
-          {children}
-        </div>
+        <AuthProvider>
+          <div className="justify-center min-h-screen">
+            {children}
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

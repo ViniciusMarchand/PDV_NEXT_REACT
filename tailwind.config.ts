@@ -31,10 +31,10 @@ module.exports = {
                 '9xl': '5120px',
             },
             colors: {
-              primaria: '#F7F7F7',
-              secundaria: '#FDFDFD',
-              terciaria: '#f97316',
-              terciaria2: '#ea580c',
+              primaria: '#F5F5F5',
+              secundaria: '#FBFBFB',
+              terciaria: '#facc15',
+              terciaria2: '#eab308',
 
             },
             fontFamily: {
