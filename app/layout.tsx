@@ -29,14 +29,12 @@ export default function RootLayout({
     );
   } else {
     return <html lang="pt-br">
-    <body className={`${inter.className} bg-primaria`}>
+    <body className={`${inter.className} bg-primaria  overflow-y-hidden`}>
       <AuthProvider>
-        <div className="justify-center min-h-screen">
-          <Header/>
-          <Sidebar/>
-          <div className="ml-sidebar">
+        <Header/>
+        <div className="h-full flex w-full">
+        <Sidebar/>
             {children}
-          </div>
         </div>
       </AuthProvider>
     </body>

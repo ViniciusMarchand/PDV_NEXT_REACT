@@ -1,8 +1,8 @@
 'use client'
 
 import { useContext } from 'react';
-import CardLayout from '../components/CardLayout';
-import GenericButton from '../components/GenericButton';
+import CardLayout from '../components/common/CardLayout';
+import GenericButton from '../components/common/GenericButton';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AuthContext } from '@/contexts/AuthContext';
 
@@ -24,7 +24,7 @@ export default function App() {
   const onSubmit: SubmitHandler<Inputs> = (user) => login(user);
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center flex-col">
+    <div className="w-full min-h-full flex items-center justify-center flex-col">
       <h1 className="text-[25px] font-bold mb-5">FERRAGEM AVILA</h1>
       <CardLayout>
         <div className="w-[450px] h-[500px] px-10 py-5">

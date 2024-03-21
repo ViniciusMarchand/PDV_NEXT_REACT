@@ -14,7 +14,7 @@ export default function Sidebar() {
     }
 
     return <>
-        <div className="left-0 h-screen bg-secundaria w-sidebar fixed shadow-md py-3 px-2">
+        <div className="left-0 min-h-full bg-secundaria w-sidebar sticky shadow-md py-3 px-2">
             {
                 SideBarData.map(elemento => (
                     <Link href={elemento.path}>
