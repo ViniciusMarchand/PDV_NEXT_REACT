@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "contexts/AuthContext.jsx", "components/common/GenericButton.tsx", "app/produtos/page.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "contexts/AuthContext.jsx", "components/common/GenericButton.tsx", "app/produtos/page.tsx", "components/common/SideOptions.tsx"],
   "exclude": ["node_modules"]
 }

@@ -20,9 +20,9 @@ export default function RootLayout({
       <html lang="pt-br">
         <body className={`${inter.className} bg-primaria`}>
           <AuthProvider>
-            <div className="justify-center min-h-screen">
-              {children}
-            </div>
+              <div className="flex justify-center min-h-screen">
+                  {children}
+              </div>
           </AuthProvider>
         </body>
       </html>
@@ -32,10 +32,10 @@ export default function RootLayout({
     <body className={`${inter.className} bg-primaria  overflow-y-hidden`}>
       <AuthProvider>
         <Header/>
-        <div className="h-full flex w-full">
-        <Sidebar/>
-            {children}
-        </div>
+          <div className="h-full flex w-full">
+          <Sidebar/>
+              {children}
+          </div>
       </AuthProvider>
     </body>
   </html>
