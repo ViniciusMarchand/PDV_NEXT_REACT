@@ -18,7 +18,7 @@ theme: {
       '176': '44rem',
       '192': '48rem',
       '208': '52rem',
-      'sidebar': '250px',
+      'sidebar': '240px',
       'header':'70px'
 
   },

@@ -31,9 +31,9 @@ export default function RootLayout({
     return <html lang="pt-br">
     <body className={`${inter.className} bg-primaria  overflow-y-hidden`}>
       <AuthProvider>
+        <Sidebar/>
         <Header/>
           <div className="h-full flex w-full">
-          <Sidebar/>
               {children}
           </div>
       </AuthProvider>
