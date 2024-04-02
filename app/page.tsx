@@ -5,24 +5,18 @@ import CardLayout from '../components/common/CardLayout';
 import GenericButton from '../components/common/GenericButton';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AuthContext } from '@/contexts/AuthContext';
+import { LoginInputs } from '@/global/Types';
 
 export default function App() {
   const { login } = useContext(AuthContext);
-
-  type Inputs = {
-    username: string
-    password: string
-
-  }
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<LoginInputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (user) => login(user);
-
+  const onSubmit: SubmitHandler<LoginInputs> = (user) => login(user);
+  
   return (
     <div className="w-full min-h-full flex items-center justify-center flex-col">
       <h1 className="text-[25px] font-bold mb-5">FERRAGEM AVILA</h1>
@@ -32,7 +26,7 @@ export default function App() {
             <h2 className=" text-[25px] mt-5">Entrar</h2>
             <p className="mb-5">Sistema de vendas e estoque.</p>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div >
+              <div>
                 <label className="text-[18px]">Username</label>
                 <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("username")} />
               </div>

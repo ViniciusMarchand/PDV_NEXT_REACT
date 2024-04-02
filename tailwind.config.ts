@@ -61,6 +61,7 @@ theme: {
       secundaria: '#FBFBFB',
       terciaria: '#facc15',
       terciaria2: '#eab308',
+      textoContraste:'#fdfdfd',
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
       ring: "hsl(var(--ring))",

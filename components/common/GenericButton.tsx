@@ -3,12 +3,13 @@
 
 export default function GenericButton({
     value = "Insira o texto",
-    onClick = () => {}
+    onClick = () => {},
+    fontSize = '18px',
 
 }) {
     return(
-        <button className="w-full h-full bg-terciaria text-white rounded-md text-[18px] hover:bg-terciaria2 " onClick={() => onClick()}>
+        <button className={`w-full h-full bg-terciaria text-white rounded-md text-[${fontSize}] hover:bg-terciaria2 shadow-md`} onClick={() => onClick()}>
             {value}
-        </button>
+        </button> 
     )
 }

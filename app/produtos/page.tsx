@@ -1,19 +1,19 @@
 import CardLayout from "@/components/common/CardLayout";
-import SideOptions from "@/components/common/SideOptions";
+import GenericButton from "@/components/common/GenericButton";
+import AlertDialogProdutos from "@/components/produtos/AlertDialogProdutos";
 
 export default function produtos() {
-    return <div className="flex w-full h-full">
-
-
-        <div className="w-2/3 mr-2 h-full">
+    return <div className="flex flex-col w-full h-full">
+        <div className="w-full h-[80px] mb-3">
             <CardLayout>
-                <div className="h-[200px]"></div>
+                <div className="h-full w-full flex justify-start items-center px-3  ">
+                    <AlertDialogProdutos/>
+                </div>
             </CardLayout>
         </div>
-
-        <div className="w-1/3">
+        <div className="w-full h-full">
             <CardLayout>
-                <div className="h-full"></div>
+                <div className="h-[200px]"></div>
             </CardLayout>
         </div>
     </div>

@@ -8,7 +8,7 @@ export default function Sidebar() {
 
     function isCurrentPage(path:string) {
         if(pathname === path) {
-            return "text-[#fdfdfd] bg-terciaria";
+            return "text-textoContraste bg-terciaria";
         } 
         return ""
     }
