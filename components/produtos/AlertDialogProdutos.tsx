@@ -5,6 +5,7 @@ import { ProdutoInputs } from "@/global/Types";
 import { CurrencyInput } from "react-currency-mask";
 import ModalButton from "../common/ModalButton";
 import GenericButton from "../common/GenericButton";
+import apiProduto from "@/api/produtoApi";
 export default function AlertDialogProdutos() {
 
     const {
@@ -14,7 +15,13 @@ export default function AlertDialogProdutos() {
         formState: { errors },
     } = useForm<ProdutoInputs>();
 
-    const onSubmit: SubmitHandler<ProdutoInputs> = (produto) => console.warn(produto);
+    const onSubmit: SubmitHandler<ProdutoInputs> = (produto) => {
+        apiProduto.postApi(produto)
+        .then(res => alert("FOI!"))
+        .catch(error => alert("FOI NÃO!"))
+    };
+
+
     return <AlertDialog>
         <AlertDialogContent>
             <form onSubmit={handleSubmit(onSubmit)}>
