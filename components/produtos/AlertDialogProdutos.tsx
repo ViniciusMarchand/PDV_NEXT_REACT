@@ -6,19 +6,29 @@ import { CurrencyInput } from "react-currency-mask";
 import ModalButton from "../common/ModalButton";
 import GenericButton from "../common/GenericButton";
 import apiProduto from "@/api/produtoApi";
+import { useContext } from "react";
+import { ToastContext } from "@/contexts/ToastContext";
 export default function AlertDialogProdutos() {
+
+    const {sucesso, erro} = useContext(ToastContext);
 
     const {
         register,
         handleSubmit,
         setValue,
         formState: { errors },
+        reset
     } = useForm<ProdutoInputs>();
 
     const onSubmit: SubmitHandler<ProdutoInputs> = (produto) => {
         apiProduto.postApi(produto)
-        .then(res => alert("FOI!"))
-        .catch(error => alert("FOI NÃO!"))
+        .then(res => {
+            sucesso("Produto adicionado!")
+            reset()
+        })
+        .catch(error => {
+            erro("Erro ao adicionar produto!")
+        })
     };
 
 
@@ -38,7 +48,7 @@ export default function AlertDialogProdutos() {
                         <input type='number' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("estoque")} required />
                     </div>
                     <div className="w-[200px]">
-                        <label className="text-[18px]">Estoque</label>
+                        <label className="text-[18px]">Unidade de Medida</label>
                         <select className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("unidadeMedida")} required>
                             <option value="" disabled selected>unidade de medida</option>
                             <option value={"UNIDADE"}>Unidade</option>
@@ -61,8 +71,8 @@ export default function AlertDialogProdutos() {
                             onChangeValue={(event, originalValue, maskedValue) => { setValue("preco", Number(originalValue)) }} />
                     </div>
                     <div className="w-full">
-                        <label className="text-[18px]">Descrição</label>
-                        <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("codigoBarrasEAN13")} required />
+                        <label className="text-[18px]">Código de Barras</label>
+                        <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("codigoBarrasEAN13")} required minLength={13} maxLength={13}/>
                     </div>
                 </div>
                 <AlertDialogFooter>

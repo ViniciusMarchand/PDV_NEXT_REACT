@@ -1,6 +1,6 @@
 import CardLayout from "@/components/common/CardLayout";
-import GenericButton from "@/components/common/GenericButton";
 import AlertDialogProdutos from "@/components/produtos/AlertDialogProdutos";
+import TabelaProdutos from "@/components/produtos/TabelaProdutos";
 
 export default function produtos() {
     return <div className="flex flex-col w-full h-full">
@@ -13,7 +13,7 @@ export default function produtos() {
         </div>
         <div className="w-full h-full">
             <CardLayout>
-                <div className="h-[200px]"></div>
+                    <TabelaProdutos/>
             </CardLayout>
         </div>
     </div>
