@@ -9,10 +9,6 @@ export default function Produtos() {
     const [height, setHeight] = useState(0);
     const [key, setKey] = useState(0);
 
-    const atualizarTabela = useCallback(() => {
-        setKey(key + 1);
-    },[key]);
-    
     useEffect(() => {
         if (!ref.current) {
 
@@ -30,7 +26,7 @@ export default function Produtos() {
           resizeObserver.disconnect();
         }
       }, [ref, height]);
-      console.warn(height)
+
       return <div className="flex flex-col w-full h-full" key={key}>
         <div className="w-full h-[80px] mb-3">
             <CardLayout>

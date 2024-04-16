@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from "react";
+import PaginationBar from "../common/PaginationBar";
 
 export default function TabelaProdutos(props: { divHeight: Number}) {
   const ref = useRef<HTMLTableRowElement>(null);
@@ -13,7 +14,7 @@ export default function TabelaProdutos(props: { divHeight: Number}) {
   }, [ref]);
 
   useEffect(() => {
-    const divisao = Math.trunc((Number(divHeight) - height*2) /height);
+    const divisao = Math.trunc((Number(divHeight) - height * 3) /height);
     setTeste([]);
     for(let i = 0; i<divisao; i++) {
       setTeste(current=> [...current, 1]);
@@ -46,5 +47,8 @@ export default function TabelaProdutos(props: { divHeight: Number}) {
         }
       </tbody>
     </table>
+    <div className="w-full h-full flex justify-center items-end">
+      <PaginationBar/>
+    </div>
   </div>
 }

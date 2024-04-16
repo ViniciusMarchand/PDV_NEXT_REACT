@@ -19,7 +19,8 @@ theme: {
       '192': '48rem',
       '208': '52rem',
       'sidebar': '240px',
-      'header':'70px'
+      'header':'70px',
+      'paginationbar':'30px'
 
   },
   screens: {
