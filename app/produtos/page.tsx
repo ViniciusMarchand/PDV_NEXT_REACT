@@ -7,7 +7,11 @@ import { useEffect, useState, useRef, useCallback } from "react";
 export default function Produtos() {
     const ref = useRef<HTMLDivElement>(null);
     const [height, setHeight] = useState(0);
-    const [key, setKey] = useState(0);
+    const [key, setKey] = useState('');
+
+    const updateTable = useCallback(() => {
+      setKey(crypto.randomUUID());
+    },[]);
 
     useEffect(() => {
         if (!ref.current) {
@@ -27,17 +31,17 @@ export default function Produtos() {
         }
       }, [ref, height]);
 
-      return <div className="flex flex-col w-full h-full" key={key}>
+      return <div className="flex flex-col w-full h-full">
         <div className="w-full h-[80px] mb-3">
             <CardLayout>
                 <div className="h-full w-full flex justify-start items-center px-3  ">
-                    <AlertDialogProdutos />
+                    <AlertDialogProdutos updateTable={updateTable}/>
                 </div>
             </CardLayout>
         </div>
         <div className="w-full h-full" ref={ref}>
             <CardLayout>
-                <TabelaProdutos divHeight={height} />
+                <TabelaProdutos divHeight={height} key={key}/>
             </CardLayout>
         </div>
     </div>

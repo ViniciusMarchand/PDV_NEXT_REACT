@@ -8,8 +8,8 @@ import GenericButton from "../common/GenericButton";
 import apiProduto from "@/api/produtoApi";
 import { useContext } from "react";
 import { ToastContext } from "@/contexts/ToastContext";
-export default function AlertDialogProdutos() {
-
+export default function AlertDialogProdutos(props:{updateTable:Function}) {
+    const {updateTable} = props;
     const {sucesso, erro} = useContext(ToastContext);
 
     const {
@@ -17,18 +17,24 @@ export default function AlertDialogProdutos() {
         handleSubmit,
         setValue,
         formState: { errors },
-        reset
-    } = useForm<ProdutoInputs>();
+        reset,
+    } = useForm<ProdutoInputs>({
+        defaultValues: {
+            precoFornecedor:0,
+            preco:0
+        }
+    });
 
     const onSubmit: SubmitHandler<ProdutoInputs> = (produto) => {
         apiProduto.postApi(produto)
         .then(res => {
             sucesso("Produto adicionado!")
             reset()
+            updateTable();
         })
         .catch(error => {
             erro("Erro ao adicionar produto!")
-        })
+        }).finally(() => console.warn(produto));
     };
 
 
@@ -49,8 +55,8 @@ export default function AlertDialogProdutos() {
                     </div>
                     <div className="w-[200px]">
                         <label className="text-[18px]">Unidade de Medida</label>
-                        <select className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("unidadeMedida")} required>
-                            <option value="" disabled selected>unidade de medida</option>
+                        <select className='text-[17px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("unidadeMedida")} required defaultValue={""}>
+                            <option value="" disabled>unidade de medida</option>
                             <option value={"UNIDADE"}>Unidade</option>
                             <option value={"METRO"}>Metro</option>
                             <option value={"GRAMA"}>Grama</option>

@@ -5,6 +5,7 @@ export type LoginInputs = {
 }
 
 export type ProdutoInputs = {
+    id: number | undefined,
     descricao: string,
     unidadeMedida: string,
     estoque: number,

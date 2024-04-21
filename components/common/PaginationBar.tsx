@@ -1,10 +1,11 @@
-
 'use client'
 
-export default function PaginationBar() {
+export default function PaginationBar(props: {pagination:any}) {
+    const pagination = props.pagination;
+    const totalPages = pagination.totalPages;
+
     return (
-
-
+        totalPages > 1 &&
         <nav className="mt-1">
             <ul className="flex items-center -space-x-px h-paginationbar text-sm">
                 <li>
