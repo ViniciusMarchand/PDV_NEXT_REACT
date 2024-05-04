@@ -26,8 +26,8 @@ export default function PaginationBar(props: {pagination:any}) {
                 {
                     counter.map((element, i) => (
                         <li key={i}>
-                            <Link href={i.toString()}>
-                                <p className="flex items-center justify-center px-3 h-paginationbar leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{i+1}</p>
+                            <Link href={(i + 1).toString()}>
+                                <p className="flex items-center justify-center px-3 h-paginationbar leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{i + 1}</p>
                             </Link>
                         </li>
                     ))

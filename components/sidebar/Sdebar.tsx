@@ -1,7 +1,9 @@
 'use client'
 import { SideBarData } from "@/constants/Sidebar";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Logo from "@/public/imgs/logo-header.png"
+import Image from "next/image";
 
 export default function Sidebar() {
     const pathname = usePathname();
@@ -14,10 +16,11 @@ export default function Sidebar() {
     }
 
     return <>
-        <div className="left-0 min-h-full bg-secundaria w-sidebar fixed shadow-md py-0 z-10">
-            <div className="h-header flex flex-col justify-center items-center mb-3">
-                <h1 className="font-bold text-[18px]">Ferragem</h1>
-                <h2 className="font-bold">Avila</h2>
+        <div className="left-0 min-h-full bg-secundaria w-sidebar fixed shadow-md py-0 px-8 z-10">
+            <div className="min-h-header flex flex-col justify-center items-center my-5">
+                {/* <h1 className="font-bold text-[18px]">Ferragem</h1>
+                <h2 className="font-bold">Avila</h2> */}
+                <Image src={Logo} alt="logo" height={150}/>
             </div>
             {
                 SideBarData.map((elemento, i) => (
