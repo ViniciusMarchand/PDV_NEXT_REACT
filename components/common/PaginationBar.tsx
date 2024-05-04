@@ -5,7 +5,6 @@ import Link from "next/link";
 export default function PaginationBar(props: {pagination:any}) {
     const pagination = props.pagination;
     const totalPages = pagination.totalPages;
-    console.warn(pagination);
     const {pageNumber} = pagination.pageable;
 
     const counter = Array(totalPages).fill(0);
