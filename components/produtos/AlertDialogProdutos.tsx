@@ -34,7 +34,7 @@ export default function AlertDialogProdutos(props:{updateTable:Function}) {
         })
         .catch(error => {
             erro("Erro ao adicionar produto!")
-        }).finally(() => console.warn(produto));
+        });
     };
 
 

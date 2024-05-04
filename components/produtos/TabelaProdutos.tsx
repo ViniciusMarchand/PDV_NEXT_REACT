@@ -1,40 +1,29 @@
 'use client'
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import PaginationBar from "../common/PaginationBar";
 import apiProduto from "@/api/produtoApi";
 import { ProdutoInputs } from "@/global/Types";
+import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
 
-export default function TabelaProdutos(props: { divHeight: Number}) {
-  const ref = useRef<HTMLTableRowElement>(null);
-  const { divHeight } = props;
-  const [height, setHeight] = useState(0);
+export default function TabelaProdutos(props:{page:number}) {
+
+  const page = props.page;
   const [pagination, setPagination] = useState();
   const [pageSize, setPageSize] = useState<Number>(0);
   const [productList, setProductList] = useState<ProdutoInputs[]>();
+  const { teste } = useContext(ProductModalFormContext);
 
   useEffect(() => {
-    if (ref) {
-      setHeight(Number(ref.current?.offsetHeight));
-    }
-  }, [ref]);
-
-  useEffect(() => {
-    const divisao = Math.trunc((Number(divHeight) - height * 3) /height);
-    setPageSize(divisao);
-    
-  },[divHeight, height]);
-
-  useEffect(() => {
-    apiProduto.getApi(0, pageSize).then(res => {
+    apiProduto.getApi(page).then(res => {
       setProductList(res.data.content);
       setPagination(res.data);
     });
-  },[pageSize]);
+  }, [page]);
 
-  return <div className="w-full p-3">
-    <table className="w-full text-center h-full">
+  return <div className="w-full p-3   max-h-full overflow-y-auto ">
+    <table className="w-full text-center h-full overflow-y-scroll">
       <thead className="w-full [&>th]:py-2">
-        <tr className="[&>th]:py-1" ref={ref}>
+        <tr className="[&>th]:py-1">
           <th>ID</th>
           <th>DESCRIÇÃO</th>
           <th>ESTOQUE</th>
@@ -46,7 +35,7 @@ export default function TabelaProdutos(props: { divHeight: Number}) {
       <tbody>
         {
           productList?.map((product, i) => (
-            
+
             <tr key={i} className="border-t [&>td]:py-1">
               <td>{product.id}</td>
               <td>{product.descricao}</td>
@@ -57,13 +46,13 @@ export default function TabelaProdutos(props: { divHeight: Number}) {
             </tr>
           ))
         }
-        
+
       </tbody>
     </table>
-    <div className="w-full h-full flex justify-center items-end">
+    <div className="w-full flex justify-center items-end">
       {
         pagination !== undefined &&
-        <PaginationBar pagination={pagination}/>
+        <PaginationBar pagination={pagination} />
       }
     </div>
   </div>

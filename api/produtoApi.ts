@@ -3,11 +3,10 @@ import http from '@/utils/http';
 import { ProdutoInputs } from '@/global/Types';
 import { apiLink } from '@/constants/env';
 const apiProduto = {
-    getApi: async (page:number, size:Number
+    getApi: async (page:number
         // sort:string[]
     ) => {
-    
-        const URL = apiLink + `produto/ativos?page=${page}&size=${size}&sort=id`;
+        const URL = apiLink + `produto/ativos?page=${page}&size=22&sort=id`;
         return await axios.get(URL)
         .then((res) => res)
         .catch(error => {

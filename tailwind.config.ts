@@ -60,7 +60,7 @@ theme: {
     colors: {
       primaria: '#F5F5F5',
       secundaria: '#FBFBFB',
-      terciaria: '#facc15',
+      terciaria: '#F5CB28',
       terciaria2: '#eab308',
       textoContraste:'#fdfdfd',
       border: "hsl(var(--border))",

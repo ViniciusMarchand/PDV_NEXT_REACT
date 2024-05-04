@@ -32,7 +32,7 @@ export default function RootLayout({
     );
   } else {
     return <html lang="pt-br">
-    <body className={`${inter.className} bg-primaria  max-h-screen`} suppressHydrationWarning={true}>
+    <body className={`${inter.className} bg-primaria  h-screen max-h-screen overflow-hidden`} suppressHydrationWarning={true}>
       <ToastProvider>
         <AuthProvider>
           <Header/>
