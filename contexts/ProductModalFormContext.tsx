@@ -13,6 +13,7 @@ export const ProductModalFormContext = createContext<any>(null);
 export const ProductModalFormProvider = (props: { children: React.ReactNode }) => {
     const { children } = props;
     const [formStatus, setFormStatus] = useState(productFormStatus.Adicionar);
+    const [selectedProduct, setSelectedProduct] = useState<ProductInputs>();
     const [key, setKey] = useState("");
     const teste = () => {
         alert("FOI");
@@ -34,21 +35,26 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
         }
     });
 
-    const onSubmit: SubmitHandler<ProductInputs> = (produto) => {
+    const onSubmit: SubmitHandler<ProductInputs> = (product) => {
         if (formStatus === productFormStatus.Adicionar) {
-            productApi.post(produto)
+            productApi.post(product)
                 .then(res => {
-                    successToast("Produto adicionado!")
-                    reset()
-                    updateKey();
+                    successToast("Produto adicionado com sucesso!");
+                    reset();
                 })
-                .catch(error => {
-                    errorToast("Erro ao adicionar produto!")
-                });
+                .catch(error => errorToast("Erro ao adicionar produto!"))
+                .finally(() => updateKey());
         }
         if (formStatus === productFormStatus.Editar) {
-
-        }
+            if(selectedProduct?.id !== undefined)
+            productApi.put(selectedProduct.id, product)
+            .then(res => {
+                successToast("Produto editado com sucesso!");
+                reset();
+            })
+            .catch(error => errorToast("Erro ao editar produto!"))
+            .finally(() => updateKey());
+        }   
     };
 
     const updateKey = () => {
@@ -67,6 +73,8 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
         setValue("precoFornecedor", precoFornecedor);
         setValue("preco", preco);
         setValue("codigoBarrasEAN13", codigoBarrasEAN13);
+
+        setSelectedProduct(product);
     };
     
   
