@@ -4,10 +4,11 @@ import PaginationBar from "../common/PaginationBar";
 import productApi from "@/api/productApi";
 import { ProductInputs } from "@/global/Types";
 import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
-import { FaRegTrashCan } from "react-icons/fa6";
+import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import DeleteProductDialog from "./DeleteProductDialog";
 import { useRouter } from "next/navigation";
+import { AlertDialogTrigger } from "../ui/alert-dialog";
 
 export default function TabelaProdutos(props: { page: number }) {
 
@@ -15,7 +16,7 @@ export default function TabelaProdutos(props: { page: number }) {
   const [pagination, setPagination] = useState();
   const [productList, setProductList] = useState<ProductInputs[]>();
   const [chosenProduct, setChosenProduct] = useState<ProductInputs>();
-  const { teste } = useContext(ProductModalFormContext);
+  const { teste, statusToEdit } = useContext(ProductModalFormContext);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function TabelaProdutos(props: { page: number }) {
       setProductList(res.data.content);
       setPagination(res.data);
     });
-  }, [page]);
+  }, [page, router]);
 
   return <div className="w-full p-3   max-h-full overflow-y-auto">
     <Dialog>
@@ -53,9 +54,12 @@ export default function TabelaProdutos(props: { page: number }) {
                 <td>{product.unidadeMedida}</td>
                 <td>{product.preco}</td>
                 <td>{product.codigoBarrasEAN13}</td>
-                <td onClick={() => setChosenProduct(product)}>
-                  <DialogTrigger>
-                    <FaRegTrashCan />
+                <td onClick={() => setChosenProduct(product)} className="flex">
+                  <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>
+                    <FaRegPenToSquare className="hover:text-terciaria transition"/>
+                  </AlertDialogTrigger>
+                  <DialogTrigger title="Deletar">
+                    <FaRegTrashCan className="hover:text-terciaria transition"/>
                   </DialogTrigger>
                 </td>
               </tr>
