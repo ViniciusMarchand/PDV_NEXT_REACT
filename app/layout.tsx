@@ -2,10 +2,11 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
-import {ToastProvider} from "@/contexts/ToastContext"
+import { ToastProvider } from "@/contexts/ToastContext"
 import { usePathname } from "next/navigation";
 import Header from "@/components/header/Header";
 import Sidebar from "@/components/sidebar/Sdebar";
+import { ProductModalFormProvider } from "@/contexts/ProductModalFormContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,17 +15,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
+
   const pathname = usePathname();
-  if(pathname === "/") {
+  if (pathname === "/") {
     return (
       <html lang="pt-br">
         <body className={`${inter.className} bg-primaria`} suppressHydrationWarning={true}>
           <ToastProvider>
             <AuthProvider>
-                <div className="flex justify-center min-h-screen">
-                    {children}
-                </div>
+              <div className="flex justify-center min-h-screen">
+                {children}
+              </div>
             </AuthProvider>
           </ToastProvider>
         </body>
@@ -32,19 +33,21 @@ export default function RootLayout({
     );
   } else {
     return <html lang="pt-br">
-    <body className={`${inter.className} bg-primaria  h-screen max-h-screen overflow-hidden`} suppressHydrationWarning={true}>
-      <ToastProvider>
-        <AuthProvider>
-          <Header/>
-          <Sidebar/>
-            <div className="h-full flex w-full pl-sidebar pt-header">
-              <div className="w-full h-full p-3">
-                {children}
+      <body className={`${inter.className} bg-primaria  h-screen max-h-screen overflow-hidden`} suppressHydrationWarning={true}>
+        <ToastProvider>
+          <AuthProvider>
+            <ProductModalFormProvider>
+              <Header />
+              <Sidebar />
+              <div className="h-full flex w-full pl-sidebar pt-header">
+                <div className="w-full h-full p-3">
+                  {children}
+                </div>
               </div>
-            </div>
-        </AuthProvider>
-      </ToastProvider>
-    </body>
-  </html>
+            </ProductModalFormProvider>
+          </AuthProvider>
+        </ToastProvider>
+      </body>
+    </html>
   }
 }

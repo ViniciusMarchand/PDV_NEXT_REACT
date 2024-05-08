@@ -1,16 +1,17 @@
 'use client'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTrigger } from "../ui/alert-dialog";
+import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTrigger } from "../ui/alert-dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ProdutoInputs } from "@/global/Types";
+import { ProductInputs } from "@/global/Types";
 import { CurrencyInput } from "react-currency-mask";
 import ModalButton from "../common/ModalButton";
 import GenericButton from "../common/GenericButton";
-import apiProduto from "@/api/produtoApi";
+import productApi from "@/api/productApi";
 import { useContext } from "react";
 import { ToastContext } from "@/contexts/ToastContext";
-export default function AlertDialogProdutos(props:{updateTable:Function}) {
-    const {updateTable} = props;
-    const {sucesso, erro} = useContext(ToastContext);
+import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
+export default function AlertDialogProdutos() {
+    const {successToast, errorToast} = useContext(ToastContext);
+    const {updateKey} = useContext(ProductModalFormContext);
 
     const {
         register,
@@ -18,22 +19,22 @@ export default function AlertDialogProdutos(props:{updateTable:Function}) {
         setValue,
         formState: { errors },
         reset,
-    } = useForm<ProdutoInputs>({
+    } = useForm<ProductInputs>({
         defaultValues: {
             precoFornecedor:0,
             preco:0
         }
     });
 
-    const onSubmit: SubmitHandler<ProdutoInputs> = (produto) => {
-        apiProduto.postApi(produto)
+    const onSubmit: SubmitHandler<ProductInputs> = (produto) => {
+        productApi.post(produto)
         .then(res => {
-            sucesso("Produto adicionado!")
+            successToast("Produto adicionado!")
             reset()
-            updateTable();
+            updateKey();
         })
         .catch(error => {
-            erro("Erro ao adicionar produto!")
+            errorToast("Erro ao adicionar produto!")
         });
     };
 

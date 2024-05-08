@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     const router = useRouter();
     async function login(user) {
         localStorage.setItem('token', getLogin(user).data.token);
-        router.push('/produtos');
+        router.push('/produtos/1');
     } 
 
 

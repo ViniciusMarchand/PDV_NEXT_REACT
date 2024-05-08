@@ -9,18 +9,15 @@ export default function Sidebar() {
     const pathname = usePathname();
 
     function isCurrentPage(path:string) {
-        if(pathname === path) {
+        if(pathname.includes(path)) {
             return "text-textoContraste bg-terciaria";
         } 
-        return ""
     }
 
     return <>
-        <div className="left-0 min-h-full bg-secundaria w-sidebar fixed shadow-md py-0 px-8 z-10">
+        <div className="left-0 min-h-full bg-secundaria w-sidebar fixed shadow-md py-0 z-10">
             <div className="min-h-header flex flex-col justify-center items-center my-5">
-                {/* <h1 className="font-bold text-[18px]">Ferragem</h1>
-                <h2 className="font-bold">Avila</h2> */}
-                <Image src={Logo} alt="logo" height={150}/>
+                <Image priority={true} src={Logo} alt="logo" height={150} className="h-auto"/>
             </div>
             {
                 SideBarData.map((elemento, i) => (
@@ -31,7 +28,6 @@ export default function Sidebar() {
                                 <p className="ml-2">{elemento.title}</p>
                             </div>
                         </div>
-                        <div className=""></div>
                     </Link>
                 ))
             }

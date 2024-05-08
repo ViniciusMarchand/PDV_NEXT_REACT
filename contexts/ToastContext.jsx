@@ -5,22 +5,22 @@ export const ToastContext = createContext();
 
 export const ToastProvider = ({ children }) => {
 
-    const sucesso = (mensagem) => {
+    const successToast = (mensagem) => {
         
         toast.success(`${mensagem}`);
     }
 
-    const erro = (mensagem) => {
+    const errorToast = (mensagem) => {
         toast.error(`${mensagem}`);  
     }
 
-    const aviso = (mensagem) => {
+    const warningToast = (mensagem) => {
         toast.warn(`${mensagem}`);  
     }
 
 
     return (
-        <ToastContext.Provider value={{sucesso, aviso, erro}}>
+        <ToastContext.Provider value={{successToast, errorToast, warningToast}}>
             {children}
             <ToastContainer/>
         </ToastContext.Provider>

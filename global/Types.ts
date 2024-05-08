@@ -4,7 +4,7 @@ export type LoginInputs = {
 
 }
 
-export type ProdutoInputs = {
+export type ProductInputs = {
     id: number | undefined,
     descricao: string,
     unidadeMedida: string,
