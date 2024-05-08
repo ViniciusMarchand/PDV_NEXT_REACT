@@ -36,15 +36,13 @@ export default function RootLayout({
       <body className={`${inter.className} bg-primaria  h-screen max-h-screen overflow-hidden`} suppressHydrationWarning={true}>
         <ToastProvider>
           <AuthProvider>
-            <ProductModalFormProvider>
-              <Header />
-              <Sidebar />
-              <div className="h-full flex w-full pl-sidebar pt-header">
-                <div className="w-full h-full p-3">
-                  {children}
-                </div>
+            <Header />
+            <Sidebar />
+            <div className="h-full flex w-full pl-sidebar pt-header">
+              <div className="w-full h-full p-3">
+                {children}
               </div>
-            </ProductModalFormProvider>
+            </div>
           </AuthProvider>
         </ToastProvider>
       </body>
