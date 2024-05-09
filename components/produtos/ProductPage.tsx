@@ -2,7 +2,7 @@ import { useContext } from "react";
 import CardLayout from "../common/CardLayout";
 import ModalButton from "../common/ModalButton";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
-import TabelaProdutos from "./TabelaProdutos";
+import ProductTable from "./TableProducts";
 import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
 
 export default function ProductPage(props:{page: number}) {
@@ -22,7 +22,7 @@ export default function ProductPage(props:{page: number}) {
         </div>
         <div className="h-[500px] grow">
             <CardLayout>
-                <TabelaProdutos key={key} page={page} />
+                <ProductTable key={key} page={page} />
             </CardLayout>
         </div>
     </>
