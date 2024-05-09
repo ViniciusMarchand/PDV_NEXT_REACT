@@ -13,6 +13,9 @@ export const ProductModalFormContext = createContext<any>(null);
 export const ProductModalFormProvider = (props: { children: React.ReactNode }) => {
     const { children } = props;
     const [formStatus, setFormStatus] = useState(productFormStatus.Adicionar);
+    const [maskedPrecoValue, setMaskedPrecoValue] = useState<number | string>('');
+    const [maskedPrecoFornecedorValue, setMaskedPrecoFornecedorValue] = useState<number | string>('');
+
     const [selectedProduct, setSelectedProduct] = useState<ProductInputs>();
     const [key, setKey] = useState("");
     const teste = () => {
@@ -71,12 +74,14 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
         setValue("estoque", estoque);
         setValue("unidadeMedida", unidadeMedida);
         setValue("precoFornecedor", precoFornecedor);
+        setMaskedPrecoFornecedorValue(precoFornecedor);
         setValue("preco", preco);
+        setMaskedPrecoValue(preco);
         setValue("codigoBarrasEAN13", codigoBarrasEAN13);
 
         setSelectedProduct(product);
     };
-    
+    console.warn(watch());
   
     return (
         <ProductModalFormContext.Provider value={{
@@ -113,16 +118,22 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
                             <div className="w-[200px]">
                                 <label className="text-[18px]">Preço Fornecedor</label>
                                 <CurrencyInput
-                                    value={watch().precoFornecedor.toString()}
+                                    value={maskedPrecoFornecedorValue}
                                     InputElement={<input  type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' required />}
-                                    onChangeValue={(event, originalValue, maskedValue) => { setValue("precoFornecedor", Number(originalValue)) }} />
+                                    onChangeValue={(event, originalValue, maskedValue) => { 
+                                        setValue("precoFornecedor", Number(originalValue));
+                                        setMaskedPrecoFornecedorValue(maskedValue); 
+                                    }} />
                             </div>
                             <div className="w-[200px]">
                                 <label className="text-[18px]">Preço</label>
                                 <CurrencyInput
-                                    value={watch().preco.toString()}
+                                    value={maskedPrecoValue}
                                     InputElement={<input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' required />}
-                                    onChangeValue={(event, originalValue, maskedValue) => { setValue("preco", Number(originalValue)) }} />
+                                    onChangeValue={(event, originalValue, maskedValue) => { 
+                                        setValue("preco", Number(originalValue));
+                                        setMaskedPrecoValue(maskedValue);
+                                    }} />
                             </div>
                             <div className="w-full">
                                 <label className="text-[18px]">Código de Barras</label>
