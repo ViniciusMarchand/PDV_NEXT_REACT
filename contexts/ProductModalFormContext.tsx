@@ -81,7 +81,6 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
 
         setSelectedProduct(product);
     };
-    console.warn(watch());
   
     return (
         <ProductModalFormContext.Provider value={{

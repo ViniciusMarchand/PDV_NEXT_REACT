@@ -8,7 +8,7 @@ export default function ModalButton({
 
 }) {
     return(
-        <div className={`w-full h-full bg-terciaria text-white rounded-md text-[${fontSize}] hover:bg-terciaria2 shadow-md flex items-center justify-center`} onClick={() => onClick()}>
+        <div className={`cursor-pointer w-full h-full bg-terciaria text-white rounded-md text-[${fontSize}] hover:bg-terciaria2 shadow-md flex items-center justify-center`} onClick={() => onClick()}>
             {value}
         </div> 
     )

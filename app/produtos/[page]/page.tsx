@@ -1,5 +1,5 @@
 'use client'
-import ProductPage from "@/components/products/ProductPage";
+import ProductPage from "@/components/produtos/ProductPage";
 import { ProductModalFormProvider } from "@/contexts/ProductModalFormContext";
 
 export default function Produtos(props: any) {
