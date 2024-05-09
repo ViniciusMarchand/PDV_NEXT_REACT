@@ -10,7 +10,7 @@ import DeleteProductDialog from "./DeleteProductDialog";
 import { useRouter } from "next/navigation";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
 
-export default function TabelaProdutos(props: { page: number }) {
+export default function ProductTable(props: { page: number }) {
 
   const page = props.page;
   const [pagination, setPagination] = useState();
@@ -23,14 +23,14 @@ export default function TabelaProdutos(props: { page: number }) {
     productApi.get(page).then(res => {
       const {content} = res.data; 
       if(content.length === 0) {
-        router.push("1")
+        router.push("1");
       }
       setProductList(res.data.content);
       setPagination(res.data);
     });
   }, [page, router]);
 
-  return <div className="w-full p-3   max-h-full overflow-y-auto">
+  return <div className="w-full p-3 max-h-full overflow-y-auto">
     <Dialog>
       <table className="w-full text-center h-full overflow-y-scroll">
         <thead className="w-full [&>th]:py-2">
@@ -52,7 +52,7 @@ export default function TabelaProdutos(props: { page: number }) {
                 <td>{product.descricao}</td>
                 <td>{product.estoque}</td>
                 <td>{product.unidadeMedida}</td>
-                <td>{product.preco}</td>
+                <td>R$ {product.preco}</td>
                 <td>{product.codigoBarrasEAN13}</td>
                 <td onClick={() => setChosenProduct(product)} className="flex">
                   <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>
