@@ -6,7 +6,6 @@ import { ToastProvider } from "@/contexts/ToastContext"
 import { usePathname } from "next/navigation";
 import Header from "@/components/header/Header";
 import Sidebar from "@/components/sidebar/Sdebar";
-import { ProductModalFormProvider } from "@/contexts/ProductModalFormContext";
 
 const inter = Inter({ subsets: ["latin"] });
 

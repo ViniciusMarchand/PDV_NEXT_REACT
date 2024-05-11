@@ -21,7 +21,7 @@ export default function Sidebar() {
             </div>
             {
                 SideBarData.map((elemento, i) => (
-                    <Link key={i} href={elemento.path}>
+                    <Link key={i} href={elemento.path === '/produtos' ? elemento.path + '/1' : elemento.path}>
                         <div className="flex cursor-pointer hover:rounded-md hover:text-terciaria transition">
                             <div className={"flex  items-center p-3 w-full " + isCurrentPage(elemento.path)}>
                                 {elemento.icon}

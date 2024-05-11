@@ -13,14 +13,11 @@ export const ProductModalFormContext = createContext<any>(null);
 export const ProductModalFormProvider = (props: { children: React.ReactNode }) => {
     const { children } = props;
     const [formStatus, setFormStatus] = useState(productFormStatus.Adicionar);
-    const [maskedPrecoValue, setMaskedPrecoValue] = useState<number | string>('');
-    const [maskedPrecoFornecedorValue, setMaskedPrecoFornecedorValue] = useState<number | string>('');
+    const [maskedPrecoValue, setMaskedPrecoValue] = useState<number | string>('0');
+    const [maskedPrecoFornecedorValue, setMaskedPrecoFornecedorValue] = useState<number | string>('0');
 
     const [selectedProduct, setSelectedProduct] = useState<ProductInputs>();
     const [key, setKey] = useState("");
-    const teste = () => {
-        alert("FOI");
-    }
 
     const { successToast, errorToast } = useContext(ToastContext);
 
@@ -84,7 +81,6 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
   
     return (
         <ProductModalFormContext.Provider value={{
-            teste,
             updateKey,
             key,
             statusToAdd,

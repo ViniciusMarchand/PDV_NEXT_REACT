@@ -10,7 +10,7 @@ export const SideBarData = [
     },
     {
         title: "Produtos",
-        path: "/produtos/1",
+        path: "/produtos",
         icon: <FaBoxes size={30}/>
 
     }
