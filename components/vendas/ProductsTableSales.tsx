@@ -9,8 +9,6 @@ export default function ProductsTableSales(productPageInfo: any) {
     
     const { selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
 
-    console.warn(selectedProductsOnSalesPage);
-
     return <div className="h-full w-full flex flex-col">
         <div className="grow max-h-full h-full px-3 my-3 overflow-y-auto">
             <table className="w-full text-center">
