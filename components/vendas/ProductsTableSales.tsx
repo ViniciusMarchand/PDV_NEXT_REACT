@@ -5,7 +5,6 @@ import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormCo
 
 export default function ProductsTableSales(productPageInfo: any) {
     const paginationInfo = productPageInfo?.productPageInfo; 
-    const productList = paginationInfo.content || [];
     
     const { selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
 
