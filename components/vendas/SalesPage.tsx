@@ -34,7 +34,7 @@ export default function SalesPage() {
             <div className="h-full">
                 <CardLayout>
                     <div></div>
-                    {/* <ProductsTableSales productPageInfo={productPageInfo} /> */}
+                    <ProductsTableSales productPageInfo={productPageInfo} />
                 </CardLayout>
             </div>
         </div>

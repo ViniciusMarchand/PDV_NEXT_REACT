@@ -2,8 +2,9 @@ import type { Config } from "tailwindcss"
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 const config = {
-theme: {
-  container: {
+  theme: {
+    important: "#app",
+    container: {
     center: true,
     padding: "2rem",
     screens: {
@@ -136,6 +137,8 @@ export default config
 
 
 /** @type {import('tailwindcss').Config} */
+
+
 
 
 

@@ -1,14 +1,15 @@
 import { ProductInputs } from "@/global/Types";
 import PaginationBar from "../common/PaginationBar";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
 
 export default function ProductsTableSales(productPageInfo: any) {
     const paginationInfo = productPageInfo?.productPageInfo; 
     const productList = paginationInfo.content || [];
+    
+    const { selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
 
-
-
-
+    console.warn(selectedProductsOnSalesPage);
 
     return <div className="h-full w-full flex flex-col">
         <div className="grow max-h-full h-full px-3 my-3 overflow-y-auto">
@@ -21,11 +22,12 @@ export default function ProductsTableSales(productPageInfo: any) {
                         <th>UNIDADE DE MEDIDA</th>
                         <th>PREÇO</th>
                         <th>CÓDIGO DE BARRAS</th>
+                        <th>QTDE</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        productList.map((product: ProductInputs, i: number) => (
+                        selectedProductsOnSalesPage.map((product: ProductInputs, i: number) => (
                             <tr key={i} className="border-t [&>td]:py-1">
                                 <td>{product.id}</td>
                                 <td>{product.descricao}</td>
@@ -33,6 +35,7 @@ export default function ProductsTableSales(productPageInfo: any) {
                                 <td>{product.unidadeMedida}</td>
                                 <td>R$ {product.preco}</td>
                                 <td>{product.codigoBarrasEAN13}</td>
+                                <td>{product.quantidade}</td>
                             </tr>
                         ))
                     }

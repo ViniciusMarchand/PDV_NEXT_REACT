@@ -12,4 +12,6 @@ export type ProductInputs = {
     precoFornecedor: number,
     preco: number,
     codigoBarrasEAN13: string,
+    quantidade: any,
 }
+

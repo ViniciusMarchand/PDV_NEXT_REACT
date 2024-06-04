@@ -3,7 +3,7 @@ type Props = {
   }
 export default function CardLayout({children} : Props) {
     return (
-        <div className="bg-secundaria rounded-md shadow-lg h-full w-full">
+        <div className="bg-secundaria rounded-md shadow-lg h-full w-full flex flex-col">
             {children}
         </div>
     )

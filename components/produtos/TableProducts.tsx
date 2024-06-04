@@ -16,7 +16,7 @@ export default function ProductTable(props: { page: number }) {
   const [pagination, setPagination] = useState();
   const [productList, setProductList] = useState<ProductInputs[]>();
   const [chosenProduct, setChosenProduct] = useState<ProductInputs>();
-  const { teste, statusToEdit } = useContext(ProductModalFormContext);
+  const { statusToEdit } = useContext(ProductModalFormContext);
   const router = useRouter();
 
   useEffect(() => {
