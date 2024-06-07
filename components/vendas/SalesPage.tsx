@@ -6,15 +6,9 @@ import { ProductInputs } from "@/global/Types";
 import productApi from "@/api/productApi";
 import { AlertDialog, AlertDialogTrigger } from "../ui/alert-dialog";
 import ModalButton from "../common/ModalButton";
+import salesApi from "@/api/salesApi";
 
 export default function SalesPage() {
-    const [productPageInfo, setProductPageInfo] = useState<ProductInputs[] | []>([]);
-
-    useEffect(() => {
-        productApi.get(0)
-            .then(res => setProductPageInfo(res.data))
-            .catch(error => error);
-    }, []);
 
     return <>
         <div className="flex flex-col w-full h-full">
@@ -33,15 +27,14 @@ export default function SalesPage() {
             </div>
             <div className="h-full">
                 <CardLayout>
-                    <div></div>
-                    <ProductsTableSales productPageInfo={productPageInfo} />
+                    <ProductsTableSales />
                 </CardLayout>
             </div>
         </div>
         <div className="h-full ml-3">
             <CardLayout>
                 <div className="w-[400px]">
-
+                    teste
                 </div>
             </CardLayout>
         </div>

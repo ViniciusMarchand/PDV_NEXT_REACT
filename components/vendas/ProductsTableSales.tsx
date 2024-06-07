@@ -1,11 +1,10 @@
-import { ProductInputs } from "@/global/Types";
+import { Item } from "@/global/Types";
 import PaginationBar from "../common/PaginationBar";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
 
-export default function ProductsTableSales(productPageInfo: any) {
-    const paginationInfo = productPageInfo?.productPageInfo; 
-    
+export default function ProductsTableSales() {
+
     const { selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
 
     return <div className="h-full w-full flex flex-col">
@@ -24,15 +23,16 @@ export default function ProductsTableSales(productPageInfo: any) {
                 </thead>
                 <tbody>
                     {
-                        selectedProductsOnSalesPage.map((product: ProductInputs, i: number) => (
+                        selectedProductsOnSalesPage.map((item:Item, i: number) => (
+                            
                             <tr key={i} className="border-t [&>td]:py-1">
-                                <td>{product.id}</td>
-                                <td>{product.descricao}</td>
-                                <td>{product.estoque}</td>
-                                <td>{product.unidadeMedida}</td>
-                                <td>R$ {product.preco}</td>
-                                <td>{product.codigoBarrasEAN13}</td>
-                                <td>{product.quantidade}</td>
+                                <td>{item.product.id}</td>
+                                <td>{item.product.descricao}</td>
+                                <td>{item.product.estoque}</td>
+                                <td>{item.product.unidadeMedida}</td>
+                                <td>R$ {item.product.preco}</td>
+                                <td>{item.product.codigoBarrasEAN13}</td>
+                                <td>{item.quantity }</td>
                             </tr>
                         ))
                     }

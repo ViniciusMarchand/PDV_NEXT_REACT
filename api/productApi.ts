@@ -1,5 +1,4 @@
 import axios from 'axios';
-import http from '@/utils/http';
 import { ProductInputs } from '@/global/Types';
 import { apiLink } from '@/constants/env';
 const productApi = {
@@ -14,18 +13,18 @@ const productApi = {
                 throw new Error(error);
             })
     },
-    post: async (produto: ProductInputs) => {
+    post: async (product: ProductInputs) => {
         const URL = apiLink + "produto";
-        return await axios.post(URL, produto)
+        return await axios.post(URL, product)
             .then((res) => res)
             .catch(error => {
                 console.error(error);
                 throw new Error(error);
             })
     },
-    put: async (id: number, produto: ProductInputs) => {
+    put: async (id: number, product: ProductInputs) => {
         const URL = apiLink + "produto/" + id;
-        return await axios.put(URL, produto)
+        return await axios.put(URL, product)
             .then((res) => res)
             .catch(error => {
                 console.error(error);

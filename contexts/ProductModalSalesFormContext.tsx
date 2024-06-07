@@ -2,7 +2,7 @@ import "../app/globals.css"
 import { createContext, useContext, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import ProductSelectorModalContent from "@/components/vendas/ProductSelectorModalContent";
-import { ProductInputs } from "@/global/Types";
+import { Item } from "@/global/Types";
 
 export const ProductModalSalesFormContext = createContext<any>(null);
 
@@ -10,7 +10,7 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
     const { children } = props;
     const [key, setKey] = useState("");
 
-    const [selectedProductsOnSalesPage, setSelectedProductsOnSalesPage] = useState<ProductInputs[]>([]);
+    const [selectedProductsOnSalesPage, setSelectedProductsOnSalesPage] = useState<Item[]>([]);
 
     const updateKey = () => {
         setKey(crypto.randomUUID());

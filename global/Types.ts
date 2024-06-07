@@ -12,6 +12,15 @@ export type ProductInputs = {
     precoFornecedor: number,
     preco: number,
     codigoBarrasEAN13: string,
-    quantidade: any,
+}
+
+export type Item = {
+    product: ProductInputs,
+    quantity: number
+}
+
+export type ItemInfo = {
+    produtoId: number | undefined,
+    quantidade: number
 }
 
