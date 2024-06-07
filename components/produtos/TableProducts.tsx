@@ -5,7 +5,7 @@ import productApi from "@/api/productApi";
 import { ProductInputs } from "@/global/Types";
 import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
 import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductDialog from "./DeleteProductDialog";
 import { useRouter } from "next/navigation";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
@@ -31,44 +31,46 @@ export default function ProductTable(props: { page: number }) {
   }, [page, router]);
 
   return <div className="w-full p-3 max-h-full overflow-y-auto">
-    <Dialog>
-      <table className="w-full text-center h-full overflow-y-scroll">
-        <thead className="w-full [&>th]:py-2">
-          <tr className="[&>th]:py-1">
-            <th>ID</th>
-            <th>DESCRIÇÃO</th>
-            <th>ESTOQUE</th>
-            <th>UNIDADE DE MEDIDA</th>
-            <th>PREÇO</th>
-            <th>CÓDIGO DE BARRAS</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            productList?.map((product, i) => (
+    <div>
+      <Dialog>
+        <table className="w-full text-center h-full overflow-y-scroll">
+          <thead className="w-full [&>th]:py-2">
+            <tr className="[&>th]:py-1">
+              <th>ID</th>
+              <th>DESCRIÇÃO</th>
+              <th>ESTOQUE</th>
+              <th>UNIDADE DE MEDIDA</th>
+              <th>PREÇO</th>
+              <th>CÓDIGO DE BARRAS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              productList?.map((product, i) => (
 
-              <tr key={i} className="border-t [&>td]:py-1">
-                <td>{product.id}</td>
-                <td>{product.descricao}</td>
-                <td>{product.estoque}</td>
-                <td>{product.unidadeMedida}</td>
-                <td>R$ {product.preco}</td>
-                <td>{product.codigoBarrasEAN13}</td>
-                <td onClick={() => setChosenProduct(product)} className="flex">
-                  <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>
-                    <FaRegPenToSquare className="hover:text-terciaria transition"/>
-                  </AlertDialogTrigger>
-                  <DialogTrigger title="Deletar">
-                    <FaRegTrashCan className="hover:text-terciaria transition"/>
-                  </DialogTrigger>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-        <DeleteProductDialog product={chosenProduct} />
-    </Dialog>
+                <tr key={i} className="border-t [&>td]:py-1">
+                  <td>{product.id}</td>
+                  <td>{product.descricao}</td>
+                  <td>{product.estoque}</td>
+                  <td>{product.unidadeMedida}</td>
+                  <td>R$ {product.preco}</td>
+                  <td>{product.codigoBarrasEAN13}</td>
+                  <td onClick={() => setChosenProduct(product)} className="flex">
+                    <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>
+                      <FaRegPenToSquare className="hover:text-terciaria transition"/>
+                    </AlertDialogTrigger>
+                    <DialogTrigger title="Deletar">
+                      <FaRegTrashCan className="hover:text-terciaria transition"/>
+                    </DialogTrigger>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+          <DeleteProductDialog product={chosenProduct} />
+      </Dialog>
+    </div>
     <div className="w-full flex justify-center items-end">
       {
         pagination !== undefined &&
