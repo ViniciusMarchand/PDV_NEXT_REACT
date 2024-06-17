@@ -25,6 +25,8 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    }, []);
 
    function selectProduct(product: ProductInputs) {
+      isOutOfStock(product.estoque) ? 
+      errorToast("Produto fora de estoque!") :
       setSelectedItems(current => [...current, {product:product, quantity:1}]);
    }
 
@@ -60,9 +62,14 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
 
       salesApi.postItems(formattedItems).then(res => {
          successToast("Item adicionado com sucesso!");
+         setSelectedItems([]);
       }).catch(error => {
          errorToast("Erro ao adicionar item!");
       });
+   }
+
+   function isOutOfStock(stockNumber: number) {
+      return stockNumber === 0 ? true : false;
    }
 
    return <AlertDialog>
@@ -99,7 +106,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                           productList.map((product: ProductInputs, i: number) => (
                                              !isAlreadySelected(product.id) &&
 
-                                             <tr key={i} className="border-t [&>td]:py-1">
+                                             <tr key={i} className={`border-t [&>td]:py-1 hover:bg-terciaria hover:text-textoContraste ${isOutOfStock(product.estoque) && "bg-gray-200"}`}>
                                                 <td>{product.id}</td>
                                                 <td>{product.descricao}</td>
                                                 <td>{product.estoque}</td>
@@ -107,7 +114,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                                 <td>R$ {product.preco}</td>
                                                 <td>{product.codigoBarrasEAN13}</td>
                                                 <td>
-                                                   <FaBasketShopping title="Adicionar no carrinho de compra" size={18} className="cursor-pointer hover:text-terciaria transition" onClick={() => selectProduct(product)} />
+                                                   <FaBasketShopping title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => selectProduct(product)} />
                                                 </td>
                                              </tr>
                                           ))

@@ -21,6 +21,15 @@ const salesApi = {
                 throw new Error(error);
             })
     },
+    getProductsFromSale: async () => {
+        const URL = apiLink + "venda/ativa/produtos";
+        return await axios.get(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    },
 
 }
 

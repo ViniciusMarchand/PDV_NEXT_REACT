@@ -1,12 +1,8 @@
 'use client'
-import { useEffect, useState } from "react";
 import CardLayout from "../common/CardLayout";
 import ProductsTableSales from "./ProductsTableSales";
-import { ProductInputs } from "@/global/Types";
-import productApi from "@/api/productApi";
-import { AlertDialog, AlertDialogTrigger } from "../ui/alert-dialog";
+import { AlertDialogTrigger } from "../ui/alert-dialog";
 import ModalButton from "../common/ModalButton";
-import salesApi from "@/api/salesApi";
 
 export default function SalesPage() {
 

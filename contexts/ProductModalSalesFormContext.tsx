@@ -1,8 +1,9 @@
 import "../app/globals.css"
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import ProductSelectorModalContent from "@/components/vendas/ProductSelectorModalContent";
-import { Item } from "@/global/Types";
+import { Item, ProductInputs } from "@/global/Types";
+import salesApi from "@/api/salesApi";
 
 export const ProductModalSalesFormContext = createContext<any>(null);
 
@@ -15,7 +16,21 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
     const updateKey = () => {
         setKey(crypto.randomUUID());
     };
+
+    useEffect(() => {
+        salesApi.getProductsFromSale().then(res => {
+            const products = res.data;
+            const items = products.map((product: ProductInputs) => {
+                return {
+                    product: product,
+                    quantity: 1
+                }
+            });
+            setSelectedProductsOnSalesPage(items);
+        }).catch(error => console.error("Erro no servidor"));
+    }, []);
     
+    console.warn(selectedProductsOnSalesPage);
     //FIX: tailwind @layer base its not working here, that's why I'm using css
     return (
         <ProductModalSalesFormContext.Provider value={{
@@ -23,7 +38,7 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
             selectedProductsOnSalesPage,
             key
         }}>
-            <ProductSelectorModalContent setSelectedProductsOnSalesPage={setSelectedProductsOnSalesPage} >
+            <ProductSelectorModalContent setSelectedProductsOnSalesPage={setSelectedProductsOnSalesPage}  >
                 {children}
             </ProductSelectorModalContent>
         </ProductModalSalesFormContext.Provider>
