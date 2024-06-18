@@ -8,8 +8,8 @@ import ProductQuantitySelection from "./ProductQuantitySelection";
 import salesApi from "@/api/salesApi";
 import { ToastContext } from "@/contexts/ToastContext";
 
-export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function}) {
-   const { children, setSelectedProductsOnSalesPage } = props;
+export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function, selectedProductsOnSalesPage: Item[]}) {
+   const { children, setSelectedProductsOnSalesPage, selectedProductsOnSalesPage } = props;
 
    const [productList, setProductList] = useState<ProductInputs[]>([]);
    const [selectedItems, setSelectedItems] = useState<Item[]>([]);
@@ -31,7 +31,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    }
 
    function isAlreadySelected(id: number = 0) {
-      return selectedItems.some(item => item.product.id === id);
+      return selectedItems.some(item => item.product.id === id) || selectedProductsOnSalesPage.some(item => item.product.id === id);
    }
 
    function removeProduct(id:number) {
@@ -50,7 +50,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    },[selectedItems]);
 
    function send() {
-      setSelectedProductsOnSalesPage(selectedItems);
+      setSelectedProductsOnSalesPage((current: Item[]) => [...current.concat(selectedItems)]);
 
       const formattedItems = selectedItems.map(item => {
          const {product, quantity} = item;

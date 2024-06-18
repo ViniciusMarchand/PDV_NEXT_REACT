@@ -30,7 +30,7 @@ export default function SalesPage() {
         <div className="h-full ml-3">
             <CardLayout>
                 <div className="w-[400px]">
-                    teste
+                    {/* <SalesInfo /> */}
                 </div>
             </CardLayout>
         </div>

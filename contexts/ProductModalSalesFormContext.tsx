@@ -30,7 +30,6 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
         }).catch(error => console.error("Erro no servidor"));
     }, []);
     
-    console.warn(selectedProductsOnSalesPage);
     //FIX: tailwind @layer base its not working here, that's why I'm using css
     return (
         <ProductModalSalesFormContext.Provider value={{
@@ -38,7 +37,7 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
             selectedProductsOnSalesPage,
             key
         }}>
-            <ProductSelectorModalContent setSelectedProductsOnSalesPage={setSelectedProductsOnSalesPage}  >
+            <ProductSelectorModalContent setSelectedProductsOnSalesPage={setSelectedProductsOnSalesPage} selectedProductsOnSalesPage={selectedProductsOnSalesPage}  >
                 {children}
             </ProductSelectorModalContent>
         </ProductModalSalesFormContext.Provider>
