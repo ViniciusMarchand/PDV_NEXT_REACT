@@ -3,7 +3,6 @@ import { ItemInfo} from '@/global/Types';
 import { apiLink } from '@/constants/env';
 const salesApi = {
     postItems: async (items: ItemInfo[]) => {
-        console.warn(items)
         const URL = apiLink + "venda/add-itens/lista/produtos";
         return await axios.post(URL, items)
             .then((res) => res)
@@ -30,6 +29,15 @@ const salesApi = {
                 throw new Error(error);
             })
     },
+    removeProduct: async (id: number) => {
+        const URL = apiLink + "venda/remove-item/" + id;
+        return await axios.delete(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    }
 
 }
 

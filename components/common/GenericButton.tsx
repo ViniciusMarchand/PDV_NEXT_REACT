@@ -1,15 +1,29 @@
 
 'use client'
 
+import { cn } from "@/lib/utils";
+
 export default function GenericButton({
     value = "Insira o texto",
-    onClick = () => {},
-    fontSize = '18px',
-
+    className = "",
+    ...props
 }) {
+    const buttonClasses = cn(
+    'w-full', 
+    'h-full', 
+    'bg-terciaria',
+    'text-white',
+    'rounded-md',
+    'text-[18px]',
+    'hover:bg-terciaria2',
+    'shadow-md',
+    'text-[18px]',
+	className,
+	);
     return(
-        <button className={`w-full h-full bg-terciaria text-white rounded-md text-[${fontSize}] hover:bg-terciaria2 shadow-md`} onClick={() => onClick()}>
-            {value}
+        <button 
+        className={buttonClasses}> 
+        {value}
         </button> 
     )
 }

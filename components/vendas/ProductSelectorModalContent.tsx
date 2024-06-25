@@ -149,12 +149,12 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                   </div>
                </div>
             <AlertDialogFooter className="min-h-[40px]">
-               <AlertDialogAction onClick={() => send()}>
-                  Confirmar
-               </AlertDialogAction>
                <AlertDialogCancel>
                   Cancelar
                </AlertDialogCancel>
+               <AlertDialogAction onClick={() => send()}>
+                  Confirmar
+               </AlertDialogAction>
             </AlertDialogFooter>
          </AlertDialogContent>
       {children}

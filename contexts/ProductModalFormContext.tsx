@@ -136,12 +136,12 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
                             </div>
                         </div>
                         <AlertDialogFooter>
-                            <div className="w-[110px]">
-                                <GenericButton fontSize="15px" value="Confirmar" />
-                            </div>
                             <AlertDialogCancel>
                                 Cancelar
                             </AlertDialogCancel>
+                            <div className="w-[110px]">
+                                <GenericButton fontSize="15px" value="Confirmar" />
+                            </div>
                         </AlertDialogFooter>
                     </form>
                 </AlertDialogContent>

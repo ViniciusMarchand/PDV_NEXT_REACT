@@ -3,6 +3,7 @@ import CardLayout from "../common/CardLayout";
 import ProductsTableSales from "./ProductsTableSales";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
 import ModalButton from "../common/ModalButton";
+import SalesInfo from "./SalesInfo";
 
 export default function SalesPage() {
 
@@ -29,8 +30,8 @@ export default function SalesPage() {
         </div>
         <div className="h-full ml-3">
             <CardLayout>
-                <div className="w-[400px]">
-                    {/* <SalesInfo /> */}
+                <div className="w-[400px] h-full flex flex-col-reverse">
+                    <SalesInfo />
                 </div>
             </CardLayout>
         </div>
