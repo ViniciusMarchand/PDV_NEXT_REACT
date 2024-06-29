@@ -8,8 +8,8 @@ import ProductQuantitySelection from "./ProductQuantitySelection";
 import salesApi from "@/api/salesApi";
 import { ToastContext } from "@/contexts/ToastContext";
 
-export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function, selectedProductsOnSalesPage: Item[]}) {
-   const { children, setSelectedProductsOnSalesPage, selectedProductsOnSalesPage } = props;
+export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function, selectedProductsOnSalesPage: Item[], updateProductsFromSales: Function}) {
+   const { children, setSelectedProductsOnSalesPage, selectedProductsOnSalesPage, updateProductsFromSales } = props;
 
    const [productList, setProductList] = useState<ProductInputs[]>([]);
    const [selectedItems, setSelectedItems] = useState<Item[]>([]);
@@ -49,20 +49,20 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
       }
    },[selectedItems]);
 
-   function send() {
-      setSelectedProductsOnSalesPage((current: Item[]) => [...current.concat(selectedItems)]);
-
+   async function send() {
+      
       const formattedItems = selectedItems.map(item => {
-         const {product, quantity} = item;
+         const {product: product, quantity} = item;
          return {
             quantidade:quantity,
             produtoId:product.id 
          }
       });
-
       salesApi.postItems(formattedItems).then(res => {
+         // setSelectedProductsOnSalesPage((current: Item[]) => [...current.concat(selectedItems)]);
          successToast("Item adicionado com sucesso!");
          setSelectedItems([]);
+         updateProductsFromSales();
       }).catch(error => {
          errorToast("Erro ao adicionar item!");
       });

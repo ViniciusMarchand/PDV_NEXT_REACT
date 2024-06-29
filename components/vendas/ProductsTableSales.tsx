@@ -1,4 +1,4 @@
-import { Item, ProductInputs } from "@/global/Types";
+import { Item } from "@/global/Types";
 import PaginationBar from "../common/PaginationBar";
 import { useContext, useState } from "react";
 import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
@@ -9,7 +9,7 @@ import DeleteProductFromSalesDialog from "./DeleteProductFromSalesDialog";
 export default function ProductsTableSales() {
 
     const { selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
-    const [chosenProduct, setChosenProduct] = useState<ProductInputs>();
+    const [chosenProduct, setChosenProduct] = useState<Item>();
 
     const { key } = useContext(ProductModalSalesFormContext);
 
@@ -42,7 +42,7 @@ export default function ProductsTableSales() {
                                 <td>{item.quantity }</td>
                                 <td>                                               
                                     <DialogTrigger>
-                                        <FaRegTrashCan title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => setChosenProduct(item.product)}/>
+                                        <FaRegTrashCan title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => setChosenProduct(item)}/>
                                     </DialogTrigger>
                                 </td>
                             </tr>
@@ -57,7 +57,7 @@ export default function ProductsTableSales() {
                 // <PaginationBar pagination={paginationInfo} />
             }
         </div>
-            <DeleteProductFromSalesDialog product={chosenProduct} />
+            <DeleteProductFromSalesDialog item={chosenProduct} />
         </Dialog>
     </div>
 }

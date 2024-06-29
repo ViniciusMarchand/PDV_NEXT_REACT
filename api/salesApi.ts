@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { ItemInfo} from '@/global/Types';
 import { apiLink } from '@/constants/env';
+import { Axios } from './config';
 const salesApi = {
     postItems: async (items: ItemInfo[]) => {
-        const URL = apiLink + "venda/add-itens/lista/produtos";
-        return await axios.post(URL, items)
+        const URL = apiLink + "venda/add-itens/lista";
+        return await Axios.post(URL, items)
             .then((res) => res)
             .catch(error => {
                 console.error(error);
@@ -13,7 +13,7 @@ const salesApi = {
     },    
     getProducts: async () => {
         const URL = apiLink + "venda/ativa/produtos";
-        return await axios.get(URL)
+        return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
                 console.error(error);
@@ -21,8 +21,8 @@ const salesApi = {
             })
     },
     getProductsFromSale: async () => {
-        const URL = apiLink + "venda/ativa/produtos";
-        return await axios.get(URL)
+        const URL = apiLink + "venda/ativa/itens";
+        return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
                 console.error(error);
@@ -30,8 +30,8 @@ const salesApi = {
             })
     },
     removeProduct: async (id: number) => {
-        const URL = apiLink + "venda/remove-item/" + id;
-        return await axios.delete(URL)
+        const URL = apiLink + "venda/remover-item/{itemId}?itemId=" + id;
+        return await Axios.delete(URL)
             .then((res) => res)
             .catch(error => {
                 console.error(error);

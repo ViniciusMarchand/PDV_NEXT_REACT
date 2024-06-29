@@ -6,7 +6,6 @@ export const ToastContext = createContext();
 export const ToastProvider = ({ children }) => {
 
     const successToast = (mensagem) => {
-        
         toast.success(`${mensagem}`);
     }
 

@@ -1,15 +1,25 @@
-import { Fragment, createContext } from "react";
+import { Fragment, createContext, useContext } from "react";
 import getLogin from "../mock/getLogin";
 import { useRouter } from "next/navigation";
+import authApi from "@/api/authApi";
+import { ToastContext } from "./ToastContext";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
+    const { errorToast } = useContext(ToastContext);
+
     const router = useRouter();
     async function login(user) {
-        localStorage.setItem('token', getLogin(user).data.token);
-        router.push('/produtos/1');
+        try {
+            const res = await authApi.login(user);
+            const { accessToken } = res.data;
+            localStorage.setItem('token', accessToken);
+            router.push('/produtos/1');
+        } catch (error) {
+            errorToast(error.message);
+        }
     } 
 
 

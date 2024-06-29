@@ -1,12 +1,12 @@
-import axios from 'axios';
 import { ProductInputs } from '@/global/Types';
 import { apiLink } from '@/constants/env';
+import { Axios } from './config';
 const productApi = {
     get: async (page: number
         // sort:string[]
     ) => {
         const URL = apiLink + `produto/ativos?page=${page}&size=22&sort=id`;
-        return await axios.get(URL)
+        return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
                 console.error(error);
@@ -15,7 +15,7 @@ const productApi = {
     },
     post: async (product: ProductInputs) => {
         const URL = apiLink + "produto";
-        return await axios.post(URL, product)
+        return await Axios.post(URL, product)
             .then((res) => res)
             .catch(error => {
                 console.error(error);
@@ -24,7 +24,7 @@ const productApi = {
     },
     put: async (id: number, product: ProductInputs) => {
         const URL = apiLink + "produto/" + id;
-        return await axios.put(URL, product)
+        return await Axios.put(URL, product)
             .then((res) => res)
             .catch(error => {
                 console.error(error);
@@ -33,7 +33,7 @@ const productApi = {
     },
     delete: async (id: number) => {
         const URL = apiLink + "produto/" + id;
-        return await axios.delete(URL)
+        return await Axios.delete(URL)
             .then((res) => res)
             .catch(error => {
                 console.error(error);

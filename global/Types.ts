@@ -15,12 +15,26 @@ export type ProductInputs = {
 }
 
 export type Item = {
+    id?: number,
     product: ProductInputs,
-    quantity: number
+    quantity: number,
 }
 
 export type ItemInfo = {
     produtoId: number | undefined,
     quantidade: number
+}
+
+export type SalesItem = {
+    id: number,
+    quantidade: number,
+    preco: number,
+    precoUnitarioProduto: number,
+    produto: ProductInputs,
+}
+
+export type Login = {
+    username: string,
+    password: string   
 }
 

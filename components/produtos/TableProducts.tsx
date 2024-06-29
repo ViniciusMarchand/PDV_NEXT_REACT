@@ -55,7 +55,7 @@ export default function ProductTable(props: { page: number }) {
                   <td>{product.unidadeMedida}</td>
                   <td>R$ {product.preco}</td>
                   <td>{product.codigoBarrasEAN13}</td>
-                  <td onClick={() => setChosenProduct(product)} className="flex">
+                  <td onClick={() => setChosenProduct(product)} className="flex w-full h-full">
                     <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>
                       <FaRegPenToSquare className="hover:text-terciaria transition"/>
                     </AlertDialogTrigger>
