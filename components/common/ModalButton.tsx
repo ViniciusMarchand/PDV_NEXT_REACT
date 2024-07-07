@@ -1,7 +1,6 @@
 
 'use client'
-
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 export default function ModalButton({
     value = "Insira o texto",
@@ -9,26 +8,27 @@ export default function ModalButton({
     ...props
 }) {
     const buttonClasses = cn(
-        'w-full', 
-        'h-full', 
+        'cursor-pointer',
+        'w-full',
+        'h-full',
         'bg-terciaria',
         'text-white',
         'rounded-md',
-        'text-[18px]',
         'hover:bg-terciaria2',
         'shadow-md',
+        'flex',
+        'items-center',
+        'justify-center',
         'text-[18px]',
-        "flex",
-        "items-center",
-        "justify-center",
         className,
-        );
+    );
 
     return(
         <div 
         className={buttonClasses} 
         {...props}
         >
+
             {value}
         </div> 
     )

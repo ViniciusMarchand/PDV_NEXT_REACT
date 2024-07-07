@@ -1,10 +1,13 @@
 import { useContext, useEffect } from "react";
 import GenericButton from "../common/GenericButton";
+
+import ModalButton from "../common/ModalButton";
+import ModalConfirmSales from "./ModalConfirmSales";
+
 import CancelSalesModal from "./CancelSalesModal";
 import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
 
 export default function SalesInfo() {
-
 
     return (
         <div className="w-full p-5 flex gap-5">
@@ -13,9 +16,9 @@ export default function SalesInfo() {
                     <GenericButton value="Cancelar" className="full px-5 bg-red-500 hover:bg-red-600"/>
                 </CancelSalesModal>
             </div>
-            <div className="h-[40px] w-full grow">
-                <GenericButton value="Confirmar" className="w-full"/>
-            </div>
+            <ModalConfirmSales>
+                    <ModalButton value="Confirmar" className="w-full"/>
+            </ModalConfirmSales>
         </div>
     );
 }
