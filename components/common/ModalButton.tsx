@@ -1,11 +1,9 @@
 
 'use client'
-
 import { cn } from "@/lib/utils"
 
 export default function ModalButton({
     value = "Insira o texto",
-    onClick = () => {},
     className = "",
     ...props
 }) {
@@ -26,7 +24,11 @@ export default function ModalButton({
     );
 
     return(
-        <div {...props} className={buttonClasses}>
+        <div 
+        className={buttonClasses} 
+        {...props}
+        >
+
             {value}
         </div> 
     )

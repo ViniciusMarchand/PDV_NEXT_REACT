@@ -4,6 +4,8 @@ import ProductsTableSales from "./ProductsTableSales";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
 import ModalButton from "../common/ModalButton";
 import SalesInfo from "./SalesInfo";
+import { useContext, useEffect } from "react";
+import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
 
 export default function SalesPage() {
 

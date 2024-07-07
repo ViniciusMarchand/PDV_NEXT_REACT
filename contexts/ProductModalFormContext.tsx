@@ -1,5 +1,5 @@
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader } from "@/components/ui/alert-dialog";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContext } from "./ToastContext";
 import { ProductInputs } from "@/global/Types";
@@ -8,6 +8,7 @@ import productApi from "@/api/productApi";
 import { CurrencyInput } from "react-currency-mask";
 import GenericButton from "@/components/common/GenericButton";
 import { productFormStatus } from "@/constants/enums";
+
 export const ProductModalFormContext = createContext<any>(null);
 
 export const ProductModalFormProvider = (props: { children: React.ReactNode }) => {
@@ -139,8 +140,8 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
                             <AlertDialogCancel>
                                 Cancelar
                             </AlertDialogCancel>
-                            <div className="w-[110px]">
-                                <GenericButton fontSize="15px" value="Confirmar" />
+                            <div>
+                                <GenericButton value="Confirmar" className="text-[14px] w-[110px]"/>
                             </div>
                         </AlertDialogFooter>
                     </form>

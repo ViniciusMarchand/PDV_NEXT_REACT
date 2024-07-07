@@ -37,7 +37,17 @@ const salesApi = {
                 console.error(error);
                 throw new Error(error);
             })
-    }
+    },
+    cancelSales: async () => {
+        const URL = apiLink + "venda/cancelar";
+        return await Axios.delete(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    },
+
 
 }
 

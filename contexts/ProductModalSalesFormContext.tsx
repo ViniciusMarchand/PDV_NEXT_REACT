@@ -28,7 +28,7 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
                 }
             });
             setSelectedProductsOnSalesPage(items);
-        }).catch(error => console.error("Erro no servidor"));
+        }).catch(error => setSelectedProductsOnSalesPage([]));
     },[]);
 
     useEffect(() => {
