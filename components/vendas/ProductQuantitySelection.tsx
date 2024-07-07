@@ -9,11 +9,8 @@ export default function ProductQuantitySelection(props:{product:ProductInputs, r
 
     useEffect(() => {
         let number;
-        try {
-            number = parseFloat(quantity);
-        } catch (error) {
-            number = 1;
-        }
+        number = parseFloat(quantity);
+        
         changeQuantity(product.id, number);
     },[quantity, changeQuantity, product]);
 

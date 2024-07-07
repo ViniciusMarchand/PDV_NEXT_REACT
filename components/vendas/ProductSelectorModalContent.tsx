@@ -42,11 +42,15 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    const changeQuantity = useCallback((id:number, quantity:number) => {
       let aux = [...selectedItems];
       const index = aux.findIndex(item => item.product.id === id);
+      if(isNaN(quantity)) {
+         quantity = 1;
 
-      if(aux[index].quantity  !== quantity) {
-         aux[index].quantity  = quantity;
+      }
+      if(aux[index].quantity !== quantity) {
+         aux[index].quantity = quantity;
          setSelectedItems(aux);
       }
+
    },[selectedItems]);
 
    async function send() {

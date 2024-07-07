@@ -31,7 +31,7 @@ export default function DeleteProductDialog(productInput: DeleteProductDialogPro
                 Você tem certeza que deseja deletar {descricao}? 
             </DialogDescription>
             <DialogFooter className="flex justify-center">
-                <DialogTrigger className="bg-red-500 py-2 px-3 rounded-md text-[#fdfdfd] hover:bg-red-600 shadow-2xl" onClick={() => deleteProduct()}>
+                <DialogTrigger className="bg-red-400 py-2 px-3 rounded-md text-[#fdfdfd] hover:bg-red-500 shadow-md" onClick={() => deleteProduct()}>
                     Deletar
                 </DialogTrigger>
             </DialogFooter>

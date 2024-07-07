@@ -22,7 +22,9 @@ export default function GenericButton({
 	);
     return(
         <button 
-        className={buttonClasses}> 
+        className={buttonClasses}
+        {...props}
+        > 
         {value}
         </button> 
     )

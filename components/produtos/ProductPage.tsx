@@ -14,7 +14,7 @@ export default function ProductPage(props:{page: number}) {
                 <div className="h-full w-full flex justify-start items-center px-3  ">
                     <AlertDialogTrigger onClick={() => statusToAdd()}>
                         <div className="w-[200px] h-[35px]">
-                            <ModalButton value="Adicionar Produto" />
+                            <ModalButton value="Adicionar Produto"  />
                         </div>
                     </AlertDialogTrigger>
                 </div>
