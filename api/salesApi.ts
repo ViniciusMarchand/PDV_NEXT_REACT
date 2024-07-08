@@ -47,6 +47,15 @@ const salesApi = {
                 throw new Error(error);
             })
     },
+    getSale: async () => {
+        const URL = apiLink + "venda/ativa";
+        return await Axios.get(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    },
 
 
 }

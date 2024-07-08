@@ -38,3 +38,12 @@ export type Login = {
     password: string   
 }
 
+export type Sale = {
+    id: number,
+    dataHoraInicio: string,
+    dataHoraConclusao: string,
+    concluida: boolean,
+    precoTotal: number,
+    formaPagamento: string,
+}
+
