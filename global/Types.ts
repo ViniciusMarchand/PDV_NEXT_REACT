@@ -47,3 +47,15 @@ export type Sale = {
     formaPagamento: string,
 }
 
+export type SaleItem = {
+    id: number,
+    quantidade: number,
+    preco: number,
+    precoUnitarioProduto: number,
+    produto: ProductInputs,
+}
+
+export type EndSale = {
+    dataHoraConclusao?: string,
+    formaPagamento: string
+}

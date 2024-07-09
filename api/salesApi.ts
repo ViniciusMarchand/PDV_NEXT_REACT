@@ -1,4 +1,4 @@
-import { ItemInfo} from '@/global/Types';
+import { EndSale, ItemInfo, Sale} from '@/global/Types';
 import { apiLink } from '@/constants/env';
 import { Axios } from './config';
 const salesApi = {
@@ -50,6 +50,15 @@ const salesApi = {
     getSale: async () => {
         const URL = apiLink + "venda/ativa";
         return await Axios.get(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    },
+    confirmSale: async (endSale: EndSale) => {
+        const URL = apiLink + "venda/concluir";
+        return await Axios.post(URL, endSale)
             .then((res) => res)
             .catch(error => {
                 console.error(error);

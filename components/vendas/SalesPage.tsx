@@ -9,6 +9,8 @@ import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormCo
 
 export default function SalesPage() {
 
+    
+
     return <>
         <div className="flex flex-col w-full h-full">
             <div className="w-full min-h-[80px] mb-3">
@@ -32,7 +34,7 @@ export default function SalesPage() {
         </div>
         <div className="h-full ml-3">
             <CardLayout>
-                <div className="w-[400px] h-full flex flex-col-reverse">
+                <div className="w-[350px] h-full flex flex-col">
                     <SalesInfo />
                 </div>
             </CardLayout>

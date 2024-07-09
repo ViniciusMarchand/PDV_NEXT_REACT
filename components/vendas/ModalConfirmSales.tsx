@@ -1,100 +1,48 @@
-import { ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useContext } from "react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from "../ui/dialog";
+import salesApi from "@/api/salesApi";
 import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Input } from "../ui/input";
-import { CurrencyInput } from "react-currency-mask";
-type Props = {
-    children: string | JSX.Element | JSX.Element[]
-}
-export default function ModalConfirmSales({ children }: Props) {
-
-    const { sale } = useContext(ProductModalSalesFormContext);
-    const [payment, setPayment] = useState<string>("");
-    const [receivedValue, setReceivedValue] = useState<number>(0);
-    const [enoughValue, setEnoughValue] = useState<boolean>(false);
-    const [change, setChange] = useState<number>(0);
+import { ToastContext } from "@/contexts/ToastContext";
 
 
-    const handleReceivedValue = (value: number) => {
-        setReceivedValue(value);
-    }
+export default function ModalConfirmSales(props: { children: ReactNode, payment: string, setPayment: Function }) {
 
-    useEffect(() => {
-        if(receivedValue >= sale?.precoTotal || 0){
-            setEnoughValue(true);
-        } else {
-            setEnoughValue(false);
+    const { children, payment, setPayment } = props;
+    const { updateProductsFromSales } = useContext(ProductModalSalesFormContext);
+    const { successToast, errorToast } = useContext(ToastContext);
+
+    async function sendSale() {
+        const endSale = { formaPagamento: payment, dataHoraConclusao: new Date().toISOString()};
+
+        try {
+            await salesApi.confirmSale(endSale);
+            setPayment("");
+            successToast("Venda finalizada com sucesso!");
+        } catch (error) {
+            errorToast("Erro ao finalizar venda!");
+        } finally {
+            updateProductsFromSales();
         }
 
-        setChange(receivedValue - sale?.precoTotal || 0);
-    },[receivedValue, sale?.precoTotal]);
-
+    }
 
     return <Dialog>
-        <DialogContent className="max-w-[300px] min-w-0">
-            <DialogTitle>Finalizar compra</DialogTitle>
-            <DialogDescription className="text-[18px]">Valor total: {sale?.precoTotal}</DialogDescription>
-
-            <div>
-                <label>Forma de pagamento</label>
-                <Select
-                onValueChange={(value) => setPayment(value)}
-                >
-                    <SelectTrigger className="w-full focus:ring-0 focus:ring-offset-0 border-gray-400 mt-1">
-                        <SelectValue placeholder="Forma de pagamento" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="Pix" className="cursor-pointer">Pix</SelectItem>
-                        <SelectItem value="Débito" className="cursor-pointer">Débito</SelectItem>
-                        <SelectItem value="Crédito" className="cursor-pointer">Crédito</SelectItem>
-                        <SelectItem value="Dinheiro" className="cursor-pointer">Dinheiro</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
-
-            {
-                payment === "Dinheiro" &&
-
-                <div>
-                    <label className="mb-2">Valor recebido</label>
-                    {
-                        !enoughValue && <p className="text-red-600 italic text-[12px]">Valor insuficiente</p>
-                    }
-                    <CurrencyInput
-                    defaultValue={"0000"}
-                        InputElement={<Input type="text" className={"mt-1 w-full focus-visible:ring-0 focus-visible:ring-offset-0  border-gray-400 " + (!enoughValue && "ring-red-600 ring-1 animate-pulse border-0 focus-visible:ring-1 focus-visible:ring-red-600")}/>}
-                        onChangeValue={(event, originalValue, maskedValue) => { 
-                            handleReceivedValue(Number(originalValue));
-                        }} 
-                    />
-                </div>
-            }
-
-            {
-                enoughValue && 
-                <div>
-                    <label className="mb-1">Troco</label>
-                    <CurrencyInput
-                    defaultValue={"0000"}
-                        InputElement={<Input type="text" disabled className={"mt-1 w-full focus-visible:ring-0 focus-visible:ring-offset-0  border-gray-400 " + (!enoughValue && "ring-red-600 ring-1 animate-pulse border-0 focus-visible:ring-1 focus-visible:ring-red-600")}/>}
-                        onChangeValue={(event, originalValue, maskedValue) => { 
-
-                        }} 
-                        value={change}
-                    />  
-                </div>
-            }
+        <DialogContent>
+            <DialogTitle>Finalizar venda</DialogTitle>
+            <DialogDescription className="text-[18px]">Você tem certeza que deseja finalizar a venda?</DialogDescription>
             <DialogFooter>
-            <DialogClose className="bg-red-500 text-textoContraste p-2 rounded-sm hover:bg-red-600 w-1/2">
-              Fechar
-            </DialogClose>
-            <DialogClose className="bg-terciaria text-textoContraste p-2 rounded-sm hover:bg-terciaria2 w-1/2">
-              Confirmar
-            </DialogClose>
+                <DialogClose className="bg-red-500 text-textoContraste p-2 rounded-sm hover:bg-red-600 w-[100px]">
+                    Fechar
+                </DialogClose>
+                <DialogClose
+                    className="bg-terciaria text-textoContraste p-2 rounded-sm hover:bg-terciaria2 w-[100px]"
+                    onClick={() => sendSale()}
+                >
+                    Confirmar
+                </DialogClose>
             </DialogFooter>
         </DialogContent>
-        <DialogTrigger className="w-full h-full">
+        <DialogTrigger className={"w-full h-full " + (payment === "" && " opacity-50 cursor-not-allowed")}>
             {children}
         </DialogTrigger>
     </Dialog>
