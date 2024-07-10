@@ -11,7 +11,7 @@ import { CurrencyInput } from "react-currency-mask";
 import { Input } from "../ui/input";
 
 export default function SalesInfo() {
-    const { sale } = useContext(ProductModalSalesFormContext);
+    const { sale, selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
     const [payment, setPayment] = useState<string>("");
     const [receivedValue, setReceivedValue] = useState<number>(0);
     const [enoughValue, setEnoughValue] = useState<boolean>(false);
@@ -34,7 +34,7 @@ export default function SalesInfo() {
     return (
         <div className="w-full p-5 flex flex-col h-full justify-between fade">
             <div className="gap-2 flex flex-col">
-                <p className="text-[18px]">Valor total: R$ {sale?.precoTotal}</p>
+                <p className="text-[18px]">Valor total: R$ {sale?.precoTotal || "00,00"}</p>
                 <div>
                     <label>Forma de pagamento</label>
                     <Select
@@ -87,11 +87,11 @@ export default function SalesInfo() {
             </div>
             <div className="mb-10">
                 <ModalConfirmSales payment={payment} setPayment={setPayment}>
-                    <ModalButton value="Confirmar" className={"w-full max-h-[40px] cursor-not-allowed" + (payment === "" && " hover:bg-terciaria")} disabled={true}/>
+                    <ModalButton value="Confirmar" className={"w-full max-h-[40px] cursor-not-allowed" + ((payment === "" || selectedProductsOnSalesPage.length === 0) && " hover:bg-terciaria")} disabled={true}/>
                 </ModalConfirmSales>
-                <div className="h-[35px] w-full grow">
+                <div className="h-[35px] w-full mt-[10px]">
                     <CancelSalesModal>
-                        <ModalButton value="Cancelar" className="full px-5 bg-red-500 hover:bg-red-600 h-[40px]" />
+                        <ModalButton value="Cancelar" className="full px-5 bg-red-500 hover:bg-red-600 h-[40px] cursor-not-allowed" />
                     </CancelSalesModal>
                 </div>
             </div>

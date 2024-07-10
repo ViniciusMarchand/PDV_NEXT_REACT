@@ -8,22 +8,20 @@ import { ToastContext } from "@/contexts/ToastContext";
 export default function ModalConfirmSales(props: { children: ReactNode, payment: string, setPayment: Function }) {
 
     const { children, payment, setPayment } = props;
-    const { updateProductsFromSales } = useContext(ProductModalSalesFormContext);
+    const { updateProductsFromSales, selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
     const { successToast, errorToast } = useContext(ToastContext);
 
     async function sendSale() {
         const endSale = { formaPagamento: payment, dataHoraConclusao: new Date().toISOString()};
 
-        try {
-            await salesApi.confirmSale(endSale);
+        salesApi.confirmSale(endSale)
+        .then(() => {
             setPayment("");
             successToast("Venda finalizada com sucesso!");
-        } catch (error) {
-            errorToast("Erro ao finalizar venda!");
-        } finally {
-            updateProductsFromSales();
-        }
-
+        }).catch(error => {
+            errorToast(error.message);
+        }).finally(() => updateProductsFromSales());
+        
     }
 
     return <Dialog>
@@ -42,7 +40,7 @@ export default function ModalConfirmSales(props: { children: ReactNode, payment:
                 </DialogClose>
             </DialogFooter>
         </DialogContent>
-        <DialogTrigger className={"w-full h-full " + (payment === "" && " opacity-50 cursor-not-allowed")}>
+        <DialogTrigger className={"w-full h-[40px] " + ((payment === "" || selectedProductsOnSalesPage.length === 0) && " opacity-50 cursor-not-allowed")} disabled={payment === ""}>
             {children}
         </DialogTrigger>
     </Dialog>
