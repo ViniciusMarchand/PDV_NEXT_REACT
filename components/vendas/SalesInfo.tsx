@@ -9,6 +9,7 @@ import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormCo
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { CurrencyInput } from "react-currency-mask";
 import { Input } from "../ui/input";
+import Pix from "./Pix";
 
 export default function SalesInfo() {
     const { sale, selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
@@ -84,8 +85,13 @@ export default function SalesInfo() {
                         }
                     </>
                 }
+
+                {
+                    payment === "Pix" &&
+                    <Pix value={sale.precoTotal}/>
+                }
             </div>
-            <div className="mb-10">
+            <div className="mb-5">
                 <ModalConfirmSales payment={payment} setPayment={setPayment}>
                     <ModalButton value="Confirmar" className={"w-full max-h-[40px] cursor-not-allowed" + ((payment === "" || selectedProductsOnSalesPage.length === 0) && " hover:bg-terciaria")} disabled={true}/>
                 </ModalConfirmSales>
