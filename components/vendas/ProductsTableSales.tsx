@@ -51,13 +51,7 @@ export default function ProductsTableSales() {
                 </tbody>
             </table>
         </div>
-        <div className="w-full min-h-[70px] border-t">
-            {
-                // paginationInfo !== undefined &&
-                // <PaginationBar pagination={paginationInfo} />
-            }
-        </div>
-            <DeleteProductFromSalesDialog item={chosenProduct} />
+        <DeleteProductFromSalesDialog item={chosenProduct} />
         </Dialog>
     </div>
 }
