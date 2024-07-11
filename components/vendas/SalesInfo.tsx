@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import GenericButton from "../common/GenericButton";
 
 import ModalButton from "../common/ModalButton";
 import ModalConfirmSales from "./ModalConfirmSales";

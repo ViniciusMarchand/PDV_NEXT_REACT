@@ -9,7 +9,7 @@ import salesApi from "@/api/salesApi";
 import { ToastContext } from "@/contexts/ToastContext";
 
 export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function, selectedProductsOnSalesPage: Item[], updateProductsFromSales: Function}) {
-   const { children, setSelectedProductsOnSalesPage, selectedProductsOnSalesPage, updateProductsFromSales } = props;
+   const { children, selectedProductsOnSalesPage, updateProductsFromSales } = props;
 
    const [productList, setProductList] = useState<ProductInputs[]>([]);
    const [selectedItems, setSelectedItems] = useState<Item[]>([]);
