@@ -13,6 +13,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
 
    const [productList, setProductList] = useState<ProductInputs[]>([]);
    const [selectedItems, setSelectedItems] = useState<Item[]>([]);
+   const [isThereSomeProductOutOfStock, setIsThereSomeProductOutOfStock] = useState(false);
 
    const {successToast, errorToast} = useContext(ToastContext);
 
@@ -49,6 +50,11 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
       if(aux[index].quantity !== quantity) {
          aux[index].quantity = quantity;
          setSelectedItems(aux);
+      }
+      if(selectedItems.some(item => item.product.estoque < item.quantity)) {
+         setIsThereSomeProductOutOfStock(true);
+      } else {
+         setIsThereSomeProductOutOfStock(false);
       }
 
    },[selectedItems]);
@@ -108,9 +114,8 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                     <tbody>
                                        {
                                           productList.map((product: ProductInputs, i: number) => (
-                                             !isAlreadySelected(product.id) &&
 
-                                             <tr key={i} className={`border-t [&>td]:py-1 hover:bg-terciaria hover:text-textoContraste ${isOutOfStock(product.estoque) && "bg-gray-200"}`}>
+                                             <tr key={i} className={`border-t [&>td]:py-1 hover:bg-terciaria hover:text-textoContraste ${isOutOfStock(product.estoque) || isAlreadySelected(product.id) && "bg-gray-200"} `}>
                                                 <td>{product.id}</td>
                                                 <td>{product.descricao}</td>
                                                 <td>{product.estoque}</td>
@@ -118,7 +123,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                                 <td>R$ {product.preco}</td>
                                                 <td>{product.codigoBarrasEAN13}</td>
                                                 <td>
-                                                   <FaBasketShopping title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => selectProduct(product)} />
+                                                   <FaBasketShopping title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => !isAlreadySelected(product.id) && selectProduct(product)} />
                                                 </td>
                                              </tr>
                                           ))
@@ -156,7 +161,11 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                <AlertDialogCancel>
                   Cancelar
                </AlertDialogCancel>
-               <AlertDialogAction onClick={() => send()}>
+               <AlertDialogAction 
+               onClick={() => !isThereSomeProductOutOfStock && send()} disabled={isThereSomeProductOutOfStock} 
+               className={`${isThereSomeProductOutOfStock && "opacity-50"}`}
+               title={`${isThereSomeProductOutOfStock && "Há produtos fora de estoque!"}`}
+               >
                   Confirmar
                </AlertDialogAction>
             </AlertDialogFooter>
