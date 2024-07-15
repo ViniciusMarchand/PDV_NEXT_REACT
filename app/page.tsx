@@ -36,7 +36,7 @@ export default function App() {
                 <input type='password' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-6 p-2 bg-secundaria' {...register("password")} />
               </div>
               <div className="h-[45px]">
-                <GenericButton value='Entrar' />
+                <GenericButton value='Entrar' className='text-[18px]'/>
               </div>
               <div className="w-full h-[1px] border my-6"></div>
               <p className="text-center text-terciaria hover:underline cursor-pointer hover:text-terciaria2">Esqueceu a senha?</p>

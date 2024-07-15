@@ -11,6 +11,7 @@ export default function ProductQuantitySelection(props:{product:ProductInputs, r
     useEffect(() => {
         let number;
         number = parseFloat(quantity);
+        if(number < 0) number = 1;
         changeQuantity(product.id, number);
 
         if(product.estoque < Number(quantity)) {

@@ -3,13 +3,27 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import salesApi from "@/api/salesApi";
 import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
 import { ToastContext } from "@/contexts/ToastContext";
+import { cn } from "@/lib/utils";
 
 
-export default function ModalConfirmSales(props: { children: ReactNode, payment: string, setPayment: Function }) {
+export default function ModalConfirmSales(props: { children: ReactNode, payment: string, setPayment: Function, className?: string, isValid: boolean }) {
 
-    const { children, payment, setPayment } = props;
-    const { updateProductsFromSales, selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
+    const { children, payment, setPayment, className, isValid } = props;
+    const { updateProductsFromSales } = useContext(ProductModalSalesFormContext);
     const { successToast, errorToast } = useContext(ToastContext);
+
+    const buttonClasses = cn(
+        'w-full', 
+        'h-full', 
+        'bg-terciaria',
+        'text-white',
+        'rounded-md',
+        'text-[18px]',
+        'hover:bg-terciaria2',
+        'shadow-md',
+        'text-[18px]',
+        className,
+    );
 
     async function sendSale() {
         const endSale = { formaPagamento: payment, dataHoraConclusao: new Date().toISOString()};
@@ -40,7 +54,7 @@ export default function ModalConfirmSales(props: { children: ReactNode, payment:
                 </DialogClose>
             </DialogFooter>
         </DialogContent>
-        <DialogTrigger className={"w-full h-[40px] " + ((payment === "" || selectedProductsOnSalesPage.length === 0) && " opacity-50 cursor-not-allowed")} disabled={payment === ""}>
+        <DialogTrigger className={"w-full h-[40px] " + ((!isValid) && " opacity-50 cursor-not-allowed")} disabled={!isValid}>
             {children}
         </DialogTrigger>
     </Dialog>

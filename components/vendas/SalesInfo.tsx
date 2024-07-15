@@ -16,6 +16,7 @@ export default function SalesInfo() {
     const [receivedValue, setReceivedValue] = useState<number>(0);
     const [enoughValue, setEnoughValue] = useState<boolean>(false);
     const [change, setChange] = useState<number>(0);
+    const [isValid, setIsValid] = useState<boolean>(false);
 
     const handleReceivedValue = (value: number) => {
         setReceivedValue(value);
@@ -30,6 +31,14 @@ export default function SalesInfo() {
 
         setChange(receivedValue - sale?.precoTotal || 0);
     }, [receivedValue, sale?.precoTotal]);
+
+    useEffect(() => {
+        if (payment !== "" && selectedProductsOnSalesPage.length > 0) {
+            setIsValid(true);
+        } else {
+            setIsValid(false);
+        }
+    }, [payment, selectedProductsOnSalesPage]);
 
     return (
         <div className="w-full p-5 flex flex-col h-full justify-between fade">
@@ -87,16 +96,22 @@ export default function SalesInfo() {
 
                 {
                     payment === "Pix" &&
-                    <Pix value={sale.precoTotal}/>
+                    <Pix value={sale?.precoTotal || 0}/>
                 }
             </div>
             <div className="mb-5">
-                <ModalConfirmSales payment={payment} setPayment={setPayment}>
-                    <ModalButton value="Confirmar" className={"w-full max-h-[40px] cursor-not-allowed" + ((payment === "" || selectedProductsOnSalesPage.length === 0) && " hover:bg-terciaria")} disabled={true}/>
+                <ModalConfirmSales payment={payment} setPayment={setPayment} isValid={isValid}>
+                    <ModalButton 
+                    value="Confirmar" 
+                    className={"w-full max-h-[40px]" + ((!isValid) && " cursor-not-allowed hover:bg-terciaria")} 
+                    disabled={isValid}
+                    />
                 </ModalConfirmSales>
                 <div className="h-[35px] w-full mt-[10px]">
-                    <CancelSalesModal>
-                        <ModalButton value="Cancelar" className="full px-5 bg-red-500 hover:bg-red-600 h-[40px] cursor-not-allowed" />
+                    <CancelSalesModal setPayment={setPayment} isValid={isValid}>
+                        <ModalButton 
+                        value="Cancelar" 
+                        className={`full px-5 bg-red-500 hover:bg-red-600 h-[40px]` + ((!isValid) && "  cursor-not-allowed opacity-50 hover:bg-red-500")} />
                     </CancelSalesModal>
                 </div>
             </div>

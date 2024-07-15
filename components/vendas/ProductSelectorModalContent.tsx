@@ -7,10 +7,11 @@ import { FaBasketShopping } from "react-icons/fa6";
 import ProductQuantitySelection from "./ProductQuantitySelection";
 import salesApi from "@/api/salesApi";
 import { ToastContext } from "@/contexts/ToastContext";
+import PaginationBar from "../common/PaginationBar";
 
 export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function, selectedProductsOnSalesPage: Item[], updateProductsFromSales: Function}) {
    const { children, selectedProductsOnSalesPage, updateProductsFromSales } = props;
-
+   const [pagination, setPagination] = useState<any>();
    const [productList, setProductList] = useState<ProductInputs[]>([]);
    const [selectedItems, setSelectedItems] = useState<Item[]>([]);
    const [isThereSomeProductOutOfStock, setIsThereSomeProductOutOfStock] = useState(false);
@@ -21,6 +22,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
       productApi.get(0)
          .then(res => {
             setProductList(res.data.content);
+            setPagination(res.data);
          })
          .catch(error => console.error("Erro no servidor"));
    }, []);
@@ -83,7 +85,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    }
 
    return <AlertDialog>
-         <AlertDialogContent className="max-w-none w-[1450px] h-[780px] flex flex-col bg-primaria">
+         <AlertDialogContent className="max-w-none w-[1450px] h-[600px] flex flex-col bg-primaria">
             <AlertDialogHeader className="max-h-[30px]">
                <h1 className="text-[20px]"> Produto</h1>
             </AlertDialogHeader>
@@ -99,7 +101,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                      <div className="h-max-full h-full w-full grow">
                         <CardLayout>
                            <div className="max-h-full h-full w-full overflow-y-auto">
-                              <div className="grow h-[200px] px-3">
+                              <div className="px-3">
                                  <table className="w-full text-center">
                                     <thead className="w-full [&>th]:py-2 sticky top-0 bg-[#fdfdfd] border-b">
                                        <tr className="[&>th]:py-1">
@@ -132,13 +134,20 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                  </table>
                               </div>
                            </div>
+                           <div className="w-full border-t">
+                           {
+                              pagination !== undefined &&
+                             <PaginationBar pagination={pagination} />
+                             
+                           }
+                           </div>
                         </CardLayout>
                      </div>
                   </div>
                   <div className="h-full">
                      <CardLayout>
                         <div className="max-h-full h-full w-[300px] p-5">
-                           <div className="overflow-auto h-[590px] pr-1">
+                           <div className="overflow-auto pr-1">
                               <div className="flex w-full justify-between mb-3">
                                  <p className="flex items-center">Descrição</p>
                                  <div>

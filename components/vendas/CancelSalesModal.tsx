@@ -1,25 +1,24 @@
 import salesApi from "@/api/salesApi";
 import ModalButton from "../common/ModalButton";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle, DialogTrigger } from "../ui/dialog"
-import { useCallback, useContext } from "react";
+import { ReactNode, useCallback, useContext } from "react";
 import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
 import { ToastContext } from "@/contexts/ToastContext";
 
-type Props = {
-    children: string | JSX.Element | JSX.Element[]
-}
+export default function CancelSalesModal(props: { children: ReactNode, setPayment: Function, isValid:boolean }) {
+    const { children, setPayment, isValid } = props;
 
-export default function CancelSalesModal({ children }: Props) {
     const { updateProductsFromSales } = useContext(ProductModalSalesFormContext);
     const { successToast, errorToast } = useContext(ToastContext);
 
     const cancelSales = useCallback(() => {
         salesApi.cancelSales().then(res => {
             successToast("Venda cancelada com sucesso!");
+            setPayment("");
             updateProductsFromSales();
-        }).catch(error => errorToast("Erro ao cancelar venda!"))
-    }, [updateProductsFromSales, errorToast, successToast]);
-    
+        }).catch(error => errorToast(error.message))
+    }, [updateProductsFromSales, errorToast, successToast, setPayment]);
+
     return (
         <Dialog>
             <DialogContent>
@@ -35,7 +34,7 @@ export default function CancelSalesModal({ children }: Props) {
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>
-            <DialogTrigger className="w-full h-full">
+            <DialogTrigger className={`w-full h-[40px]`} disabled={!isValid}>
                 {children}
             </DialogTrigger>
         </Dialog>

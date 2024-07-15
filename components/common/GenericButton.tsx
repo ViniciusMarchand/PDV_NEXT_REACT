@@ -14,10 +14,9 @@ export default function GenericButton({
     'bg-terciaria',
     'text-white',
     'rounded-md',
-    'text-[18px]',
+    'text-[14px]',
     'hover:bg-terciaria2',
     'shadow-md',
-    'text-[18px]',
 	className,
 	);
     return(

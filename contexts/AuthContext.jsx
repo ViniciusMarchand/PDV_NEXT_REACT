@@ -16,11 +16,13 @@ export const AuthProvider = ({ children }) => {
             const res = await authApi.login(user);
             const { accessToken } = res.data;
             localStorage.setItem('token', accessToken);
-            router.push('/produtos/1');
+            router.push('/vendas');
         } catch (error) {
             errorToast(error.message);
         }
     } 
+
+    
 
 
     return (

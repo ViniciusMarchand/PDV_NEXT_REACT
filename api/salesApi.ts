@@ -44,7 +44,7 @@ const salesApi = {
             .then((res) => res)
             .catch(error => {
                 console.error(error);
-                throw new Error(error);
+                throw new Error(error.response.data.error);
             })
     },
     getSale: async () => {

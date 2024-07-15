@@ -8,7 +8,6 @@ import productApi from "@/api/productApi";
 import { CurrencyInput } from "react-currency-mask";
 import GenericButton from "@/components/common/GenericButton";
 import { productFormStatus } from "@/constants/enums";
-
 export const ProductModalFormContext = createContext<any>(null);
 
 export const ProductModalFormProvider = (props: { children: React.ReactNode }) => {
