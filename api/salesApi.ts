@@ -65,6 +65,14 @@ const salesApi = {
                 throw new Error(error.response.data.error);
             })
     },
+    addProductByBarCode: async (barCode: string) => {
+        const URL = apiLink + "venda/add-item/codigo-barras?codigoBarras=" + barCode;
+        return await Axios.post(URL)
+            .then((res) => res)
+            .catch(error => {
+                throw new Error(error.response.data.error);
+            })
+    }
 
 
 }
