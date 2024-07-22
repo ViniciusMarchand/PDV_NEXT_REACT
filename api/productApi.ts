@@ -40,6 +40,19 @@ const productApi = {
                 throw new Error(error);
             })
     },
+    importCSV: async (file:FormData) => {
+        const URL = apiLink + "produto/importar-csv";
+        return await Axios.post(URL, file, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+        })
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    },
 }
 
 export default productApi;

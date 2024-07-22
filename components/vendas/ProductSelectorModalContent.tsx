@@ -171,9 +171,8 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                   Cancelar
                </AlertDialogCancel>
                <AlertDialogAction 
-               onClick={() => !isThereSomeProductOutOfStock && send()} disabled={isThereSomeProductOutOfStock} 
-               className={`${isThereSomeProductOutOfStock && "opacity-50"}`}
-               title={`${isThereSomeProductOutOfStock && "Há produtos fora de estoque!"}`}
+               onClick={() => (selectedItems.length === 0 || !isThereSomeProductOutOfStock) && send()} disabled={isThereSomeProductOutOfStock} 
+               className={`${(selectedItems.length === 0 || isThereSomeProductOutOfStock) && "opacity-50"}`}
                >
                   Confirmar
                </AlertDialogAction>
