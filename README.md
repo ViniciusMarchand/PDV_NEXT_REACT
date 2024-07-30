@@ -1,4 +1,4 @@
-##Projeto PDV
+## Projeto PDV
 Este projeto é um sistema de ponto de venda (PDV) desenvolvido utilizando tecnologias modernas para garantir uma experiência de usuário fluida e eficiente. Abaixo estão as principais tecnologias e bibliotecas utilizadas no projeto.
 
 Tecnologias Utilizadas
