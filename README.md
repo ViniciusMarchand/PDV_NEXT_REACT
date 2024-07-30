@@ -22,3 +22,7 @@ npm run dev
 ```
 
 Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
+
+Além desse projeto, para rodar ele com todas as funcionalidades, você precisa rodar um redis e clonar o backend.
+Backend:
+https://github.com/GabryelMelo07/ferragem-avila-pdv/commits/master/
