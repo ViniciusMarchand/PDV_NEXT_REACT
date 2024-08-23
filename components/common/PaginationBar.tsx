@@ -23,11 +23,6 @@ export default function PaginationBar(props: { pagination: any }) {
     const isNotFirstPage = number >= 1;
     const isNotLastPage = number < totalPages - 1;
 
-    const teste = (page: number) => {
-        console.log("number", number);
-        console.warn("page", page);
-    }
-    console.warn("pages",pages)
     return (
         totalPages > 1 &&
         <nav className="mt-1">
@@ -44,7 +39,7 @@ export default function PaginationBar(props: { pagination: any }) {
                     pages.map((page) => (
                         <li key={page}>
                             <Link href={(page + 1).toString()}>
-                                <p className={"flex items-center justify-center px-3 h-paginationbar leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer " + (number === (page) && "bg-gray-300")}>{page + 1}{teste(page -1)}</p>
+                                <p className={"flex items-center justify-center px-3 h-paginationbar leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer " + (number === (page) && "bg-gray-300")}>{page + 1}</p>
                             </Link>
                         </li>
                     ))
