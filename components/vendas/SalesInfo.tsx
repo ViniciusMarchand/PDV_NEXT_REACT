@@ -48,6 +48,7 @@ export default function SalesInfo() {
                     <label>Forma de pagamento</label>
                     <Select
                         onValueChange={(value) => setPayment(value)}
+                        disabled={selectedProductsOnSalesPage.length === 0}
                     >
                         <SelectTrigger className="w-full focus:ring-0 focus:ring-offset-0 border-gray-400 mt-1 fade-in">
                             <SelectValue placeholder="Forma de pagamento" />

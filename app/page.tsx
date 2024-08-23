@@ -6,6 +6,8 @@ import GenericButton from '../components/common/GenericButton';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AuthContext } from '@/contexts/AuthContext';
 import { LoginInputs } from '@/global/Types';
+import Image from 'next/image';
+import Logo from '@/public/imgs/logo.png';
 
 export default function App() {
 
@@ -20,7 +22,7 @@ export default function App() {
   
   return (
     <div className="w-full min-h-full flex items-center justify-center flex-col">
-      <h1 className="text-[25px] font-bold mb-5">FERRAGEM AVILA</h1>
+      <Image src={Logo} width={150} height={150} alt={'logo'} />
       <div className="w-[450px] h-[500px]">
         <CardLayout>
           <div className="py-5 px-10">

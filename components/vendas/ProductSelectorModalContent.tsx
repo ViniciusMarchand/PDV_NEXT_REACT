@@ -98,7 +98,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                            </div>
                         </CardLayout>
                      </div>
-                     <div className="h-max-full h-full w-full grow">
+                     <div className="h-[200px] w-full grow">
                         <CardLayout>
                            <div className="max-h-full h-full w-full overflow-y-auto">
                               <div className="px-3">
@@ -134,7 +134,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                  </table>
                               </div>
                            </div>
-                           <div className="w-full border-t">
+                           <div className="w-full border-t flex justify-center items-center pb-1">
                            {
                               pagination !== undefined &&
                              <PaginationBar pagination={pagination} />

@@ -23,14 +23,14 @@ export default function ProductTable(props: { page: number }) {
     productApi.get(page).then(res => {
       const {content} = res.data; 
       if(content.length === 0) {
-        router.push("1");
+        router.push("0");
       }
       setProductList(res.data.content);
       setPagination(res.data);
     });
   }, [page, router]);
 
-  return <div className="w-full p-3 max-h-full overflow-y-auto">
+  return <div className="w-full p-3 max-h-full overflow-y-auto flex flex-col">
     <div>
       <Dialog>
         <table className="w-full text-center h-full overflow-y-scroll">

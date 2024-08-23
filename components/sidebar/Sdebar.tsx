@@ -2,7 +2,7 @@
 import { SideBarData } from "@/constants/Sidebar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Logo from "@/public/imgs/logo-header.png"
+import Logo from "@/public/imgs/logo.png"
 import Image from "next/image";
 
 export default function Sidebar() {

@@ -6,6 +6,7 @@ const productApi = {
         // sort:string[]
     ) => {
         const URL = apiLink + `produto/ativos?page=${page}&size=22&sort=id`;
+        console.warn("PAGINAPAGINAPAING", page)
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {

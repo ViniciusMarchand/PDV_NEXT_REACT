@@ -19,7 +19,7 @@ export default function RootLayout({
   if (pathname === "/") {
     return (
       <html lang="pt-br">
-        <body className={`${inter.className} bg-primaria`} suppressHydrationWarning={true}>
+        <body className={`${inter.className} bg-primaria max-h-screen`} suppressHydrationWarning={true}>
           <ToastProvider>
             <AuthProvider>
               <div className="flex justify-center min-h-screen">
