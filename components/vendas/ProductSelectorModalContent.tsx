@@ -8,6 +8,7 @@ import ProductQuantitySelection from "./ProductQuantitySelection";
 import salesApi from "@/api/salesApi";
 import { ToastContext } from "@/contexts/ToastContext";
 import PaginationBar from "../common/PaginationBar";
+import PaginationBarSinglePage from "../common/PaginationBarSinglePage";
 
 export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function, selectedProductsOnSalesPage: Item[], updateProductsFromSales: Function}) {
    const { children, selectedProductsOnSalesPage, updateProductsFromSales } = props;
@@ -18,14 +19,18 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
 
    const {successToast, errorToast} = useContext(ToastContext);
 
-   useEffect(() => {
-      productApi.get(0)
+   const changePage = useCallback((pageNumber: number) => {
+      productApi.get(pageNumber)
          .then(res => {
             setProductList(res.data.content);
             setPagination(res.data);
          })
          .catch(error => console.error("Erro no servidor"));
    }, []);
+
+   useEffect(() => {
+      changePage(0);
+   },[changePage]);
 
    function selectProduct(product: ProductInputs) {
       isOutOfStock(product.estoque) ? 
@@ -137,7 +142,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                            <div className="w-full border-t flex justify-center items-center pb-1">
                            {
                               pagination !== undefined &&
-                             <PaginationBar pagination={pagination} />
+                              <PaginationBarSinglePage pagination={pagination} changePage={changePage} />
                              
                            }
                            </div>
