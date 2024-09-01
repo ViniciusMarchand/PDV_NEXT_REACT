@@ -115,7 +115,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                           <th>ESTOQUE</th>
                                           <th>UNIDADE DE MEDIDA</th>
                                           <th>PREÇO</th>
-                                          <th colSpan={2}>CÓDIGO DE BARRAS</th>
+                                          <th>CÓDIGO DE BARRAS</th>
                                        </tr>
                                     </thead>
                                     <tbody>

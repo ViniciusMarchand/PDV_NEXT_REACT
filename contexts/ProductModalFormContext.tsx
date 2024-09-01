@@ -25,9 +25,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
         register,
         handleSubmit,
         setValue,
-        formState: { errors },
         reset,
-        watch,
     } = useForm<ProductInputs>({
         defaultValues: {
             precoFornecedor: 0,
@@ -45,6 +43,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
                 .catch(error => errorToast("Erro ao adicionar produto!"))
                 .finally(() => updateKey());
         }
+
         if (formStatus === productFormStatus.Editar) {
             if(selectedProduct?.id !== undefined)
             productApi.put(selectedProduct.id, product)
@@ -64,6 +63,8 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
     const statusToAdd = () => {
         setFormStatus(productFormStatus.Adicionar);
     };
+
+    
     const statusToEdit = (product:ProductInputs) => {
         setFormStatus(productFormStatus.Editar);
         const {descricao, estoque, unidadeMedida, preco, precoFornecedor, codigoBarrasEAN13} = product;

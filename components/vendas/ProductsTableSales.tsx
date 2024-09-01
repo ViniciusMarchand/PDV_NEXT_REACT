@@ -1,15 +1,20 @@
 import { Item } from "@/global/Types";
-import PaginationBar from "../common/PaginationBar";
 import { useContext, useState } from "react";
 import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
-import { FaRegTrashCan } from "react-icons/fa6";
+import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductFromSalesDialog from "./DeleteProductFromSalesDialog";
+import EditableQuantity from "./EditableQuantity";
+import { GiConfirmed } from "react-icons/gi";
+import { MdCancel } from "react-icons/md";
 
 export default function ProductsTableSales() {
 
     const { selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
     const [chosenProduct, setChosenProduct] = useState<Item>();
+    const [isEditing, setIsEditing] = useState(false);
+    const [editingProductId, setEditingProductId] = useState<number | undefined>(0);
+
 
     const { key } = useContext(ProductModalSalesFormContext);
 
@@ -25,25 +30,53 @@ export default function ProductsTableSales() {
                         <th>UNIDADE DE MEDIDA</th>
                         <th>PREÇO</th>
                         <th>CÓDIGO DE BARRAS</th>
-                        <th colSpan={2}>QTDE</th>
+                        <th>QTDE</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         selectedProductsOnSalesPage.map((item:Item, i: number) => (
                             
-                            <tr key={i} className="border-t [&>td]:py-1 hover:bg-terciaria hover:text-textoContraste">
+                            <tr key={i} className="border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste">
                                 <td>{item.product.id}</td>
                                 <td>{item.product.descricao}</td>
                                 <td>{item.product.estoque}</td>
                                 <td>{item.product.unidadeMedida}</td>
                                 <td>R$ {item.product.preco}</td>
                                 <td>{item.product.codigoBarrasEAN13}</td>
-                                <td>{item.quantity }</td>
-                                <td>                                               
-                                    <DialogTrigger>
-                                        <FaRegTrashCan title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => setChosenProduct(item)}/>
-                                    </DialogTrigger>
+                                <td className="flex items-center justify-around">
+                                    {isEditing && editingProductId === item.product.id ? <EditableQuantity item={item}/> : item.quantity} 
+                                </td>
+                                <td>
+                                    <div className="flex justify-center ">
+                                        {
+                                            editingProductId === item.product.id ?
+                                            <>
+                                                <GiConfirmed 
+                                                    className="transition mr-1 cursor-pointer"
+                                                    size={18}
+                                                    title="Confirmar edição"
+                                                />
+                                                <MdCancel 
+                                                    className="cursor-pointer transition"
+                                                    size={18}
+                                                    title="Cancelar edição"
+                                                />
+                                            </>
+                                            :
+                                            <>
+                                                <FaRegPenToSquare 
+                                                    className="transition mr-1 cursor-pointer"
+                                                    size={18}
+                                                    onClick={() => {setIsEditing(true); setEditingProductId(item.product.id)}}
+                                                /> 
+                                                <DialogTrigger>
+                                                    <FaRegTrashCan title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => setChosenProduct(item)}/>
+                                                </DialogTrigger>
+                                            </>
+
+                                        }
+                                    </div>                                               
                                 </td>
                             </tr>
                         ))

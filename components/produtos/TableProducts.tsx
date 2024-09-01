@@ -30,7 +30,7 @@ export default function ProductTable(props: { page: number }) {
     });
   }, [page, router]);
 
-  return <div className="w-full p-3 max-h-full overflow-y-auto flex flex-col">
+  return <div className="w-full px-3  pt-3 max-h-full overflow-y-auto flex flex-col">
     <div>
       <Dialog>
         <table className="w-full text-center h-full overflow-y-scroll">
@@ -71,7 +71,7 @@ export default function ProductTable(props: { page: number }) {
           <DeleteProductDialog product={chosenProduct} />
       </Dialog>
     </div>
-    <div className="w-full flex justify-center items-end">
+    <div className="w-full border-t flex justify-center items-center pb-1 sticky bottom-0 bg-secundaria">      
       {
         pagination !== undefined &&
         <PaginationBar pagination={pagination} />
