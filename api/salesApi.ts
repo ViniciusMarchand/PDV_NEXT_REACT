@@ -72,8 +72,18 @@ const salesApi = {
             .catch(error => {
                 throw new Error(error.response.data.error);
             })
-    }
+    },
 
+    editItem: async (itemId: number, quantity: number) => {
+        const URL = apiLink + `venda/edit-item/{itemId}?itemId=${itemId}&quantidade=${quantity}`;
+        console.warn("URL", URL);
+        return await Axios.post(URL, {itemId, quantity})
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error.response.data.error);
+            })
+    }
 
 }
 

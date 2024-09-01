@@ -10,7 +10,6 @@ export const ProductModalSalesFormContext = createContext<any>(null);
 export const ProductModalFormSalesProvider = (props: { children: React.ReactNode }) => {
     const { children } = props;
     const [key, setKey] = useState(0);
-
     const [selectedProductsOnSalesPage, setSelectedProductsOnSalesPage] = useState<Item[]>([]);
     const [sale, setSale] = useState<Sale>();
 
@@ -47,7 +46,7 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
             selectedProductsOnSalesPage,
             updateProductsFromSales,
             key,
-            sale
+            sale,
         }}>
             <ProductSelectorModalContent 
             setSelectedProductsOnSalesPage={setSelectedProductsOnSalesPage} 

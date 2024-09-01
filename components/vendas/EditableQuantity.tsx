@@ -1,17 +1,14 @@
-import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
 import { Item } from "@/global/Types";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
-export default function EditableQuantity({ item }: { item: Item }) {
-    const { updateQuantity } = useContext(ProductModalSalesFormContext);
-    const [quantity, setQuantity] = useState(item.quantity);
+export default function EditableQuantity(props: { item: Item, setNewQuantity: Function }) {
+    const { item, setNewQuantity } = props;
+    const [quantity, setQuantity] = useState<string | number>(item.quantity);
 
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(e.target.value);
-        if (value > 0) {
-            setQuantity(value);
-            updateQuantity(item.product.id, value);
-        }
+        const value = e.target.value;
+        setQuantity(value);
+        setNewQuantity(value);
     };
 
     return (

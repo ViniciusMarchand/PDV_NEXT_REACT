@@ -7,15 +7,39 @@ import DeleteProductFromSalesDialog from "./DeleteProductFromSalesDialog";
 import EditableQuantity from "./EditableQuantity";
 import { GiConfirmed } from "react-icons/gi";
 import { MdCancel } from "react-icons/md";
+import { ToastContext } from "@/contexts/ToastContext";
+import salesApi from "@/api/salesApi";
 
 export default function ProductsTableSales() {
 
-    const { selectedProductsOnSalesPage } = useContext(ProductModalSalesFormContext);
+    const { selectedProductsOnSalesPage, updateProductsFromSales } = useContext(ProductModalSalesFormContext);
     const [chosenProduct, setChosenProduct] = useState<Item>();
     const [isEditing, setIsEditing] = useState(false);
     const [editingProductId, setEditingProductId] = useState<number | undefined>(0);
+    const [newQuantity, setNewQuantity] = useState('0');
+    const {successToast, errorToast} = useContext(ToastContext);
 
+    const updateQuantity = async (productId: number, quantity: string, stock:number) => {
+        try {
+            let numberQuantity : number;
+            if(quantity ===  '') 
+                numberQuantity = 1;
+            else
+                numberQuantity = parseInt(quantity);
 
+            if(numberQuantity > stock) {
+                throw new Error("Quantidade maior que o estoque!");
+            }
+
+            await salesApi.editItem(productId, numberQuantity);
+            successToast("Quantidade atualizada com sucesso!");
+            updateProductsFromSales();
+        } catch (error: any) {
+            errorToast(error.message);
+        }
+    };
+
+    
     const { key } = useContext(ProductModalSalesFormContext);
 
     return <div className="h-full w-full flex flex-col" key={key}>
@@ -45,7 +69,7 @@ export default function ProductsTableSales() {
                                 <td>R$ {item.product.preco}</td>
                                 <td>{item.product.codigoBarrasEAN13}</td>
                                 <td className="flex items-center justify-around">
-                                    {isEditing && editingProductId === item.product.id ? <EditableQuantity item={item}/> : item.quantity} 
+                                    {isEditing && editingProductId === item.product.id ? <EditableQuantity item={item} setNewQuantity={setNewQuantity}/> : item.quantity} 
                                 </td>
                                 <td>
                                     <div className="flex justify-center ">
@@ -56,11 +80,13 @@ export default function ProductsTableSales() {
                                                     className="transition mr-1 cursor-pointer"
                                                     size={18}
                                                     title="Confirmar edição"
+                                                    onClick={() => {item.id && updateQuantity(item.id, newQuantity, item.product.estoque); setIsEditing(false); setEditingProductId(0)}}
                                                 />
                                                 <MdCancel 
                                                     className="cursor-pointer transition"
                                                     size={18}
                                                     title="Cancelar edição"
+                                                    onClick={() => {setIsEditing(false); setEditingProductId(0)}}
                                                 />
                                             </>
                                             :
