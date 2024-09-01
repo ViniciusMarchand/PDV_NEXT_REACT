@@ -109,10 +109,10 @@ export default function SalesInfo() {
                     />
                 </ModalConfirmSales>
                 <div className="h-[35px] w-full mt-[10px]">
-                    <CancelSalesModal setPayment={setPayment} isValid={isValid}>
+                    <CancelSalesModal setPayment={setPayment} isValid={selectedProductsOnSalesPage.length > 0 || payment !== ""}>
                         <ModalButton 
                         value="Cancelar" 
-                        className={`full px-5 bg-red-500 hover:bg-red-600 h-[40px]` + ((!isValid) && "  cursor-not-allowed opacity-50 hover:bg-red-500")} />
+                        className={`full px-5 bg-red-500 hover:bg-red-600 h-[40px]` + ((!(selectedProductsOnSalesPage.length > 0 || payment !== "")) && "  cursor-not-allowed opacity-50 hover:bg-red-500")} />
                     </CancelSalesModal>
                 </div>
             </div>
