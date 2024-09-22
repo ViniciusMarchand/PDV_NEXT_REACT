@@ -75,7 +75,7 @@ const salesApi = {
     },
 
     editItem: async (itemId: number, quantity: number) => {
-        const URL = apiLink + `venda/edit-item/{itemId}?itemId=${itemId}&quantidade=${quantity}`;
+        const URL = apiLink + `venda/edit-item/${itemId}?quantidade=${quantity}`;
         console.warn("URL", URL);
         return await Axios.post(URL, {itemId, quantity})
             .then((res) => res)

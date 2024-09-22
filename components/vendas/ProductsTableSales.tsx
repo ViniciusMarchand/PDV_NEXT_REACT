@@ -5,8 +5,7 @@ import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductFromSalesDialog from "./DeleteProductFromSalesDialog";
 import EditableQuantity from "./EditableQuantity";
-import { GiConfirmed } from "react-icons/gi";
-import { MdCancel } from "react-icons/md";
+import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { ToastContext } from "@/contexts/ToastContext";
 import salesApi from "@/api/salesApi";
 
@@ -76,17 +75,17 @@ export default function ProductsTableSales() {
                                         {
                                             editingProductId === item.product.id ?
                                             <>
-                                                <GiConfirmed 
-                                                    className="transition mr-1 cursor-pointer"
-                                                    size={18}
-                                                    title="Confirmar edição"
-                                                    onClick={() => {item.id && updateQuantity(item.id, newQuantity, item.product.estoque); setIsEditing(false); setEditingProductId(0)}}
-                                                />
-                                                <MdCancel 
-                                                    className="cursor-pointer transition"
+                                                <GiCancel  
+                                                    className="cursor-pointer transition mr-1"
                                                     size={18}
                                                     title="Cancelar edição"
                                                     onClick={() => {setIsEditing(false); setEditingProductId(0)}}
+                                                />
+                                                <GiConfirmed 
+                                                    className="transition cursor-pointer"
+                                                    size={18}
+                                                    title="Confirmar edição"
+                                                    onClick={() => {item.id && updateQuantity(item.id, newQuantity, item.product.estoque); setIsEditing(false); setEditingProductId(0)}}
                                                 />
                                             </>
                                             :

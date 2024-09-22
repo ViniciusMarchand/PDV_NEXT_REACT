@@ -2,10 +2,9 @@ import { ProductInputs } from '@/global/Types';
 import { apiLink } from '@/constants/env';
 import { Axios } from './config';
 const productApi = {
-    get: async (page: number
-        // sort:string[]
+    get: async (page: number, sort:string
     ) => {
-        const URL = apiLink + `produto/ativos?page=${page}&size=22&sort=id`;
+        const URL = apiLink + `produto/ativos?page=${page}&size=22&sort=${sort}`;
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {

@@ -15,6 +15,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
     const [formStatus, setFormStatus] = useState(productFormStatus.Adicionar);
     const [maskedPrecoValue, setMaskedPrecoValue] = useState<number | string>('0');
     const [maskedPrecoFornecedorValue, setMaskedPrecoFornecedorValue] = useState<number | string>('0');
+    const [sortBy, setSortBy] = useState("id");
 
     const [selectedProduct, setSelectedProduct] = useState<ProductInputs>();
     const [key, setKey] = useState("");
@@ -86,6 +87,8 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
             key,
             statusToAdd,
             statusToEdit,
+            sortBy,
+            setSortBy
         }}>
             <AlertDialog>
                 <AlertDialogContent>

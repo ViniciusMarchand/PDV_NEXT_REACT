@@ -16,7 +16,7 @@ export default function EditableQuantity(props: { item: Item, setNewQuantity: Fu
             type="number"
             value={quantity}
             onChange={handleQuantityChange}
-            className="w-12 text-center hover:text-[#333] border rounded-sm"
+            className="w-12 text-center hover:text-[#333] border rounded-sm outline-gray-500"
         />
     );
 }

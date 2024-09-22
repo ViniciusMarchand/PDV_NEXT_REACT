@@ -16,11 +16,11 @@ export default function ProductTable(props: { page: number }) {
   const [pagination, setPagination] = useState();
   const [productList, setProductList] = useState<ProductInputs[]>();
   const [chosenProduct, setChosenProduct] = useState<ProductInputs>();
-  const { statusToEdit } = useContext(ProductModalFormContext);
+  const { statusToEdit, sortBy } = useContext(ProductModalFormContext);
   const router = useRouter();
 
   useEffect(() => {
-    productApi.get(page).then(res => {
+    productApi.get(page, sortBy).then(res => {
       const {content} = res.data; 
       if(content.length === 0) {
         router.push("0");
@@ -28,8 +28,8 @@ export default function ProductTable(props: { page: number }) {
       setProductList(res.data.content);
       setPagination(res.data);
     });
-  }, [page, router]);
-
+  }, [page, router, sortBy]);
+  
   return <div className="w-full px-3  pt-3 max-h-full overflow-y-auto flex flex-col">
     <div>
       <Dialog>

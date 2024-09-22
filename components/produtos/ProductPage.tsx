@@ -1,4 +1,4 @@
-import { FormEvent, useContext } from "react";
+import { useContext } from "react";
 import CardLayout from "../common/CardLayout";
 import ModalButton from "../common/ModalButton";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
@@ -8,10 +8,12 @@ import { Input } from "../ui/input";
 import { AiFillFileAdd } from "react-icons/ai";
 import productApi from "@/api/productApi";
 import { ToastContext } from "@/contexts/ToastContext";
+import { FaSearch } from "react-icons/fa";
+import SearchBar from "../common/SearchBar";
 
 export default function ProductPage(props:{page: number}) {
     const {page} = props;
-    const { key, statusToAdd, updateKey } = useContext(ProductModalFormContext);
+    const { key, statusToAdd, updateKey, sortBy, setSortBy } = useContext(ProductModalFormContext);
     const {successToast, errorToast} = useContext(ToastContext);
     async function sendFile(e: React.ChangeEvent<HTMLInputElement>) {
         const file = (e.target as HTMLInputElement).files?.[0];
@@ -26,7 +28,6 @@ export default function ProductPage(props:{page: number}) {
                 updateKey();
             });
         }
-
     }
 
     return <>
@@ -40,10 +41,11 @@ export default function ProductPage(props:{page: number}) {
                     </AlertDialogTrigger>
                     <div className="bg-terciaria hover:bg-terciaria2 transition w-[35px] h-[35px] rounded-sm cursor-pointer">
                         <Input id="files" type="file" className="hidden" onChange={(e) => sendFile(e)}/>
-                        <label htmlFor="files" className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer" title="Importar CSV">
+                        <label htmlFor="files" className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer shadow-md" title="importar CSV">
                             <AiFillFileAdd color="fdfdfd" size={25}/>
                         </label>
                     </div>
+                    <SearchBar value={sortBy} setValue={setSortBy} />
                 </div>
             </CardLayout>
         </div>
