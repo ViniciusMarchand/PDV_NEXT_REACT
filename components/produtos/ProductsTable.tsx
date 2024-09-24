@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import PaginationBar from "../common/PaginationBar";
 import productApi from "@/api/productApi";
 import { ProductInputs } from "@/global/Types";
@@ -7,30 +7,20 @@ import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
 import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductDialog from "./DeleteProductDialog";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
 
-export default function ProductTable(props: { page: number }) {
+export default function ProductTable(props: { page?: number }) {
 
-  const page = props.page;
-  const [pagination, setPagination] = useState();
-  const [productList, setProductList] = useState<ProductInputs[]>();
   const [chosenProduct, setChosenProduct] = useState<ProductInputs>();
-  const { statusToEdit, sortBy } = useContext(ProductModalFormContext);
-  const router = useRouter();
+  const { statusToEdit, pagination } = useContext(ProductModalFormContext);
+  const [products, setProducts] = useState<ProductInputs[]>([]);
 
   useEffect(() => {
-    productApi.get(page, sortBy).then(res => {
-      const {content} = res.data; 
-      if(content.length === 0) {
-        router.push("0");
-      }
-      setProductList(res.data.content);
-      setPagination(res.data);
-    });
-  }, [page, router, sortBy]);
-  
-  return <div className="w-full px-3  pt-3 max-h-full overflow-y-auto flex flex-col">
+    setProducts(pagination?.content || []);    
+  }, [pagination]);
+
+  return <div className="w-full px-3  pt-3 max-h-full overflow-y-auto flex flex-col justify-between h-full">
     <div>
       <Dialog>
         <table className="w-full text-center h-full overflow-y-scroll">
@@ -46,7 +36,7 @@ export default function ProductTable(props: { page: number }) {
           </thead>
           <tbody>
             {
-              productList?.map((product, i) => (
+              products?.map((product, i) => (
 
                 <tr key={i} className="border-t [&>td]:py-1">
                   <td>{product.id}</td>

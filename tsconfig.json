@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "contexts/AuthContext.jsx", "components/common/GenericButton.tsx", "app/produtos/[page]/page.tsx", "components/common/SideOptions.tsx", "contexts/ProductModalSalesFormContext.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "contexts/AuthContext.jsx", "components/common/GenericButton.tsx", "app/produtos/page.tsx", "components/common/SideOptions.tsx", "contexts/ProductModalSalesFormContext.tsx"],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,6 @@
+'uae client';
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader } from "@/components/ui/alert-dialog";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContext } from "./ToastContext";
 import { ProductInputs } from "@/global/Types";
@@ -8,20 +9,39 @@ import productApi from "@/api/productApi";
 import { CurrencyInput } from "react-currency-mask";
 import GenericButton from "@/components/common/GenericButton";
 import { productFormStatus } from "@/constants/enums";
+import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 export const ProductModalFormContext = createContext<any>(null);
 
-export const ProductModalFormProvider = (props: { children: React.ReactNode }) => {
+export const ProductModalFormProvider = (props: { children: React.ReactNode}) => {
     const { children } = props;
     const [formStatus, setFormStatus] = useState(productFormStatus.Adicionar);
     const [maskedPrecoValue, setMaskedPrecoValue] = useState<number | string>('0');
     const [maskedPrecoFornecedorValue, setMaskedPrecoFornecedorValue] = useState<number | string>('0');
     const [sortBy, setSortBy] = useState("id");
-
+    const [searchedName, setSearchedName] = useState("");
     const [selectedProduct, setSelectedProduct] = useState<ProductInputs>();
     const [key, setKey] = useState("");
-
+    const [pagination, setPagination] = useState();
     const { successToast, errorToast } = useContext(ToastContext);
-
+    const [page, setPage] = useState<number | undefined>(undefined);
+    const searchParams = useSearchParams();
+    
+    useEffect(() => {
+        const newPage = searchParams.get('page') || '';
+        
+        // Atualiza os estados sempre que os searchParams mudam
+        setPage(Number(newPage) - 1);
+    }, [searchParams]) // Reexecuta o efeito sempre que searchParams mudar
+    
+    useEffect(() => {
+        if(page !== undefined)
+        productApi.get(page, "id").then(res => {
+            setPagination(res.data);
+        });
+    }, [page]);
+    
+    
     const {
         register,
         handleSubmit,
@@ -33,21 +53,21 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
             preco: 0
         }
     });
-
+    
     const onSubmit: SubmitHandler<ProductInputs> = (product) => {
         if (formStatus === productFormStatus.Adicionar) {
             productApi.post(product)
-                .then(res => {
-                    successToast("Produto adicionado com sucesso!");
-                    reset();
-                })
-                .catch(error => errorToast("Erro ao adicionar produto!"))
-                .finally(() => updateKey());
+            .then(res => {
+                successToast("Produto adicionado com sucesso!");
+                reset();
+            })
+            .catch(error => errorToast("Erro ao adicionar produto!"))
+            .finally(() => updateKey());
         }
-
+        
         if (formStatus === productFormStatus.Editar) {
             if(selectedProduct?.id !== undefined)
-            productApi.put(selectedProduct.id, product)
+                productApi.put(selectedProduct.id, product)
             .then(res => {
                 successToast("Produto editado com sucesso!");
                 reset();
@@ -56,15 +76,15 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
             .finally(() => updateKey());
         }   
     };
-
+    
     const updateKey = () => {
         setKey(crypto.randomUUID());
     };
-
+    
     const statusToAdd = () => {
         setFormStatus(productFormStatus.Adicionar);
     };
-
+    
     
     const statusToEdit = (product:ProductInputs) => {
         setFormStatus(productFormStatus.Editar);
@@ -77,18 +97,19 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode }) =
         setValue("preco", preco);
         setMaskedPrecoValue(preco);
         setValue("codigoBarrasEAN13", codigoBarrasEAN13);
-
+        
         setSelectedProduct(product);
     };
-  
+    
     return (
         <ProductModalFormContext.Provider value={{
             updateKey,
             key,
             statusToAdd,
             statusToEdit,
-            sortBy,
-            setSortBy
+            setSortBy, 
+            setSearchedName,
+            pagination,
         }}>
             <AlertDialog>
                 <AlertDialogContent>
