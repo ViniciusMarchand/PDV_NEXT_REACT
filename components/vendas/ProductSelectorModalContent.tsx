@@ -7,8 +7,8 @@ import { FaBasketShopping } from "react-icons/fa6";
 import ProductQuantitySelection from "./ProductQuantitySelection";
 import salesApi from "@/api/salesApi";
 import { ToastContext } from "@/contexts/ToastContext";
-import PaginationBar from "../common/PaginationBar";
 import PaginationBarSinglePage from "../common/PaginationBarSinglePage";
+import SearchBar from "../common/SearchBar";
 
 export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function, selectedProductsOnSalesPage: Item[], updateProductsFromSales: Function}) {
    const { children, selectedProductsOnSalesPage, updateProductsFromSales } = props;
@@ -16,17 +16,27 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    const [productList, setProductList] = useState<ProductInputs[]>([]);
    const [selectedItems, setSelectedItems] = useState<Item[]>([]);
    const [isThereSomeProductOutOfStock, setIsThereSomeProductOutOfStock] = useState(false);
+   const [sortBy, setSortBy] = useState("id");
+   const [searchedName, setSearchedName] = useState<string>("");
 
    const {successToast, errorToast} = useContext(ToastContext);
 
    const changePage = useCallback((pageNumber: number) => {
-      productApi.get(pageNumber)
-         .then(res => {
-            setProductList(res.data.content);
-            setPagination(res.data);
-         })
-         .catch(error => console.error("Erro no servidor"));
-   }, []);
+      if(searchedName === "")
+         productApi.get(pageNumber, sortBy)
+            .then(res => {
+               setProductList(res.data.content);
+               setPagination(res.data);
+            })
+            .catch(error => console.error("Erro no servidor"));
+      else
+         productApi.searchProduct(pageNumber, sortBy, searchedName)
+            .then(res => {
+               setProductList(res.data.content);
+               setPagination(res.data);
+            })
+            .catch(error => console.error("Erro no servidor"));
+   }, [sortBy, searchedName]);
 
    useEffect(() => {
       changePage(0);
@@ -90,7 +100,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    }
 
    return <AlertDialog>
-         <AlertDialogContent className="max-w-none w-[1450px] h-[600px] flex flex-col bg-primaria">
+         <AlertDialogContent className="max-w-none w-[1450px] h-[600px] flex flex-col bg-primaria z-[100]">
             <AlertDialogHeader className="max-h-[30px]">
                <h1 className="text-[20px]"> Produto</h1>
             </AlertDialogHeader>
@@ -98,12 +108,12 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                   <div className="grow max-h-full h-full flex flex-col mr-3">
                      <div className="h-[60px] mb-3">
                         <CardLayout>
-                           <div className="w-full">
-
+                           <div className="w-full flex items-center h-full px-3">
+                              <SearchBar setValue={setSortBy} setSearchedName={setSearchedName} />
                            </div>
                         </CardLayout>
                      </div>
-                     <div className="h-[200px] w-full grow">
+                     <div className="h-[200px] w-full grow z-[2]">
                         <CardLayout>
                            <div className="max-h-full h-full w-full overflow-y-auto">
                               <div className="px-3">
