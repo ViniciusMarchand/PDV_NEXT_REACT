@@ -52,6 +52,15 @@ const productApi = {
                 throw new Error(error);
             })
     },
+    searchProduct: async (page: number, sort: string, searchedName: string) => {
+        const URL = apiLink + `produto/buscar?page=${page}&size=22&sort=${sort}&parametro=${searchedName}`;
+        return await Axios.get(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    }
 }
 
 export default productApi;

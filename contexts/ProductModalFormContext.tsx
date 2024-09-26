@@ -1,6 +1,6 @@
 'uae client';
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader } from "@/components/ui/alert-dialog";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContext } from "./ToastContext";
 import { ProductInputs } from "@/global/Types";
@@ -30,16 +30,30 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     useEffect(() => {
         const newPage = searchParams.get('page') || '';
         
-        // Atualiza os estados sempre que os searchParams mudam
         setPage(Number(newPage) - 1);
-    }, [searchParams]) // Reexecuta o efeito sempre que searchParams mudar
+    }, [searchParams]) 
     
     useEffect(() => {
-        if(page !== undefined)
-        productApi.get(page, "id").then(res => {
+        if(page !== undefined && pagination === undefined ) 
+        productApi.get(page, sortBy).then(res => {
             setPagination(res.data);
         });
-    }, [page]);
+    }, [page, pagination, sortBy]);
+
+    const searchItems = useCallback(() => {
+        if(searchedName !== "") {
+            productApi.searchProduct(page || 0, sortBy, searchedName)
+            .then(res => {
+                setPagination(res.data);
+            })
+        } else {
+            setPagination(undefined);
+        }
+    }, [page, sortBy, searchedName]);
+
+    useEffect(() => {
+        searchItems();
+    },[searchItems]);
     
     
     const {
@@ -110,6 +124,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
             setSortBy, 
             setSearchedName,
             pagination,
+            searchItems
         }}>
             <AlertDialog>
                 <AlertDialogContent>

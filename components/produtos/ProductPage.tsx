@@ -12,7 +12,7 @@ import { FaSearch } from "react-icons/fa";
 import SearchBar from "../common/SearchBar";
 
 export default function ProductPage() {
-    const { key, statusToAdd, updateKey, sortBy, setSortBy, setSearchedName } = useContext(ProductModalFormContext);
+    const { key, statusToAdd, updateKey, sortBy, setSortBy, setSearchedName, searchItems } = useContext(ProductModalFormContext);
     const {successToast, errorToast} = useContext(ToastContext);
     async function sendFile(e: React.ChangeEvent<HTMLInputElement>) {
         const file = (e.target as HTMLInputElement).files?.[0];
@@ -44,7 +44,7 @@ export default function ProductPage() {
                             <AiFillFileAdd color="fdfdfd" size={25}/>
                         </label>
                     </div>
-                    <SearchBar setValue={setSortBy} setSearchedName={setSearchedName}/>
+                    <SearchBar setValue={setSortBy} setSearchedName={setSearchedName} onClick={() => searchItems()}/>
                 </div>
             </CardLayout>
         </div>

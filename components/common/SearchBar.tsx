@@ -1,17 +1,24 @@
+'use client'
 import { FaSearch } from "react-icons/fa";
 import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { FaGear } from "react-icons/fa6";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
+import { useState } from "react";
 
-export default function SearchBar(props: {setValue: Function, setSearchedName?: Function}) {
-    const {setValue, setSearchedName} = props;
+export default function SearchBar(props: {setValue: Function, setSearchedName?: Function, onClick?: Function}) {
+    const {setValue, setSearchedName, onClick} = props;
+    const [valorInput, setValorInput] = useState<string>("");
 
+    const search = () => {
+        setSearchedName && setSearchedName(valorInput);
+        // onClick && onClick();
+    }
     return <div className="flex gap-2">
         <div className="flex">
-            <Input placeholder="Pesquisar" className="w-[200px] h-[35px] focus-visible:ring-0 focus-visible:ring-offset-0 rounded-[0px] rounded-l-md border-r-0" onChange={(e) => setSearchedName && setSearchedName(e.target.value)}/>
-            <div title="pesquisar" className="bg-terciaria hover:bg-terciaria2 transition w-[35px] h-[35px] rounded-r-sm cursor-pointer shadow-md flex justify-center items-center">
+            <Input placeholder="Pesquisar" className="w-[200px] h-[35px] focus-visible:ring-0 focus-visible:ring-offset-0 rounded-[0px] rounded-l-md border-r-0" value={valorInput} onChange={(e) => setValorInput(e.target.value)}/>
+            <div title="pesquisar" className="bg-terciaria hover:bg-terciaria2 transition w-[35px] h-[35px] rounded-r-sm cursor-pointer shadow-md flex justify-center items-center" onClick={() => search()}>
                 <FaSearch className="text-textoContraste" size={20} />
             </div>
         </div>
