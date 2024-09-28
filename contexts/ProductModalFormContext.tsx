@@ -9,7 +9,6 @@ import productApi from "@/api/productApi";
 import { CurrencyInput } from "react-currency-mask";
 import GenericButton from "@/components/common/GenericButton";
 import { productFormStatus } from "@/constants/enums";
-import { useRouter } from "next/router";
 import { useSearchParams } from "next/navigation";
 export const ProductModalFormContext = createContext<any>(null);
 
@@ -123,6 +122,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
             statusToEdit,
             setSortBy, 
             setSearchedName,
+            searchedName,
             pagination,
             searchItems
         }}>

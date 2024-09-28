@@ -9,11 +9,12 @@ export default function Sidebar() {
     const pathname = usePathname();
 
     function isCurrentPage(path:string) {
-        if(pathname.includes(path)) {
+        if(path.includes(pathname)) {
             return "text-textoContraste bg-terciaria";
         } 
     }
-
+    
+    console.warn(pathname)
     return <>
         <div className="left-0 min-h-full bg-secundaria w-sidebar fixed shadow-md py-0 z-10">
             <div className="min-h-header flex flex-col justify-center items-center my-5">
@@ -21,7 +22,7 @@ export default function Sidebar() {
             </div>
             {
                 SideBarData.map((elemento, i) => (
-                    <Link key={i} href={elemento.path === '/produtos' ? elemento.path + '/1' : elemento.path}>
+                    <Link key={i} href={elemento.path}>
                         <div className="flex cursor-pointer hover:rounded-md hover:text-terciaria transition">
                             <div className={"flex  items-center p-3 w-full " + isCurrentPage(elemento.path)}>
                                 {elemento.icon}

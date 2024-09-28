@@ -1,19 +1,18 @@
 'use client'
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PaginationBar from "../common/PaginationBar";
-import productApi from "@/api/productApi";
 import { ProductInputs } from "@/global/Types";
 import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
 import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductDialog from "./DeleteProductDialog";
-import { useRouter, useSearchParams } from "next/navigation";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
+import HighlightText from "../common/HighlightText";
 
 export default function ProductTable(props: { page?: number }) {
 
   const [chosenProduct, setChosenProduct] = useState<ProductInputs>();
-  const { statusToEdit, pagination } = useContext(ProductModalFormContext);
+  const { statusToEdit, pagination, searchedName } = useContext(ProductModalFormContext);
   const [products, setProducts] = useState<ProductInputs[]>([]);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function ProductTable(props: { page?: number }) {
 
                 <tr key={i} className="border-t [&>td]:py-1">
                   <td>{product.id}</td>
-                  <td>{product.descricao}</td>
+                  <td><HighlightText text={product.descricao} term={searchedName}/></td>
                   <td>{product.estoque}</td>
                   <td>{product.unidadeMedida}</td>
                   <td>R$ {product.preco}</td>
