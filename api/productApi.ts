@@ -60,6 +60,15 @@ const productApi = {
                 console.error(error);
                 throw new Error(error);
             })
+    },
+    editQuantity: async (id: number, newQuantity: string) => {
+        const URL = apiLink + `produto/${id}/editar-estoque?novoEstoque=${newQuantity}`;
+        return await Axios.patch(URL, { quantidade: newQuantity })
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
     }
 }
 

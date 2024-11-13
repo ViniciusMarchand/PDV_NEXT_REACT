@@ -1,10 +1,7 @@
 'use client'
 import CardLayout from "../common/CardLayout";
 import ProductsTableSales from "./ProductsTableSales";
-import { AlertDialogTrigger } from "../ui/alert-dialog";
-import ModalButton from "../common/ModalButton";
 import SalesInfo from "./SalesInfo";
-import { Input } from "../ui/input";
 import SalesHeader from "./SalesHeader";
 
 

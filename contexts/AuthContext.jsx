@@ -1,5 +1,4 @@
 import { Fragment, createContext, useContext } from "react";
-import getLogin from "../mock/getLogin";
 import { useRouter } from "next/navigation";
 import authApi from "@/api/authApi";
 import { ToastContext } from "./ToastContext";

@@ -73,9 +73,9 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
             .then(res => {
                 successToast("Produto adicionado com sucesso!");
                 reset();
+                updateKey();
             })
             .catch(error => errorToast("Erro ao adicionar produto!"))
-            .finally(() => updateKey());
         }
         
         if (formStatus === productFormStatus.Editar) {
@@ -84,9 +84,9 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
             .then(res => {
                 successToast("Produto editado com sucesso!");
                 reset();
+                updateKey();
             })
             .catch(error => errorToast("Erro ao editar produto!"))
-            .finally(() => updateKey());
         }   
     };
     
@@ -137,11 +137,14 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                 <label className="text-[18px]">Descrição</label>
                                 <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("descricao")} required />
                             </div>
-                            <div className="w-[200px]">
-                                <label className="text-[18px]">Estoque</label>
-                                <input type='number' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("estoque")} required />
-                            </div>
-                            <div className="w-[200px]">
+                            {
+                                !(formStatus == productFormStatus.Editar) && 
+                                <div className="w-[200px]">
+                                    <label className="text-[18px]">Estoque</label>
+                                    <input type='number' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("estoque")} required />
+                                </div>
+                            }
+                            <div className={ formStatus === productFormStatus.Adicionar ? "w-[200px]" : "w-full"}>
                                 <label className="text-[18px]">Unidade de Medida</label>
                                 <select className='text-[17px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("unidadeMedida")} required defaultValue={""}>
                                     <option value="" disabled>unidade de medida</option>
@@ -150,25 +153,28 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                     <option value={"Grama"}>Grama</option>
                                 </select>
                             </div>
-                            <div className="w-[200px]">
-                                <label className="text-[18px]">Preço Fornecedor</label>
-                                <CurrencyInput
-                                    value={maskedPrecoFornecedorValue}
-                                    InputElement={<input  type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' required />}
-                                    onChangeValue={(event, originalValue, maskedValue) => { 
-                                        setValue("precoFornecedor", Number(originalValue));
-                                        setMaskedPrecoFornecedorValue(maskedValue); 
-                                    }} />
-                            </div>
-                            <div className="w-[200px]">
-                                <label className="text-[18px]">Preço</label>
-                                <CurrencyInput
-                                    value={maskedPrecoValue}
-                                    InputElement={<input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' required />}
-                                    onChangeValue={(event, originalValue, maskedValue) => { 
-                                        setValue("preco", Number(originalValue));
-                                        setMaskedPrecoValue(maskedValue);
-                                    }} />
+                            <div className="w-full flex justify-between">
+                                <div className="w-[200px]">
+                                    <label className="text-[18px]">Preço Fornecedor</label>
+                                    <CurrencyInput
+                                        value={maskedPrecoFornecedorValue}
+                                        InputElement={<input  type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' required />}
+                                        onChangeValue={(event, originalValue, maskedValue) => { 
+                                            setValue("precoFornecedor", Number(originalValue));
+                                            setMaskedPrecoFornecedorValue(maskedValue); 
+                                        }} />
+                                </div>
+                                <div className="w-[200px]">
+                                    <label className="text-[18px]">Preço</label>
+                                    <CurrencyInput
+                                        value={maskedPrecoValue}
+                                        InputElement={<input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' required />}
+                                        onChangeValue={(event, originalValue, maskedValue) => { 
+                                            setValue("preco", Number(originalValue));
+                                            setMaskedPrecoValue(maskedValue);
+                                        }} />
+                                </div>
+
                             </div>
                             <div className="w-full">
                                 <label className="text-[18px]">Código de Barras</label>

@@ -1,4 +1,4 @@
-import { FaBoxes } from "react-icons/fa";
+import { FaBoxes, FaChartBar } from "react-icons/fa";
 import { FaCashRegister } from "react-icons/fa";
 
 export const SideBarData = [
@@ -12,5 +12,10 @@ export const SideBarData = [
         title: "Produtos",
         path: "/produtos?page=1",
         icon: <FaBoxes size={30}/>
+    },
+    {
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: <FaChartBar size={30} />
     }
 ]
