@@ -59,3 +59,9 @@ export type EndSale = {
     dataHoraConclusao?: string,
     formaPagamento: string
 }
+
+export type WeeklySalesData = {
+    data: string,
+    totalVendas: number,
+    totalLucro: number
+}

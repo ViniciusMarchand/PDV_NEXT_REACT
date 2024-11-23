@@ -1,9 +1,10 @@
-import CardLayout from "@/components/common/CardLayout";
+import { WeeklySalesChart } from "@/components/dashboard/WeeklySalesChart";
 
 export default function Page() {
     return( 
-        <CardLayout>
-            <h1>Dashboard</h1>
-        </CardLayout>
+            <div className="w-full p-2 gap-5 grow-1 flex">
+                <WeeklySalesChart />
+                {/* <WeeklySalesChart /> */}
+            </div>
     )
 }
