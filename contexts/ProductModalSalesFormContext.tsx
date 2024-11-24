@@ -39,7 +39,6 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
         updateProductsFromSales();
     }, [updateProductsFromSales]);
     
-    //FIX: tailwind @layer base its not working here, that's why I'm using css
     return (
         <ProductModalSalesFormContext.Provider value={{
             updateKey,

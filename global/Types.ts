@@ -4,7 +4,7 @@ export type LoginInputs = {
 
 }
 
-export type ProductInputs = {
+export type  ProductInputs = {
     id: number | undefined,
     descricao: string,
     unidadeMedida: string,
@@ -60,8 +60,21 @@ export type EndSale = {
     formaPagamento: string
 }
 
-export type WeeklySalesData = {
+export type DailySales = {
     data: string,
     totalVendas: number,
     totalLucro: number
+}
+
+export type Page = {
+    size: number,
+    number: number,
+    totalElements: number,
+    totalPages: number,
+}
+
+
+export type ProductPagination = {
+    page: Page,
+    content: ProductInputs[]
 }

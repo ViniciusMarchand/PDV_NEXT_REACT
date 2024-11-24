@@ -1,9 +1,9 @@
 import { FaSpinner } from "react-icons/fa";
 
-export default function Spinner({size = 18}) {
+export default function Spinner({size = 30}) {
     return (
         <div className="animate-spin">
-            <FaSpinner  size={size}/>
+            <FaSpinner size={size}/>
         </div>
     )
 }

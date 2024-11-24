@@ -20,14 +20,14 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
-export function WeeklySalesChart() {
+export function MonthlySalesChart() {
 
     const [data, setData] = useState<DailySales[]>([]);
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await dashboardApi.weeklyChart();
+                const res = await dashboardApi.monthlyChart();
                 setData(res.data.vendasDiarias);
             } catch (error) {
 
@@ -41,7 +41,7 @@ export function WeeklySalesChart() {
                 {
                     data.length > 0 ? (
                         <>
-                            <h2>VENDAS SEMANAIS</h2>
+                            <h2>VENDAS MENSAIS</h2>
                             <ChartContainer config={chartConfig} className="h-[250px] w-full">
                                 <BarChart accessibilityLayer data={data}>
                                     <CartesianGrid vertical={false} />
