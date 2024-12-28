@@ -4,9 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "@/public/imgs/logo.png"
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "@/lib/utils";
+import { User } from "@/global/Types";
 
 export default function Sidebar() {
     const pathname = usePathname();
+    const [userInfo, setUserInfo] = useState<User>();
+
+    useEffect(() => {
+        const user = getUserInfo();
+        setUserInfo(user);
+    },[]);
+
 
     function isCurrentPage(path:string) {
         if(path.includes(pathname)) {
@@ -21,6 +31,7 @@ export default function Sidebar() {
             </div>
             {
                 SideBarData.map((elemento, i) => (
+                    elemento.access && elemento.access !== userInfo?.scope ? null :
                     <Link key={i} href={elemento.path}>
                         <div className="flex cursor-pointer hover:rounded-md hover:text-terciaria transition">
                             <div className={"flex  items-center p-3 w-full " + isCurrentPage(elemento.path)}>

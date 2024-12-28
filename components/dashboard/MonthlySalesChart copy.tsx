@@ -60,8 +60,8 @@ export function MonthlySalesChart() {
                                         }}
                                     />
                                     <ChartTooltip content={<ChartTooltipContent />} />
-                                    <Bar dataKey="totalVendas" fill="var(--color-valorTotal)" radius={4} />
-                                    <Bar dataKey="totalLucro" fill="var(--color-lucro)" radius={4} />
+                                    <Bar dataKey="totalVendas" name={"Vendas totais"} fill="var(--color-valorTotal)" radius={4} />
+                                    <Bar dataKey="totalLucro" name={"Lucros totais"} fill="var(--color-lucro)" radius={4} />
                                 </BarChart>
                             </ChartContainer>
                         </>

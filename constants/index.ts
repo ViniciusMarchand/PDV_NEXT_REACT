@@ -1,0 +1,7 @@
+const publicPages = [
+    "/",
+];
+
+export {
+    publicPages
+}

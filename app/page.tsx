@@ -4,20 +4,40 @@ import { useContext } from 'react';
 import CardLayout from '../components/common/CardLayout';
 import GenericButton from '../components/common/GenericButton';
 import { useForm, SubmitHandler } from "react-hook-form";
-import { AuthContext } from '@/contexts/AuthContext';
 import { LoginInputs } from '@/global/Types';
 import Image from 'next/image';
 import Logo from '@/public/imgs/logo.png';
+import { useRouter } from 'next/navigation';
+import authApi from '@/api/authApi';
+import { createCookie } from '@/lib/utils';
+import { ToastContext } from '@/contexts/ToastContext';
 
 export default function App() {
 
-  const { login } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInputs>();
- 
+
+  const { errorToast } = useContext(ToastContext);
+
+  const router = useRouter();
+
+  const login = async (user: LoginInputs) => {
+      try {
+          const res = await authApi.login(user);
+          const { accessToken, refreshToken } = res.data;
+
+          createCookie('accessToken', accessToken);
+          createCookie('refreshToken', refreshToken);
+
+          router.push('/vendas');
+      } catch (error:any) {
+          errorToast(error.message);
+      }
+  }
+
   const onSubmit: SubmitHandler<LoginInputs> = (user) => login(user);
   
   return (
@@ -28,7 +48,7 @@ export default function App() {
           <div className="py-5 px-10">
             <h2 className=" text-[25px] mt-5">Entrar</h2>
             <p className="mb-5">Sistema de vendas e estoque.</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} method='POST'>
               <div>
                 <label className="text-[18px]">Username</label>
                 <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("username")} />

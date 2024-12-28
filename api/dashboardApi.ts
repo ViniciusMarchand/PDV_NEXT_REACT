@@ -2,7 +2,7 @@ import { apiLink } from '@/constants/env';
 import { Axios } from './config';
 const dashboardApi = {
     weeklyChart: async () => {
-        const URL = apiLink + `dashboard/vendas/grafico-semanal`;
+        const URL = `dashboard/vendas/grafico-semanal`;
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
@@ -12,7 +12,7 @@ const dashboardApi = {
     },
 
     monthlyChart: async () => {
-        const URL = apiLink + `dashboard/vendas/grafico-mensal`;
+        const URL = `dashboard/vendas/grafico-mensal`;
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
@@ -22,7 +22,7 @@ const dashboardApi = {
     },
   
     lowStock: async (page: number) => {
-        const URL = apiLink + `dashboard/produtos/baixo-estoque?page=${page}&size=5&sort=estoque`;
+        const URL = `dashboard/produtos/baixo-estoque?page=${page}&size=5&sort=estoque`;
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
@@ -30,6 +30,16 @@ const dashboardApi = {
                 throw new Error(error);
             })
     },
+
+    bestSellers: async (date:string) => {
+        const URL = `dashboard/produtos/mais-vendidos?data=${date}`;
+        return await Axios.get(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            });
+    }
 }
 
 export default dashboardApi;

@@ -1,19 +1,20 @@
 import { createContext } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-export const ToastContext = createContext();
+import { ReactNode } from "react";
+export const ToastContext = createContext<any>(null);
 
-export const ToastProvider = ({ children }) => {
+export const ToastProvider = ({ children }: { children: ReactNode }) => {
 
-    const successToast = (mensagem) => {
+    const successToast = (mensagem:string) => {
         toast.success(`${mensagem}`);
     }
 
-    const errorToast = (mensagem) => {
+    const errorToast = (mensagem:string) => {
         toast.error(`${mensagem}`);  
     }
 
-    const warningToast = (mensagem) => {
+    const warningToast = (mensagem:string) => {
         toast.warn(`${mensagem}`);  
     }
 

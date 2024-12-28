@@ -78,3 +78,12 @@ export type ProductPagination = {
     page: Page,
     content: ProductInputs[]
 }
+
+export type User = {
+    exp: number,
+    iat: number,
+    iss: string,
+    nome: string,
+    scope: string,
+    sub: string
+}

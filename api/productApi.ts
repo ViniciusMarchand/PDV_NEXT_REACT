@@ -1,10 +1,9 @@
 import { ProductInputs } from '@/global/Types';
-import { apiLink } from '@/constants/env';
 import { Axios } from './config';
 const productApi = {
     get: async (page: number, sort:string
     ) => {
-        const URL = apiLink + `produto/ativos?page=${page}&size=22&sort=${sort}`;
+        const URL = `produto/ativos?page=${page}&size=22&sort=${sort}`;
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
@@ -13,7 +12,7 @@ const productApi = {
             })
     },
     post: async (product: ProductInputs) => {
-        const URL = apiLink + "produto";
+        const URL = "produto";
         return await Axios.post(URL, product)
             .then((res) => res)
             .catch(error => {
@@ -22,7 +21,7 @@ const productApi = {
             })
     },
     put: async (id: number, product: ProductInputs) => {
-        const URL = apiLink + "produto/" + id;
+        const URL = "produto/" + id;
         return await Axios.put(URL, product)
             .then((res) => res)
             .catch(error => {
@@ -31,7 +30,7 @@ const productApi = {
             })
     },
     delete: async (id: number) => {
-        const URL = apiLink + "produto/" + id;
+        const URL = "produto/" + id;
         return await Axios.delete(URL)
             .then((res) => res)
             .catch(error => {
@@ -40,7 +39,7 @@ const productApi = {
             })
     },
     importCSV: async (file:FormData) => {
-        const URL = apiLink + "produto/importar-csv";
+        const URL = "produto/importar-csv";
         return await Axios.post(URL, file, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -53,7 +52,7 @@ const productApi = {
             })
     },
     searchProduct: async (page: number, sort: string, searchedName: string) => {
-        const URL = apiLink + `produto/buscar?page=${page}&size=22&sort=${sort}&parametro=${searchedName}`;
+        const URL = `produto/buscar?page=${page}&size=22&sort=${sort}&parametro=${searchedName}`;
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
@@ -62,7 +61,7 @@ const productApi = {
             })
     },
     editQuantity: async (id: number, newQuantity: string) => {
-        const URL = apiLink + `produto/${id}/editar-estoque?novoEstoque=${newQuantity}`;
+        const URL = `produto/${id}/editar-estoque?novoEstoque=${newQuantity}`;
         return await Axios.patch(URL, { quantidade: newQuantity })
             .then((res) => res)
             .catch(error => {

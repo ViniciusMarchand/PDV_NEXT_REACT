@@ -6,7 +6,6 @@ export const SideBarData = [
         title: "Vendas",
         path: "/vendas",
         icon: <FaCashRegister size={30}/>
-
     },
     {
         title: "Produtos",
@@ -16,6 +15,7 @@ export const SideBarData = [
     {
         title: "Dashboard",
         path: "/dashboard",
-        icon: <FaChartBar size={30} />
+        icon: <FaChartBar size={30} />,
+        access: 'ADMIN'
     }
 ]

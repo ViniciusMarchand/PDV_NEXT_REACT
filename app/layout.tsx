@@ -21,11 +21,9 @@ export default function RootLayout({
       <html lang="pt-br">
         <body className={`${inter.className} bg-primaria max-h-screen`} suppressHydrationWarning={true}>
           <ToastProvider>
-            <AuthProvider>
               <div className="flex justify-center min-h-screen">
                 {children}
               </div>
-            </AuthProvider>
           </ToastProvider>
         </body>
       </html>
