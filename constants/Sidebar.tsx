@@ -1,5 +1,6 @@
 import { FaBoxes, FaChartBar } from "react-icons/fa";
 import { FaCashRegister } from "react-icons/fa";
+import { TiUserAdd } from "react-icons/ti";
 
 export const SideBarData = [
     {
@@ -16,6 +17,12 @@ export const SideBarData = [
         title: "Dashboard",
         path: "/dashboard",
         icon: <FaChartBar size={30} />,
+        access: 'ADMIN'
+    },
+    {
+        title: "Usuários",
+        path: "/usuarios",
+        icon: <TiUserAdd size={30} />,
         access: 'ADMIN'
     }
 ]

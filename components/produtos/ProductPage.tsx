@@ -8,7 +8,6 @@ import { Input } from "../ui/input";
 import { AiFillFileAdd } from "react-icons/ai";
 import productApi from "@/api/productApi";
 import { ToastContext } from "@/contexts/ToastContext";
-import { FaSearch } from "react-icons/fa";
 import SearchBar from "../common/SearchBar";
 
 export default function ProductPage() {

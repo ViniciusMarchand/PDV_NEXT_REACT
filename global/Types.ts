@@ -79,11 +79,42 @@ export type ProductPagination = {
     content: ProductInputs[]
 }
 
-export type User = {
+export type UserToken = {
     exp: number,
     iat: number,
     iss: string,
     nome: string,
     scope: string,
     sub: string
+}
+
+type Role = {
+    id: number,
+    name: string
+}
+
+export type User = {
+    id: string,
+    username: string,
+    email: string,
+    nome: string,
+    sobrenome: string,
+    roles: Role[]
+}
+
+export type UserInputs = {
+    username: string,
+    email: string,
+    nome: string,
+    sobrenome: string,
+    password: string,
+    confirmacaoSenha?: string
+    roles?: string []
+}
+
+export type FormValues = {
+    label: string,
+    value: string,
+    placeholder?: string,
+    type?: string,
 }

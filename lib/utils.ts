@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import Cookies from "js-cookie";
 import { jwtDecode } from 'jwt-decode';
-import { User } from "@/global/Types";
+import { UserToken } from "@/global/Types";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -36,14 +36,14 @@ const setRefreshToken = (token: string) => {
   createCookie('refreshToken', token);
 }
 
-const getUserInfo = (): User | undefined => {
+const getUserInfo = (): UserToken | undefined => {
   const accessToken = getAccessToken();
 
   if(!accessToken) {
     return;
   }
 
-  const tokenInfo: User = jwtDecode(accessToken);
+  const tokenInfo: UserToken = jwtDecode(accessToken);
   
   return tokenInfo;
 }

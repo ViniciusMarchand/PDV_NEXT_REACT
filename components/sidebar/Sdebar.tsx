@@ -6,11 +6,11 @@ import Logo from "@/public/imgs/logo.png"
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "@/lib/utils";
-import { User } from "@/global/Types";
+import { UserToken } from "@/global/Types";
 
 export default function Sidebar() {
     const pathname = usePathname();
-    const [userInfo, setUserInfo] = useState<User>();
+    const [userInfo, setUserInfo] = useState<UserToken>();
 
     useEffect(() => {
         const user = getUserInfo();
