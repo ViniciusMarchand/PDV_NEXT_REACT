@@ -1,5 +1,6 @@
 const publicPages = [
     "/",
+    "reset-password",
 ];
 
 export {

@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import authApi from '@/api/authApi';
 import { createCookie } from '@/lib/utils';
 import { ToastContext } from '@/contexts/ToastContext';
+import Link from 'next/link';
 
 export default function App() {
 
@@ -61,7 +62,9 @@ export default function App() {
                 <GenericButton value='Entrar' className='text-[18px]'/>
               </div>
               <div className="w-full h-[1px] border my-6"></div>
-              <p className="text-center text-terciaria hover:underline cursor-pointer hover:text-terciaria2">Esqueceu a senha?</p>
+              <Link href="/reset-password/request">
+                <p className="text-center text-terciaria hover:underline cursor-pointer hover:text-terciaria2">Esqueceu a senha?</p>
+              </Link>
             </form>
           </div>
         </CardLayout>

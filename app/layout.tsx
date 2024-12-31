@@ -6,6 +6,7 @@ import { ToastProvider } from "@/contexts/ToastContext"
 import { usePathname } from "next/navigation";
 import Header from "@/components/header/Header";
 import Sidebar from "@/components/sidebar/Sdebar";
+import { publicPages } from "@/constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export default function RootLayout({
 }>) {
 
   const pathname = usePathname();
-  if (pathname === "/") {
+  if (pathname === "/" || publicPages.some((page) => pathname.includes(page))) {
     return (
       <html lang="pt-br">
         <body className={`${inter.className} bg-primaria max-h-screen`} suppressHydrationWarning={true}>
