@@ -1,28 +1,28 @@
-## Projeto PDV (🚧 em desenvolvimento!)
-Este projeto é um sistema de ponto de venda (PDV) desenvolvido utilizando tecnologias modernas para garantir uma experiência de usuário fluida e eficiente. Abaixo estão as principais tecnologias e bibliotecas utilizadas no projeto.
+## POS project (🚧 in development!)
+This project is a point-of-sale (POS) system developed using modern technologies to ensure a smooth and efficient user experience. Below are the main technologies and libraries used in the project.
 
-Tecnologias Utilizadas
-Tailwind CSS: Tailwind CSS é um framework de utilitários para estilização que permite criar layouts personalizados com rapidez e eficiência. Utilizando uma abordagem de "utility-first", ele proporciona uma maneira rápida de estilizar componentes e criar designs responsivos e atraentes sem a necessidade de escrever CSS personalizado. No projeto, Tailwind CSS é utilizado para estilizar o front-end do sistema de PDV, garantindo um design moderno e responsivo, e permitindo a criação de interfaces de usuário consistentes e customizáveis com menos código CSS.
+Technologies used
+Tailwind CSS: Tailwind CSS is a utility framework for styling that allows you to create customized layouts quickly and efficiently. Using a utility-first approach, it provides a quick way to style components and create responsive, attractive designs without the need to write custom CSS. In the project, Tailwind CSS is used to style the front-end of the POS system, ensuring a modern, responsive design and allowing the creation of consistent, customizable user interfaces with less CSS code.
 
-Next.js: Next.js é um framework React para a construção de aplicações web modernas. Oferece funcionalidades como renderização do lado do servidor (SSR), geração de páginas estáticas (SSG) e suporte a API routes, tornando-o ideal para aplicações web de alta performance. No projeto, Next.js é utilizado para construir a aplicação front-end do PDV, aproveitando suas funcionalidades de renderização do lado do servidor para melhorar a performance e SEO, e facilitando a criação de rotas e integração com APIs.
+Next.js: Next.js is a React framework for building modern web applications. It offers features such as server-side rendering (SSR), static page generation (SSG) and support for API routes, making it ideal for high-performance web applications. In the project, Next.js is used to build the POS front-end application, taking advantage of its server-side rendering features to improve performance and SEO, and facilitating the creation of routes and integration with APIs.
 
-Bibliotecas de Design de Componentes: Bibliotecas de design de componentes fornecem conjuntos de componentes reutilizáveis e estilizados que facilitam a construção de interfaces de usuário consistentes e bem projetadas. Exemplos incluem shadcn. No projeto, essas bibliotecas são utilizadas para criar e estilizar componentes da interface de usuário, como botões, formulários e modais, que são essenciais para a funcionalidade do PDV.
+Component Design Libraries: Component design libraries provide sets of reusable, stylized components that make it easy to build consistent, well-designed user interfaces. Examples include shadcn. In design, these libraries are used to create and style user interface components, such as buttons, forms and modals, which are essential for POS functionality.
 
 ## Getting Started
 
-Primeiro, instale as dependências
+First, install the dependencies
 
 ```bash
 npm install
 ```
-Depois, inicie o projeto
+Then start the project
 
 ```bash
 npm run dev
 ```
 
-Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Além desse projeto, para rodar ele com todas as funcionalidades, você precisa rodar um redis e clonar o backend.
+In addition to this project, to run it with full functionality, you need to run and clone the backend.
 Backend:
 https://github.com/GabryelMelo07/ferragem-avila-pdv/commits/master/
