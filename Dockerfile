@@ -14,7 +14,6 @@ COPY . .
 # Faz o build do Next.js
 RUN npm run build
 
-
 # Expõe a porta do servidor Next.js
 EXPOSE 3000
 
