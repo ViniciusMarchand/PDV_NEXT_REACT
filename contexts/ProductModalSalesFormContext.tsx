@@ -19,16 +19,20 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
 
     const updateProductsFromSales = useCallback(() => {
         salesApi.getProductsFromSale().then(res => {
-            const products = res.data;
-            const items = products.map((item: SalesItem) => {
-                return {
-                    id: item.id,
-                    product: item.produto,
-                    quantity: item.quantidade,
-                }
-            });
-            setSelectedProductsOnSalesPage(items);
-            delete products.itens;
+            if (res && res.data) {
+                const products = res.data;
+                const items = products.map((item: SalesItem) => {
+                    return {
+                        id: item.id,
+                        product: item.produto,
+                        quantity: item.quantidade,
+                    }
+                });
+                setSelectedProductsOnSalesPage(items);
+                delete products.itens;
+            } else {
+                setSelectedProductsOnSalesPage([]);
+            }
         }).catch(error => setSelectedProductsOnSalesPage([]));
         salesApi.getSale().then(res => {
             setSale(res.data);
