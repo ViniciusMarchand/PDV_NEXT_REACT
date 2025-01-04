@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import Header from "@/components/header/Header";
 import Sidebar from "@/components/sidebar/Sdebar";
 import { publicPages } from "@/constants";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,15 +18,17 @@ export default function RootLayout({
 }>) {
 
   const pathname = usePathname();
-  if (pathname === "/" || publicPages.some((page) => pathname.includes(page))) {
+  if (pathname && (publicPages.some((page) => pathname.includes(page)) || pathname === "/")) {
     return (
       <html lang="pt-br">
         <body className={`${inter.className} bg-primaria max-h-screen`} suppressHydrationWarning={true}>
+          <Suspense fallback={<div>Carregando...</div>}>
           <ToastProvider>
               <div className="flex justify-center min-h-screen">
                 {children}
               </div>
           </ToastProvider>
+          </Suspense>
         </body>
       </html>
     );
@@ -33,15 +36,15 @@ export default function RootLayout({
     return <html lang="pt-br">
       <body className={`${inter.className} bg-primaria  h-screen max-h-screen overflow-hidden`} suppressHydrationWarning={true}>
         <ToastProvider>
-          <AuthProvider>
-            <Header />
-            <Sidebar />
-            <div className="h-full flex w-full pl-sidebar pt-header">
-              <div className="w-full h-full p-3">
-                {children}
+            <AuthProvider>
+              <Header />
+              <Sidebar />
+              <div className="h-full flex w-full pl-sidebar pt-header">
+                <div className="w-full h-full p-3">
+                  {children}
+                </div>
               </div>
-            </div>
-          </AuthProvider>
+            </AuthProvider>
         </ToastProvider>
       </body>
     </html>

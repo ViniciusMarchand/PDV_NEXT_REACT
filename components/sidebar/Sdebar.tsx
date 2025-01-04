@@ -19,7 +19,7 @@ export default function Sidebar() {
 
 
     function isCurrentPage(path:string) {
-        if(path.includes(pathname)) {
+        if(pathname && path.includes(pathname)) {
             return "text-textoContraste bg-terciaria";
         } 
     }

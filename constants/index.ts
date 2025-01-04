@@ -1,5 +1,4 @@
 const publicPages = [
-    "/",
     "reset-password",
 ];
 

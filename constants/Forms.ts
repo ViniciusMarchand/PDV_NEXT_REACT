@@ -32,7 +32,7 @@ export const userRegistrationForm: FormValues[] = [
     {
         label: "Confirmação de senha",
         value: "confirmacaoSenha",
-        placeholder: "Digite a senha novamente",
+        placeholder: "Confirme a senha",
         type: "password",
     },
 ]
