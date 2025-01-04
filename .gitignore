@@ -35,9 +35,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.env
-
 node_modules
 npm-debug.log
 .DS_Store
-*.env

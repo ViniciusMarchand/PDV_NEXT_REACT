@@ -25,7 +25,6 @@ Axios.interceptors.response.use(
         return response;
     },
     async (error) => {
-
         const originalRequest = error.config;
         if (error.response && error.response.status === 401 && originalRequest && !originalRequest._retry) {
             originalRequest._retry = true;
@@ -34,18 +33,19 @@ Axios.interceptors.response.use(
             const refreshToken = getRefreshToken();
             
             if (refreshToken && accessToken) {
-                return await authApi.refreshToken(accessToken, refreshToken)
-                    .then((res) => {
-                        if (res.status === 200) {
-                            setAccessToken(res.data.accessToken);
-                            setRefreshToken(res.data.refreshToken);
-                            return Axios(originalRequest);
-                        }
-                    })
-                    .catch((error) => {
-                        console.error(error);                        
+                try {
+                    const res = await authApi.refreshToken(accessToken, refreshToken);
+                    if (res.status === 200) {
+                        setAccessToken(res.data.accessToken);
+                        setRefreshToken(res.data.refreshToken);
+                        return Axios(originalRequest);
+                    }
+                } catch (error) {
+                    console.error(error);
+                    if (typeof window !== "undefined") {
                         window.location.href = "/";
-                    });
+                    }
+                }
             }
         }
         return Promise.reject(error);

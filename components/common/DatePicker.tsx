@@ -34,7 +34,7 @@ export function DatePicker({ onSearchDate }: DatePickerProps) {
                     <Button
                         variant={"outline"}
                         className={cn(
-                            "w-[280px] justify-start text-left font-normal",
+                            "w-[280px] justify-start text-left font-normal bg-transparent hover:bg-gray-200  ",
                             !dateTemplate && "text-muted-foreground"
                         )}
                     >
@@ -52,7 +52,7 @@ export function DatePicker({ onSearchDate }: DatePickerProps) {
                     />
                 </PopoverContent>
             </Popover>
-            <Button className="bg-terciaria hover:bg-terciaria2" onClick={() => handleDate(dateTemplate)}>
+            <Button onClick={() => handleDate(dateTemplate)}>
                 <FaSearch className="text-white" size={18} />
             </Button>
         </div>

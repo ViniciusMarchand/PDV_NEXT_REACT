@@ -43,6 +43,14 @@ const authApi = {
                 throw new Error(error.response.data.error)
             })
     },
+    resetPassword: async (userId:string, token:string, password:string) => {
+        const URL = "/auth/reset-password";
+        return await Axios.post(URL, {userId, token, password})
+            .then((res) => res)
+            .catch(error => {
+                throw new Error(error.response.data.error)
+            })
+    }
 
 }
 

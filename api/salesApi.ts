@@ -25,8 +25,7 @@ const salesApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
-                throw new Error(error);
+
             })
     },
     removeProduct: async (id: number) => {

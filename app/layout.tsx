@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
 
   const pathname = usePathname();
-  if (pathname === "/" || publicPages.some((page) => pathname.includes(page))) {
+  if (pathname && (publicPages.some((page) => pathname.includes(page)) || pathname === "/")) {
     return (
       <html lang="pt-br">
         <body className={`${inter.className} bg-primaria max-h-screen`} suppressHydrationWarning={true}>

@@ -17,9 +17,9 @@ const Form: React.FC<FormProps> = ({ register, formValues }) => {
             {
                 formValues.map(({label, value, placeholder, type}) => (
                     <div key={value}>
-                        <label htmlFor={value}>{label}</label>
+                        <label className="text-[18px]" htmlFor={value}>{label}</label>
                         <Input 
-                            className="w-[200px] h-[35px] "  
+                            className="w-[200px] h-[45px] text-[18px] border mb-3 p-2 bg-secundaria"   
                             {...register(value)}
                             placeholder={placeholder}
                             type={type}

@@ -2,6 +2,7 @@
 import { getAccessToken } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import ErrorBoundary from "@/components/common/ErrorBoundary";
 
 export const AuthContext = createContext<any>(null);
 
@@ -18,12 +19,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setIsAuthenticated(true);
     }, [router, token]);
 
-    
-    
     return (
         isAuthenticated &&
-        <AuthContext.Provider value={{}}>
-            {children}
-        </AuthContext.Provider>
+        <ErrorBoundary>
+            <AuthContext.Provider value={{}}>
+                {children}
+            </AuthContext.Provider>
+        </ErrorBoundary>
     );
 };
