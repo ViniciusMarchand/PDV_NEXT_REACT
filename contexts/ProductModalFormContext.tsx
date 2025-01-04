@@ -27,7 +27,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     const searchParams = useSearchParams();
     
     useEffect(() => {
-        const newPage = searchParams.get('page') || '';
+        const newPage = searchParams?.get('page') || '';
         
         setPage(Number(newPage) - 1);
     }, [searchParams]) 
