@@ -12,14 +12,14 @@ export default function DeleteProductDialog(productInput: DeleteProductDialogPro
 
     const {id, descricao} = productInput?.product || {};
     const {successToast, errorToast} = useContext(ToastContext);
-    const { updateKey } = useContext(ProductModalFormContext);
+    const { searchItems } = useContext(ProductModalFormContext);
 
     function deleteProduct() {
         if(id !== undefined)
         productApi.delete(id)
         .then(res => successToast(descricao + " deletado com sucesso!"))
         .catch(error => errorToast(error.message))
-        .finally(() => updateKey());
+        .finally(() => searchItems());
     }
 
     return <>
