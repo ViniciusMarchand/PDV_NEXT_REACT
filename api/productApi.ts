@@ -1,4 +1,3 @@
-import { ProductInputs } from '@/global/Types';
 import { Axios } from './config';
 const productApi = {
     get: async (page: number, sort:string
@@ -11,18 +10,27 @@ const productApi = {
                 throw new Error(error);
             })
     },
-    post: async (product: ProductInputs) => {
+    post: async (product: FormData) => {
         const URL = "produto";
-        return await Axios.post(URL, product)
+        console.warn(product)
+        return await Axios.post(URL, product, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+        })
             .then((res) => res)
             .catch(error => {
                 console.error(error);
                 throw new Error(error);
             })
     },
-    put: async (id: number, product: ProductInputs) => {
+    put: async (id: number, product: FormData) => {
         const URL = "produto/" + id;
-        return await Axios.put(URL, product)
+        return await Axios.put(URL, product, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+        })
             .then((res) => res)
             .catch(error => {
                 console.error(error);

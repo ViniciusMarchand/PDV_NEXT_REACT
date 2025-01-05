@@ -20,7 +20,6 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     const [sortBy, setSortBy] = useState("id");
     const [searchedName, setSearchedName] = useState("");
     const [selectedProduct, setSelectedProduct] = useState<ProductInputs>();
-    const [key, setKey] = useState("");
     const [pagination, setPagination] = useState();
     const { successToast, errorToast } = useContext(ToastContext);
     const [page, setPage] = useState<number | undefined>(undefined);
@@ -68,32 +67,38 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     });
     
     const onSubmit: SubmitHandler<ProductInputs> = (product) => {
+        const formData = new FormData();
+
+        Object.entries(product).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+                formData.append(key, value.toString());
+            }
+        });
+
         if (formStatus === productFormStatus.Adicionar) {
-            productApi.post(product)
+            
+            productApi.post(formData)
             .then(res => {
                 successToast("Produto adicionado com sucesso!");
                 reset();
-                updateKey();
+                searchItems();
             })
             .catch(error => errorToast("Erro ao adicionar produto!"))
         }
         
         if (formStatus === productFormStatus.Editar) {
             if(selectedProduct?.id !== undefined)
-                productApi.put(selectedProduct.id, product)
+                productApi.put(selectedProduct.id, formData)
             .then(res => {
                 successToast("Produto editado com sucesso!");
                 reset();
-                updateKey();
+                searchItems();
             })
             .catch(error => errorToast("Erro ao editar produto!"))
         }   
     };
     
-    const updateKey = () => {
-        setKey(crypto.randomUUID());
-    };
-    
+
     const statusToAdd = () => {
         setFormStatus(productFormStatus.Adicionar);
     };
@@ -116,8 +121,6 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     
     return (
         <ProductModalFormContext.Provider value={{
-            updateKey,
-            key,
             statusToAdd,
             statusToEdit,
             setSortBy, 
@@ -148,9 +151,9 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                 <label className="text-[18px]">Unidade de Medida</label>
                                 <select className='text-[17px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("unidadeMedida")} required defaultValue={""}>
                                     <option value="" disabled>unidade de medida</option>
-                                    <option value={"Unidade"}>Unidade</option>
-                                    <option value={"Metro"}>Metro</option>
-                                    <option value={"Grama"}>Grama</option>
+                                    <option value={"UNIDADE"}>Unidade</option>
+                                    <option value={"METRO"}>Metro</option>
+                                    <option value={"GRAMA"}>Grama</option>
                                 </select>
                             </div>
                             <div className="w-full flex justify-between">

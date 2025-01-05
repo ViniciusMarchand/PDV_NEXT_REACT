@@ -19,8 +19,8 @@ export function DatePicker({ onSearchDate }: DatePickerProps) {
     const [date, setDate] = React.useState<string>(format(new Date(), "yyyy-MM-dd"))
 
 
-    async function handleDate(date:Date) {
-        setDate(format(dateTemplate, "yyyy-MM-dd"))
+    async function handleDate(date: Date) {
+        setDate(format(date, "yyyy-MM-dd"))
     }
 
     useEffect(() => {

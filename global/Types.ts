@@ -12,6 +12,7 @@ export type  ProductInputs = {
     precoFornecedor: number,
     preco: number,
     codigoBarrasEAN13: string,
+    imagem: File | null
 }
 
 export type Item = {

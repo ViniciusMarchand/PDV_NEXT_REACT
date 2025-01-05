@@ -28,7 +28,23 @@ export default function AlertDialogProdutos() {
     });
 
     const onSubmit: SubmitHandler<ProductInputs> = (produto) => {
-        productApi.post(produto)
+        const formData = new FormData();
+
+        Object.entries(produto).forEach(([key, value]) => {
+            if (value !== undefined && value !== null) {
+                formData.append(key, value.toString());
+            }
+        });
+
+        if (produto.imagem === null || produto.imagem === undefined) {
+            formData.append('imagem', ''); // Envia o campo vazio
+        } else if (produto.imagem instanceof File) {
+            formData.append('imagem', produto.imagem); // Envia o arquivo normalmente
+        }
+
+        produto.imagem = null;
+
+        productApi.post(formData)
         .then(res => {
             successToast("Produto adicionado!")
             reset()
