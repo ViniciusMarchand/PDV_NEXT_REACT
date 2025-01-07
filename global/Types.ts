@@ -79,7 +79,7 @@ export type Page = {
 
 export type Pagination = {
     page: Page,
-    content: ProductInputs[] | SaleItem[]
+    content: (ProductInputs & SaleItem)[]
 }
 
 export type UserToken = {
