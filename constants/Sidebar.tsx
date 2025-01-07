@@ -1,6 +1,9 @@
+import path from "path";
 import { FaBoxes, FaChartBar } from "react-icons/fa";
 import { FaCashRegister } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
+import { FaHistory } from "react-icons/fa";
+
 
 export const SideBarData = [
     {
@@ -24,5 +27,10 @@ export const SideBarData = [
         path: "/usuarios",
         icon: <TiUserAdd size={30} />,
         access: 'ADMIN'
+    },
+    {
+        title: "Histórico de Vendas",
+        path: "/historico-vendas",
+        icon: <FaHistory size={30} />,
     }
 ]

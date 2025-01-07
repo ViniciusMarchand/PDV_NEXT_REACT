@@ -12,7 +12,7 @@ import EditableQuantity from "./EditableQuantity";
 import { GiCancel, GiConfirmed } from "react-icons/gi";
 import productApi from "@/api/productApi";
 
-export default function ProductTable(props: { page?: number }) {
+export default function ProductTable() {
 
   const [chosenProduct, setChosenProduct] = useState<ProductInputs>();
   const { statusToEdit, pagination, searchedName } = useContext(ProductModalFormContext);

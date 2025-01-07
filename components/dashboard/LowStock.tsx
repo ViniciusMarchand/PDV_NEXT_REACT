@@ -2,13 +2,13 @@
 
 import { useCallback, useEffect, useState } from "react";
 import CardLayout from "../common/CardLayout";
-import { ProductPagination } from "@/global/Types";
+import { Pagination } from "@/global/Types";
 import dashboardApi from "@/api/dashboardApi";
 import Spinner from "../common/Spinner";
 import PaginationBarSinglePage from "../common/PaginationBarSinglePage";
 
 export default function LowStock() {
-    const [data, setData] = useState<ProductPagination>();
+    const [data, setData] = useState<Pagination>();
 
     const changePage = useCallback(async (pageNumber: number) => {
         try {

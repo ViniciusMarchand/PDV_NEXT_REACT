@@ -46,6 +46,8 @@ export type Sale = {
     concluida: boolean,
     precoTotal: number,
     formaPagamento: string,
+    vendedorId: string,
+    vendedorNome: string,
 }
 
 export type SaleItem = {
@@ -75,9 +77,9 @@ export type Page = {
 }
 
 
-export type ProductPagination = {
+export type Pagination = {
     page: Page,
-    content: ProductInputs[]
+    content: ProductInputs[] | SaleItem[]
 }
 
 export type UserToken = {

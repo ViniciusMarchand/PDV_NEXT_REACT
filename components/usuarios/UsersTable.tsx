@@ -25,11 +25,11 @@ export const UsersTable: React.FC<UsersTableProps> = ({ users }) => {
                             {
                                 users.map((user) => (
                                     <Table.Row key={user.id}>
-                                        <Table.Cell className="text-sm">{user.id}</Table.Cell>
-                                        <Table.Cell className="text-sm">{user.username}</Table.Cell>
-                                        <Table.Cell className="text-sm">{user.email}</Table.Cell>
-                                        <Table.Cell className="text-sm">{`${user.nome} ${user.sobrenome}`}</Table.Cell>
-                                        <Table.Cell className="text-sm">
+                                        <Table.Cell>{user.id}</Table.Cell>
+                                        <Table.Cell>{user.username}</Table.Cell>
+                                        <Table.Cell>{user.email}</Table.Cell>
+                                        <Table.Cell>{`${user.nome} ${user.sobrenome}`}</Table.Cell>
+                                        <Table.Cell>
                                             <p title={user.roles.map(role => role.name).join(', ')}>
                                                 {
                                                     `${user.roles[0]?.name || 'USER'}${user.roles.length > 1 ? "..." : ""}`

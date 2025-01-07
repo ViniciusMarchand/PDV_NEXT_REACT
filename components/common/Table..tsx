@@ -36,7 +36,7 @@ Table.Row.displayName = 'Table.Row';
 
 Table.Cell = ({ children, className }) => {
 
-  return <td className={className}>{children}</td>;
+  return <td className={"text-center py-1 " + className}>{children}</td>;
 };
 Table.Cell.displayName = 'Table.Cell';
 

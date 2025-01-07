@@ -81,7 +81,16 @@ const salesApi = {
                 console.error(error);
                 throw new Error(error.response.data.error);
             })
-    }
+    },
+    getSalesHistory: async (page: number, size: number) => {
+        const URL = `venda?page=${page}&size=${size}`;
+        return await Axios.get(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error);
+                throw new Error(error);
+            })
+    },
 
 }
 
