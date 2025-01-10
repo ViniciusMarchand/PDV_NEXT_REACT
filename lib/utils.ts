@@ -48,6 +48,11 @@ const getUserInfo = (): UserToken | undefined => {
   return tokenInfo;
 }
 
+const clearCookies = () => {
+  Cookies.remove('accessToken');
+  Cookies.remove('refreshToken');
+};
+
 export {
   cn,
   getAccessToken,
@@ -55,5 +60,6 @@ export {
   createCookie,
   setAccessToken,
   setRefreshToken,
-  getUserInfo
+  getUserInfo,
+  clearCookies
 }
