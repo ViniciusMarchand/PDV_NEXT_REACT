@@ -75,7 +75,7 @@ export default function UserFormModal({fetchUsers}: UserFormModalProps) {
                 className="bg-terciaria hover:bg-terciaria2 shadow-md" type="button"
                 onClick={() => setIsOpen(true)}
             >
-                Adicionar
+                Adicionar Usuário
             </Button>
         </AlertDialog>
     );

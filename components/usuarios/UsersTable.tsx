@@ -14,18 +14,16 @@ export const UsersTable: React.FC<UsersTableProps> = ({ users }) => {
                 <Table>
                     <Table.Header>
                         <Table.Row>
-                            <Table.Cell>ID</Table.Cell>
-                            <Table.Cell>USERNAME</Table.Cell>
+                            <Table.Cell>NOME DO USUÁRIO</Table.Cell>
                             <Table.Cell>EMAIL</Table.Cell>
                             <Table.Cell>NOME</Table.Cell>
-                            <Table.Cell>ROLES</Table.Cell>
+                            <Table.Cell>CARGO</Table.Cell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
                             {
                                 users.map((user) => (
                                     <Table.Row key={user.id}>
-                                        <Table.Cell>{user.id}</Table.Cell>
                                         <Table.Cell>{user.username}</Table.Cell>
                                         <Table.Cell>{user.email}</Table.Cell>
                                         <Table.Cell>{`${user.nome} ${user.sobrenome}`}</Table.Cell>

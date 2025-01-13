@@ -27,14 +27,14 @@ export default function DeleteProductFromSalesDialog(itemInput: DeleteProductDia
     return <>
         <DialogContent>
             <DialogTitle className="text-[20px] font-bold">
-                Deletar produto
+                Remover produto da venda
             </DialogTitle>
             <DialogDescription className="text-[18px]">
-                Você tem certeza que deseja remover {descricao}? 
+                Você tem certeza que deseja remover o produto: {descricao}? 
             </DialogDescription>
             <DialogFooter className="flex justify-center">
                 <DialogTrigger className="bg-red-500 py-2 px-3 rounded-md text-[#fdfdfd] hover:bg-red-600 shadow-2xl" onClick={() => deleteProduct()}>
-                    Deletar
+                    Remover
                 </DialogTrigger>
             </DialogFooter>
         </DialogContent>

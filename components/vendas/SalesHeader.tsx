@@ -42,8 +42,8 @@ export default function SalesHeader() {
                     name="barCode"
                     type="number"
                     maxLength={13}
-                    placeholder="Insira o código de barra" 
-                    className="focus-visible:ring-0 focus-visible:ring-offset-0 h-[35px] w-[184px]" 
+                    placeholder="Insira o código de barras" 
+                    className="focus-visible:ring-0 focus-visible:ring-offset-0 h-[35px] w-[191px]" 
                     />
                 </form>
             </div>

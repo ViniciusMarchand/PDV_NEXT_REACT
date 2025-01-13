@@ -23,6 +23,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     const [pagination, setPagination] = useState();
     const { successToast, errorToast } = useContext(ToastContext);
     const [page, setPage] = useState<number | undefined>(undefined);
+    const [image, setImage] = useState<File | undefined>(undefined);
     const searchParams = useSearchParams();
     
     useEffect(() => {

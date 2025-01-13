@@ -26,7 +26,7 @@ export default function CancelSalesModal(props: { children: ReactNode, setPaymen
                     Cancelar venda
                 </DialogTitle>
                 <div>
-                    <p>Voccê tem certeza que desja cancelar essa venda? Todos os itens serão removidos do carrinho de compra.</p>
+                    <p>Voccê tem certeza que deseja cancelar essa venda? Todos os itens serão removidos do carrinho de compra.</p>
                 </div>
                 <DialogFooter>
                     <DialogClose>

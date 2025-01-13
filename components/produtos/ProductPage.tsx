@@ -11,8 +11,9 @@ import { ToastContext } from "@/contexts/ToastContext";
 import SearchBar from "../common/SearchBar";
 
 export default function ProductPage() {
-    const { key, statusToAdd, updateKey, sortBy, setSortBy, setSearchedName, searchItems } = useContext(ProductModalFormContext);
+    const { key, statusToAdd, updateKey, setSortBy, setSearchedName, searchItems } = useContext(ProductModalFormContext);
     const {successToast, errorToast} = useContext(ToastContext);
+    
     async function sendFile(e: React.ChangeEvent<HTMLInputElement>) {
         const file = (e.target as HTMLInputElement).files?.[0];
         if(file) {

@@ -41,7 +41,7 @@ export function WeeklySalesChart() {
                 {
                     data.length > 0 ? (
                         <>
-                            <h2>VENDAS SEMANAIS</h2>
+                            <h2 className="font-bold">VENDAS SEMANAIS</h2>
                             <ChartContainer config={chartConfig} className="h-[250px] w-full">
                                 <BarChart accessibilityLayer data={data}>
                                     <CartesianGrid vertical={false} />
