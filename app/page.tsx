@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import CardLayout from '../components/common/CardLayout';
 import GenericButton from '../components/common/GenericButton';
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -12,8 +12,12 @@ import authApi from '@/api/authApi';
 import { createCookie } from '@/lib/utils';
 import { ToastContext } from '@/contexts/ToastContext';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import Spinner from '@/components/common/Spinner';
 
 export default function App() {
+
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -26,21 +30,24 @@ export default function App() {
   const router = useRouter();
 
   const login = async (user: LoginInputs) => {
-      try {
-          const res = await authApi.login(user);
-          const { accessToken, refreshToken } = res.data;
+    try {
+      setLoading(true);
+      const res = await authApi.login(user);
+      const { accessToken, refreshToken } = res.data;
 
-          createCookie('accessToken', accessToken);
-          createCookie('refreshToken', refreshToken);
+      createCookie('accessToken', accessToken);
+      createCookie('refreshToken', refreshToken);
 
-          router.push('/vendas');
-      } catch (error:any) {
-          errorToast(error.message);
-      }
+      router.push('/vendas');
+    } catch (error: any) {
+      errorToast(error.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const onSubmit: SubmitHandler<LoginInputs> = (user) => login(user);
-  
+
   return (
     <div className="w-full min-h-full flex items-center justify-center flex-col">
       <Image src={Logo} width={150} height={150} alt={'logo'} />
@@ -59,7 +66,11 @@ export default function App() {
                 <input type='password' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-6 p-2 bg-secundaria' {...register("password")} />
               </div>
               <div className="h-[45px]">
-                <GenericButton value='Entrar' className='text-[18px]'/>
+                <Button className='text-[18px] w-full' disabled={loading}>
+                  {
+                    loading ? <Spinner /> : 'Entrar'
+                  }
+                </Button>
               </div>
               <div className="w-full h-[1px] border my-6"></div>
               <Link href="/reset-password/request">

@@ -29,7 +29,7 @@ export default function LowStock() {
                 {
                     data ? (
                         <div className="w-full h-[300px] flex flex-col justify-between items-center">
-                            <h2 className="font-bold">PRODUTOS COM ESTOQUE BAIXO</h2>
+                            <h2>PRODUTOS COM ESTOQUE BAIXO</h2>
                             <table className="w-full text-center">
                                 <thead className="w-full py-2 sticky top-0 bg-[#fdfdfd] border-b">
                                     <tr className="py-1">

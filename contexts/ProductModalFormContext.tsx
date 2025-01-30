@@ -10,6 +10,8 @@ import { CurrencyInput } from "react-currency-mask";
 import GenericButton from "@/components/common/GenericButton";
 import { productFormStatus } from "@/constants/enums";
 import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import Spinner from "@/components/common/Spinner";
 export const ProductModalFormContext = createContext<any>(null);
 
 export const ProductModalFormProvider = (props: { children: React.ReactNode}) => {
@@ -25,6 +27,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     const [page, setPage] = useState<number | undefined>(undefined);
     const [image, setImage] = useState<File | undefined>(undefined);
     const searchParams = useSearchParams();
+    const [loading, setLoading] = useState(false);
     
     useEffect(() => {
         const newPage = searchParams?.get('page') || '';
@@ -69,12 +72,17 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     
     const onSubmit: SubmitHandler<ProductInputs> = (product) => {
         const formData = new FormData();
+        console.warn(product)
+        if(loading) 
+            return;
 
         Object.entries(product).forEach(([key, value]) => {
             if (value !== undefined && value !== null) {
                 formData.append(key, value.toString());
             }
         });
+
+        setLoading(true);
 
         if (formStatus === productFormStatus.Adicionar) {
             
@@ -85,6 +93,11 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                 searchItems();
             })
             .catch(error => errorToast("Erro ao adicionar produto!"))
+            .finally(() => {
+                setLoading(false);
+                setMaskedPrecoValue('0');
+                setMaskedPrecoFornecedorValue('0');
+            });
         }
         
         if (formStatus === productFormStatus.Editar) {
@@ -94,11 +107,17 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                 successToast("Produto editado com sucesso!");
                 reset();
                 searchItems();
+                
             })
             .catch(error => errorToast("Erro ao editar produto!"))
+            .finally(() => {
+                setLoading(false);
+                setMaskedPrecoValue('0');
+                setMaskedPrecoFornecedorValue('0');
+            });
         }   
+
     };
-    
 
     const statusToAdd = () => {
         setFormStatus(productFormStatus.Adicionar);
@@ -189,9 +208,9 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                             <AlertDialogCancel>
                                 Cancelar
                             </AlertDialogCancel>
-                            <div>
-                                <GenericButton value="Confirmar" className="text-[14px] w-[110px]"/>
-                            </div>
+                            <Button className="text-[14px] w-[110px]" disabled={loading}>
+                                {loading ? <Spinner /> : "Confirmar"}
+                            </Button>
                         </AlertDialogFooter>
                     </form>
                 </AlertDialogContent>
