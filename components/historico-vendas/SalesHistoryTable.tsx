@@ -23,7 +23,8 @@ export default function SalesHistoryTable({ salesHistory, pagination }: Props) {
                             <Table.Cell>DATA INÍCIO</Table.Cell>
                             <Table.Cell>DATA CONCLUSÃO</Table.Cell>
                             <Table.Cell>FORMA DE PAGAMENTO</Table.Cell>
-                            <Table.Cell>VENDEDOR NOME</Table.Cell>
+                            <Table.Cell>VENDEDOR</Table.Cell>
+                            <Table.Cell>...</Table.Cell>
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>

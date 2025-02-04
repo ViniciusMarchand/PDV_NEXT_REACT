@@ -48,6 +48,7 @@ export type Sale = {
     formaPagamento: string,
     vendedorId: string,
     vendedorNome: string,
+    itens: SalesItem[]
 }
 
 export type SaleItem = {

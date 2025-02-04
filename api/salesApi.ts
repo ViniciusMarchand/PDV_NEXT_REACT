@@ -7,7 +7,7 @@ const salesApi = {
         return await Axios.post(URL, items)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
                 throw new Error(error);
             })
     },    
@@ -16,7 +16,7 @@ const salesApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
                 throw new Error(error);
             })
     },
@@ -33,7 +33,7 @@ const salesApi = {
         return await Axios.delete(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
                 throw new Error(error);
             })
     },
@@ -42,7 +42,7 @@ const salesApi = {
         return await Axios.delete(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
                 throw new Error(error.response.data.error);
             })
     },
@@ -51,7 +51,7 @@ const salesApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
                 throw new Error(error);
             })
     },
@@ -60,7 +60,7 @@ const salesApi = {
         return await Axios.post(URL, endSale)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
                 throw new Error(error.response.data.error);
             })
     },
@@ -78,7 +78,7 @@ const salesApi = {
         return await Axios.post(URL, {itemId, quantity})
             .then((res) => res)
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
                 throw new Error(error.response.data.error);
             })
     },
@@ -87,10 +87,19 @@ const salesApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
+                console.error(error.message);
                 throw new Error(error);
             })
     },
+    getSaleById: async (id: number) => {
+        const URL = `venda/id/${id}`;
+        return await Axios.get(URL)
+            .then((res) => res)
+            .catch(error => {
+                console.error(error.message);
+                throw new Error(error);
+            })
+    }
 
 }
 

@@ -1,6 +1,5 @@
 'use client'
 import salesApi from "@/api/salesApi";
-import ContentHeader from "@/components/common/Contentheader";
 import SalesHistoryTable from "@/components/historico-vendas/SalesHistoryTable";
 import { Pagination, Sale } from "@/global/Types";
 import { useEffect, useState } from "react";
