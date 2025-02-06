@@ -30,7 +30,7 @@ export type SalesItem = {
     id: number,
     quantidade: number,
     preco: number,
-    precoUnitarioProduto: number,
+    precoUnitarioAtual: number,
     produto: ProductInputs,
 }
 
@@ -48,8 +48,7 @@ export type Sale = {
     formaPagamento: string,
     vendedorId: string,
     vendedorNome: string,
-    itens: SalesItem[]
-}
+    itens: SalesItem[]}
 
 export type SaleItem = {
     id: number,
