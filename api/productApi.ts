@@ -6,13 +6,11 @@ const productApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
     post: async (product: FormData) => {
         const URL = "produto";
-        console.warn(product)
         return await Axios.post(URL, product, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -20,7 +18,6 @@ const productApi = {
         })
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
@@ -33,7 +30,6 @@ const productApi = {
         })
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
@@ -42,7 +38,6 @@ const productApi = {
         return await Axios.delete(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
@@ -55,7 +50,6 @@ const productApi = {
         })
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
@@ -64,7 +58,6 @@ const productApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
@@ -73,7 +66,6 @@ const productApi = {
         return await Axios.patch(URL, { quantidade: newQuantity })
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     }

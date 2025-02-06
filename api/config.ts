@@ -40,8 +40,13 @@ Axios.interceptors.response.use(
                         setRefreshToken(res.data.refreshToken);
                         return Axios(originalRequest);
                     }
-                } catch (error) {
-                    console.error(error);
+
+                } catch (error: any) {
+                    // if(error.response.status = 401) {
+                    //         window.location.href = "/";
+                        
+                    // };
+
                     if (typeof window !== "undefined") {
                         window.location.href = "/";
                     }

@@ -6,7 +6,6 @@ const dashboardApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
@@ -16,7 +15,6 @@ const dashboardApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
@@ -26,7 +24,6 @@ const dashboardApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             })
     },
@@ -36,7 +33,6 @@ const dashboardApi = {
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
-                console.error(error);
                 throw new Error(error);
             });
     }
