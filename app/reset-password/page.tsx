@@ -20,19 +20,17 @@ export default function Page() {
     const router = useRouter();
 
     const searchParams = useSearchParams();
-    const userId = searchParams?.get('userId') || '';
     const token = searchParams?.get('token') || '';
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
             if (newPassword !== confirmPassword) {
-                errorToast('As senhas não coincidem');
                 throw new Error('As senhas não coincidem');
             }
 
-            if (userId && token && newPassword.length > 0) {
-                await authApi.resetPassword(userId, token, newPassword);
+            if (token && newPassword.length > 0) {
+                await authApi.resetPassword(token, newPassword);
                 successToast('Senha alterada com sucesso');
                 router.push('/');
             } else {
@@ -42,10 +40,8 @@ export default function Page() {
 
         } catch (error) {
             if (error instanceof Error) {
-                console.error(error.message);
                 errorToast(error.message);
             } else {
-                console.error(error);
                 errorToast('Erro ao recuperar senha');
             }
         }

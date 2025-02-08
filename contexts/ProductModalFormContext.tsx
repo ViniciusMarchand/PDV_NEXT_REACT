@@ -178,16 +178,6 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                             </div>
                             <div className="w-full flex justify-between">
                                 <div className="w-[200px]">
-                                    <label className="text-[18px]">Preço Fornecedor</label>
-                                    <CurrencyInput
-                                        value={maskedPrecoFornecedorValue}
-                                        InputElement={<input  type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' required />}
-                                        onChangeValue={(event, originalValue, maskedValue) => { 
-                                            setValue("precoFornecedor", Number(originalValue));
-                                            setMaskedPrecoFornecedorValue(maskedValue); 
-                                        }} />
-                                </div>
-                                <div className="w-[200px]">
                                     <label className="text-[18px]">Preço</label>
                                     <CurrencyInput
                                         value={maskedPrecoValue}
@@ -197,7 +187,16 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                             setMaskedPrecoValue(maskedValue);
                                         }} />
                                 </div>
-
+                                <div className="w-[200px]">
+                                    <label className="text-[18px]">Preço Fornecedor</label>
+                                    <CurrencyInput
+                                        value={maskedPrecoFornecedorValue}
+                                        InputElement={<input  type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' required />}
+                                        onChangeValue={(event, originalValue, maskedValue) => { 
+                                            setValue("precoFornecedor", Number(originalValue));
+                                            setMaskedPrecoFornecedorValue(maskedValue); 
+                                        }} />
+                                </div>
                             </div>
                             <div className="w-full">
                                 <label className="text-[18px]">Código de Barras</label>

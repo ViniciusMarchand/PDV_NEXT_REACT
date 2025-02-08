@@ -96,7 +96,11 @@ export default function ProductTable() {
                     }
                   </td>
                   <td>{product.unidadeMedida}</td>
-                  <td>R$ {product.preco}</td>
+                  <td>
+                    R$ {product.preco.toLocaleString('pt-BR', {
+                      maximumFractionDigits: 2,
+                    })}
+                  </td>
                   <td>{product.codigoBarrasEAN13}</td>
                   <td onClick={() => setChosenProduct(product)} className="flex w-full h-full">
                     <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>

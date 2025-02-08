@@ -36,16 +36,16 @@ const authApi = {
             })
     },
     resetPasswordRequest: async (email:string) => {
-        const URL = "/auth/reset-password/request";
-        return await Axios.post(URL, {email})
+        const URL = "/auth/reset-password/request?email=" + email;
+        return await Axios.post(URL)
             .then((res) => res)
             .catch(error => {
                 throw new Error(error.response.data.error)
             })
     },
-    resetPassword: async (userId:string, token:string, password:string) => {
-        const URL = "/auth/reset-password";
-        return await Axios.post(URL, {userId, token, password})
+    resetPassword: async (token:string, newPassword:string) => {
+        const URL = "/auth/reset-password?token=" + token;
+        return await Axios.post(URL, {newPassword})
             .then((res) => res)
             .catch(error => {
                 throw new Error(error.response.data.error)
