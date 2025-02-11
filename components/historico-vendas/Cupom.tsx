@@ -10,8 +10,8 @@ interface Props {
 const Cupom = ({ sale }: Props) => {
 
   const { cnpj, city, neighborhood, number, state, street, cep, phone } = clientInfo;
-  const date = format(sale.dataHoraConclusao, "dd/MM/yyyy");
-  const hour = format(sale.dataHoraConclusao, "hh:mm:ss");
+  const date = format(new Date(sale.dataHoraConclusao), "dd/MM/yyyy");
+  const hour = format(new Date(sale.dataHoraConclusao), "hh:mm:ss");
 
   console.warn("sale", sale);
   
