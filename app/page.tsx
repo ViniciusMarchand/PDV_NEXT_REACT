@@ -48,6 +48,22 @@ export default function App() {
 
   const onSubmit: SubmitHandler<LoginInputs> = (user) => login(user);
 
+  const socket = new WebSocket("wss://wss.ferragemavila.com.br/message");
+
+  socket.onopen = function () {
+      console.log("Conectado ao servidor WebSocket!");
+      // socket.send("Olá, servidor!");
+  };
+
+  socket.onmessage = function (event) {
+      console.log("Mensagem recebida: " + event.data);
+  };
+
+  socket.onclose = function () {
+      console.log("Conexão fechada.");
+  };
+
+
   return (
     <div className="w-full min-h-full flex items-center justify-center flex-col">
       <Image src={Logo} width={150} height={150} alt={'logo'} />
