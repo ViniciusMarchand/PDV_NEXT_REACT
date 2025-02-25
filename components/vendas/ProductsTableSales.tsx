@@ -1,13 +1,15 @@
 import { Item } from "@/global/Types";
 import { useContext, useState } from "react";
 import { ProductModalSalesFormContext } from "@/contexts/ProductModalSalesFormContext";
-import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductFromSalesDialog from "./DeleteProductFromSalesDialog";
 import EditableQuantity from "./EditableQuantity";
-import { GiCancel, GiConfirmed } from "react-icons/gi";
 import { ToastContext } from "@/contexts/ToastContext";
 import salesApi from "@/api/salesApi";
+import FaRegPenCustom from "../icons/FaRegPenCustom";
+import FaRegTrashCanCustom from "../icons/FaRegTrashCanCustom";
+import GiCancelCustom from "../icons/GiCancelCustom";
+import GiConfirmedCustom from "../icons/GiConfirmedCustom";
 
 export default function ProductsTableSales() {
 
@@ -60,7 +62,7 @@ export default function ProductsTableSales() {
                     {
                         selectedProductsOnSalesPage.map((item:Item, i: number) => (
                             
-                            <tr key={i} className="border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste">
+                            <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste">
                                 <td>{item.product.id}</td>
                                 <td>{item.product.descricao}</td>
                                 <td>{item.product.estoque}</td>
@@ -75,28 +77,18 @@ export default function ProductsTableSales() {
                                         {
                                             editingProductId === item.product.id ?
                                             <>
-                                                <GiCancel  
-                                                    className="cursor-pointer transition mr-1"
-                                                    size={18}
-                                                    title="Cancelar edição"
+                                                <GiCancelCustom
                                                     onClick={() => {setIsEditing(false); setEditingProductId(0)}}
                                                 />
-                                                <GiConfirmed 
-                                                    className="transition cursor-pointer"
-                                                    size={18}
-                                                    title="Confirmar edição"
+                                                <GiConfirmedCustom
                                                     onClick={() => {item.id && updateQuantity(item.id, newQuantity, item.product.estoque); setIsEditing(false); setEditingProductId(0)}}
                                                 />
                                             </>
                                             :
                                             <>
-                                                <FaRegPenToSquare 
-                                                    className="transition mr-1 cursor-pointer"
-                                                    size={18}
-                                                    onClick={() => {setIsEditing(true); setEditingProductId(item.product.id)}}
-                                                /> 
+                                                <FaRegPenCustom onClick={() => {setIsEditing(true); setEditingProductId(item.product.id)}} />
                                                 <DialogTrigger>
-                                                    <FaRegTrashCan title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => setChosenProduct(item)}/>
+                                                    <FaRegTrashCanCustom title="Remover" onClick={() => setChosenProduct(item)}/>
                                                 </DialogTrigger>
                                             </>
 
