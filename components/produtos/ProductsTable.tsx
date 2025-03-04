@@ -3,14 +3,16 @@ import { useContext, useEffect, useState } from "react";
 import PaginationBar from "../common/PaginationBar";
 import { ProductInputs } from "@/global/Types";
 import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
-import { FaRegPenToSquare, FaRegTrashCan } from "react-icons/fa6";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductDialog from "./DeleteProductDialog";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
 import HighlightText from "../common/HighlightText";
 import EditableQuantity from "./EditableQuantity";
-import { GiCancel, GiConfirmed } from "react-icons/gi";
 import productApi from "@/api/productApi";
+import FaRegPenCustom from "../icons/FaRegPenCustom";
+import FaRegTrashCanCustom from "../icons/FaRegTrashCanCustom";
+import GiConfirmedCustom from "../icons/GiConfirmedCustom";
+import GiCancelCustom from "../icons/GiCancelCustom";
 
 export default function ProductTable() {
 
@@ -63,7 +65,7 @@ export default function ProductTable() {
             {
               products?.map((product, i) => (
 
-                <tr key={i} className="border-t [&>td]:py-1">
+                <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste">
                   <td>{product.id}</td>
                   <td>
                     <HighlightText text={product.descricao} term={searchedName}/>
@@ -73,23 +75,17 @@ export default function ProductTable() {
                       editingProductId === product.id ?
                       <div className="flex items-center justify-center">
                         <EditableQuantity product={product} setNewQuantity={setNewQuantity}/>
-                        <GiCancel  
-                            className="cursor-pointer transition mx-3"
-                            size={18}
-                            title="Cancelar edição"
+                        <GiCancelCustom  
                             onClick={() => setEditingProductId(0)}
                         />
-                        <GiConfirmed 
-                            className="transition cursor-pointer"
-                            size={18}
-                            title="Confirmar edição"
+                        <GiConfirmedCustom
                             onClick={() => {product.id && updateQuantity(product.id, newQuantity); setEditingProductId(0)}}
                         />
                       </div>
                       :
                       <div className="flex items-center h-full justify-center">
                         {product.estoque}
-                        <FaRegPenToSquare className="hover:text-terciaria transition cursor-pointer ml-3" onClick={() => setEditingProductId(product.id || 0)}/>
+                        <FaRegPenCustom onClick={() => setEditingProductId(product.id || 0)} />
                       </div>
 
 
@@ -104,10 +100,10 @@ export default function ProductTable() {
                   <td>{product.codigoBarrasEAN13}</td>
                   <td onClick={() => setChosenProduct(product)} className="flex w-full h-full">
                     <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>
-                      <FaRegPenToSquare className="hover:text-terciaria transition"/>
+                      <FaRegPenCustom />
                     </AlertDialogTrigger>
                     <DialogTrigger title="Deletar">
-                      <FaRegTrashCan className="hover:text-terciaria transition"/>
+                      <FaRegTrashCanCustom />
                     </DialogTrigger>
                   </td>
                 </tr>
