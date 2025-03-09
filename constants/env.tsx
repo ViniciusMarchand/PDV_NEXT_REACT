@@ -1,7 +1,7 @@
 export const apiLink = "https://api.ferragemavila.com.br/"
 
 export const clientInfo = {
-    cnpj: process.env.NEXT_PUBLIC_CLIENT_CNPJ,
+    cnpj: process.env.NEXT_PUBLIC_CNPJ,
     street: process.env.NEXT_PUBLIC_RUA,
     number: process.env.NEXT_PUBLIC_NUMERO,
     neighborhood: process.env.NEXT_PUBLIC_BAIRRO,
