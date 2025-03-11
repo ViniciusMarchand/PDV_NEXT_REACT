@@ -7,13 +7,13 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useState } from "react";
 
-export default function SearchBar(props: {setValue: Function, setSearchedName?: Function, onClick?: Function}) {
-    const {setValue, setSearchedName, onClick} = props;
+export default function SearchBar(props: {setValue: Function, setSearchedName?: Function}) {
+    const {setValue, setSearchedName} = props;
     const [valorInput, setValorInput] = useState<string>("");
+    const [selectedValue, setSelectedValue] = useState<string>("id");
 
     const search = () => {
         setSearchedName && setSearchedName(valorInput);
-        // onClick && onClick();
     }
     return <div className="flex gap-2">
         <div className="flex">
@@ -29,8 +29,11 @@ export default function SearchBar(props: {setValue: Function, setSearchedName?: 
                 </div>
             </PopoverTrigger>
             <PopoverContent className="w-[200px]">
-                <h1 className="font-bold">Organizar por:</h1>
-                <RadioGroup defaultValue="id" className="mt-2" onValueChange={(e) => setValue(e)}>
+                <h1 className="font-bold">Ordenar por:</h1>
+                <RadioGroup value={selectedValue} className="mt-2" onValueChange={(e) => {
+                    setSelectedValue(e);
+                    setValue(e);
+                }}>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="id" id="id" />
                         <Label htmlFor="id">Id</Label>
@@ -51,10 +54,10 @@ export default function SearchBar(props: {setValue: Function, setSearchedName?: 
                         <RadioGroupItem value="preco" id="preco" />
                         <Label htmlFor="preco">Preço</Label>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    {/* <div className="flex items-center space-x-2">
                         <RadioGroupItem value="codigoBarrasEAN13" id="codigoBarrasEAN13" />
                         <Label htmlFor="codigoBarrasEAN13">Código de Barras</Label>
-                    </div>
+                    </div> */}
                 </RadioGroup>
 
             </PopoverContent>
