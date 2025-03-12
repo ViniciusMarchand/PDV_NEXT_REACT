@@ -49,7 +49,7 @@ export default function ProductsTableSales() {
             <table className="w-full text-center">
                 <thead className="w-full [&>th]:py-2 sticky top-0 bg-[#fdfdfd] border-b">
                     <tr className="[&>th]:py-1">
-                        <th>ID</th>
+                        <th>ITEM</th>
                         <th>DESCRIÇÃO</th>
                         <th>ESTOQUE</th>
                         <th>UNIDADE DE MEDIDA</th>
@@ -63,7 +63,7 @@ export default function ProductsTableSales() {
                         selectedProductsOnSalesPage.map((item:Item, i: number) => (
                             
                             <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste">
-                                <td>{item.product.id}</td>
+                                <td>{i + 1}</td>
                                 <td>{item.product.descricao}</td>
                                 <td>{item.product.estoque}</td>
                                 <td>{item.product.unidadeMedida}</td>
