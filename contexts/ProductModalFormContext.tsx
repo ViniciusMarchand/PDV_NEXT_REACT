@@ -170,7 +170,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                             <div className={ formStatus === productFormStatus.Adicionar ? "w-[200px]" : "w-full"}>
                                 <label className="text-[18px]">Unidade de Medida</label>
                                 <select className='text-[17px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("unidadeMedida")} required defaultValue={""}>
-                                    <option value="" disabled>unidade de medida</option>
+                                    <option value="" disabled>Selecione...</option>
                                     <option value={"UNIDADE"}>Unidade</option>
                                     <option value={"METRO"}>Metro</option>
                                     <option value={"GRAMA"}>Grama</option>
