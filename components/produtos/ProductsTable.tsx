@@ -53,7 +53,7 @@ export default function ProductTable() {
         <table className="w-full text-center h-full overflow-y-scroll">
           <thead className="w-full [&>th]:py-2">
             <tr className="[&>th]:py-1">
-              <th>ID</th>
+              <th>CÓDIGO</th>
               <th>DESCRIÇÃO</th>
               <th>ESTOQUE</th>
               <th>UNIDADE DE MEDIDA</th>

@@ -33,7 +33,7 @@ export default function LowStock() {
                             <table className="w-full text-center">
                                 <thead className="w-full py-2 sticky top-0 bg-[#fdfdfd] border-b">
                                     <tr className="py-1">
-                                        <th>ID</th>
+                                        <th>CÓDIGO</th>
                                         <th>DESCRIÇÃO</th>
                                         <th>ESTOQUE</th>
                                         <th>UN. MEDIDA</th>
