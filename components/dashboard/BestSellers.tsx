@@ -29,7 +29,7 @@ export default function BestSellers() {
                 <Table>
                     <Table.Header>
                         <Table.Row>
-                            <Table.Cell>ID</Table.Cell>
+                            <Table.Cell>CÓDIGO</Table.Cell>
                             <Table.Cell>DESCRIÇÃO</Table.Cell>
                             <Table.Cell>UN. MEDIDA</Table.Cell>
                             <Table.Cell>ESTOQUE</Table.Cell>
