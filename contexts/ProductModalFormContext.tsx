@@ -16,6 +16,7 @@ export const ProductModalFormContext = createContext<any>(null);
 
 export const ProductModalFormProvider = (props: { children: React.ReactNode}) => {
     const { children } = props;
+    const [open, setOpen] = useState(false);
     const [formStatus, setFormStatus] = useState(productFormStatus.Adicionar);
     const [maskedPrecoValue, setMaskedPrecoValue] = useState<number | string>('0');
     const [maskedPrecoFornecedorValue, setMaskedPrecoFornecedorValue] = useState<number | string>('0');
@@ -85,12 +86,12 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         setLoading(true);
 
         if (formStatus === productFormStatus.Adicionar) {
-            
             productApi.post(formData)
             .then(res => {
                 successToast("Produto adicionado com sucesso!");
                 reset();
                 searchItems();
+                setOpen(false);
             })
             .catch(error => errorToast("Erro ao adicionar produto!"))
             .finally(() => {
@@ -107,7 +108,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                 successToast("Produto editado com sucesso!");
                 reset();
                 searchItems();
-                
+                setOpen(false);
             })
             .catch(error => errorToast("Erro ao editar produto!"))
             .finally(() => {
@@ -120,7 +121,9 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     };
 
     const statusToAdd = () => {
+        reset();
         setFormStatus(productFormStatus.Adicionar);
+        setOpen(true);
     };
     
     
@@ -135,8 +138,8 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         setValue("preco", preco);
         setMaskedPrecoValue(preco);
         setValue("codigoBarrasEAN13", codigoBarrasEAN13);
-        
         setSelectedProduct(product);
+        setOpen(true);
     };
     
     return (
@@ -149,7 +152,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
             pagination,
             searchItems
         }}>
-            <AlertDialog>
+            <AlertDialog open={open} onOpenChange={setOpen}>
                 <AlertDialogContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <AlertDialogHeader>
