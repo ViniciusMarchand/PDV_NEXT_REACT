@@ -10,3 +10,10 @@ export const clientInfo = {
     cep: process.env.NEXT_PUBLIC_CEP,
     phone: process.env.NEXT_PUBLIC_PHONE
 }
+
+export const pixInfo = {
+    key: process.env.NEXT_PUBLIC_PIX_KEY || '',
+    name: process.env.NEXT_PUBLIC_PIX_NAME || '',
+    city: process.env.NEXT_PUBLIC_PIX_CITY || '',
+    transactionId: process.env.NEXT_PUBLIC_PIX_TRANSACTION_ID || ''
+}

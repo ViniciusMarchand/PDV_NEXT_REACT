@@ -2,22 +2,23 @@
 import { QrCodePix } from 'qrcode-pix';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { pixInfo } from '@/constants/env';
 
 export default function Pix(props:{value:number}) {
     const { value } = props;
 
     const [qrCode, setQrCode] = useState<string>('');
     const [rawPix, setRawPix] = useState<string>('');
-    const key = 'vinicius.dasilva.marchand@gmail.com';
+    const { key, name, city, transactionId } = pixInfo;
 
     useEffect(() => {
         async function generateDynamicPix() {
             const qrCodePix = QrCodePix({
                 version: '01',
-                key: 'vinicius.dasilva.marchand@gmail.com',
-                name: 'Vinicius Marchand',
-                city: 'SAO_PAULO',
-                transactionId: '312312e', 
+                key,
+                name,
+                city,
+                transactionId, 
                 value: value,
             })
 
