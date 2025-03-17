@@ -17,7 +17,7 @@ export default function ModalConfirmSales(props: { children: ReactNode, payment:
 
 
     return <Dialog open={isOpen} onOpenChange={async () => {await delay(1000); setIsConfirmed(false)}}>
-        <DialogContent>
+        <DialogContent className="[&>button]:hidden">
             {
                 !isConfirmed ?
                 <ConfirmSales 

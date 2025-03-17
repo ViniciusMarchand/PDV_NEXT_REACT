@@ -39,14 +39,14 @@ export default function ConfirmSales({ setIsConfirmed, setPayment, payment, setR
         <DialogTitle>Finalizar venda</DialogTitle>
         <DialogDescription className="text-[18px]">Você tem certeza que deseja finalizar a venda?</DialogDescription>
         <DialogFooter>
-            <DialogClose 
+            <Button 
                 className="bg-red-500 text-textoContraste p-2 rounded-sm hover:bg-red-600 w-[100px]"
                 onClick={() => setIsOpen(false)}
             >
                 Fechar
-            </DialogClose>
+            </Button>
             <Button
-                className="bg-terciaria text-textoContraste p-2 rounded-sm hover:bg-terciaria2 w-[100px] text-md"
+                className="bg-terciaria text-textoContraste p-2 rounded-sm hover:bg-terciaria2 w-[100px]"
                 onClick={() => sendSale()}
             >
                 Confirmar
