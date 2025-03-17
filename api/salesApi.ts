@@ -27,7 +27,7 @@ const salesApi = {
             })
     },
     removeProduct: async (id: number) => {
-        const URL = "venda/remover-item/{itemId}?itemId=" + id;
+        const URL = "venda/remover-item/" + id;
         return await Axios.delete(URL)
             .then((res) => res)
             .catch(error => {
