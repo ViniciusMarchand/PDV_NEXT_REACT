@@ -7,7 +7,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useState } from "react";
 
-export default function SearchBar(props: {setValue: Function, setSearchedName?: Function}) {
+export default function SearchBar(props: {setValue: Function, setSearchedName?: Function, onClick?: Function}) {
     const {setValue, setSearchedName} = props;
     const [valorInput, setValorInput] = useState<string>("");
     const [selectedValue, setSelectedValue] = useState<string>("id");

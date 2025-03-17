@@ -25,7 +25,7 @@ export function DatePicker({ onSearchDate }: DatePickerProps) {
 
     useEffect(() => {
         onSearchDate(date)
-    }, [date])	
+    }, [date]);
 
     return (
         <div className="flex gap-2">
