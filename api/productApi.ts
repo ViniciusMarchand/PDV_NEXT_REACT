@@ -1,3 +1,4 @@
+import { RequestXML } from '@/global/Types';
 import { Axios } from './config';
 const productApi = {
     get: async (page: number, sort:string
@@ -42,12 +43,37 @@ const productApi = {
             })
     },
     importCSV: async (file:FormData) => {
-        const URL = "produto/importar-csv";
+        const URL = "produto/importar-via-csv";
         return await Axios.post(URL, file, {
             headers: {
                 'Content-Type': 'multipart/form-data'
               }
         })
+            .then((res) => res)
+            .catch(error => {
+                throw new Error(error);
+            })
+    },
+    importXML: async (requestXML:RequestXML) => {
+        const { chaveAcessoNfe, porcentagemAumentoPreco } = requestXML;
+        const URL = `produto/importar-via-xml?chaveAcessoNfe=${chaveAcessoNfe}&porcentagemAumentoPreco=${porcentagemAumentoPreco}`;
+        return await Axios.post(URL, requestXML)
+            .then((res) => res)
+            .catch(error => {
+                throw new Error(error);
+            })
+    },
+    importCSVResult: async () => {
+        const URL = `produto/importar-via-csv/resultado`;
+        return await Axios.get(URL)
+            .then((res) => res)
+            .catch(error => {
+                throw new Error(error);
+            })
+    },
+    importXMLResult: async () => {
+        const URL = `produto/importar-via-xml/resultado`;
+        return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
                 throw new Error(error);

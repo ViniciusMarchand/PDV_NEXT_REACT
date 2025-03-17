@@ -29,6 +29,7 @@ export const ProductModalFormSalesProvider = (props: { children: React.ReactNode
                     }
                 });
                 setSelectedProductsOnSalesPage(items);
+
                 delete products.itens;
             } else {
                 setSelectedProductsOnSalesPage([]);

@@ -12,9 +12,10 @@ const Cupom = ({ sale }: Props) => {
 
   const { cnpj, city, neighborhood, number, state, street, cep, phone } = clientInfo;
   const date = format(new Date(sale.dataHoraConclusao), "dd/MM/yyyy");
+
   const hour = format(new Date(sale.dataHoraConclusao), "HH:mm:ss");
 
-  console.warn("sale", sale);
+
   
   return (
     <div style={{ 

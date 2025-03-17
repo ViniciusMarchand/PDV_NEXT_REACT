@@ -4,30 +4,13 @@ import ModalButton from "../common/ModalButton";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
 import ProductTable from "./ProductsTable";
 import { ProductModalFormContext } from "@/contexts/ProductModalFormContext";
-import { Input } from "../ui/input";
-import { AiFillFileAdd } from "react-icons/ai";
 import productApi from "@/api/productApi";
 import { ToastContext } from "@/contexts/ToastContext";
 import SearchBar from "../common/SearchBar";
+import ImportPopOver from "./ImportPopOver";
 
 export default function ProductPage() {
-    const { key, statusToAdd, updateKey, setSortBy, setSearchedName, searchItems } = useContext(ProductModalFormContext);
-    const {successToast, errorToast} = useContext(ToastContext);
-    
-    async function sendFile(e: React.ChangeEvent<HTMLInputElement>) {
-        const file = (e.target as HTMLInputElement).files?.[0];
-        if(file) {
-            const formData = new FormData();
-            formData.append('file', file);
-            productApi.importCSV(formData).then(() => {
-                successToast("Produtos importados com sucesso!");
-                updateKey();
-            }).catch((error) => {
-                errorToast(error.message);
-                updateKey();
-            });
-        }
-    }
+    const { key, statusToAdd, setSortBy, setSearchedName, searchItems } = useContext(ProductModalFormContext);
 
     return <>
         <div className="w-full h-[80px] mb-3">
@@ -38,12 +21,7 @@ export default function ProductPage() {
                             <ModalButton value="Adicionar Produto"  />
                         </div>
                     </AlertDialogTrigger>
-                    <div className="bg-terciaria hover:bg-terciaria2 transition w-[35px] h-[35px] rounded-sm cursor-pointer">
-                        <Input id="files" type="file" className="hidden" onChange={(e) => sendFile(e)}/>
-                        <label htmlFor="files" className="w-[35px] h-[35px] flex justify-center items-center cursor-pointer shadow-md" title="importar CSV">
-                            <AiFillFileAdd color="fdfdfd" size={25}/>
-                        </label>
-                    </div>
+                    <ImportPopOver />
                     <SearchBar setValue={setSortBy} setSearchedName={setSearchedName} onClick={() => searchItems()}/>
                 </div>
             </CardLayout>

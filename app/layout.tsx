@@ -8,6 +8,7 @@ import Header from "@/components/header/Header";
 import Sidebar from "@/components/sidebar/Sdebar";
 import { publicPages } from "@/constants";
 import { Suspense } from "react";
+import { WebSocketProvider } from "@/contexts/WebSocketContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,13 +38,15 @@ export default function RootLayout({
       <body className={`${inter.className} bg-primaria  h-screen max-h-screen overflow-hidden`} suppressHydrationWarning={true}>
         <ToastProvider>
             <AuthProvider>
-              <Header />
-              <Sidebar />
-              <div className="h-full flex w-full pl-sidebar pt-header">
-                <div className="w-full h-full p-3">
-                  {children}
+              <WebSocketProvider>
+                <Header />
+                <Sidebar />
+                <div className="h-full flex w-full pl-sidebar pt-header">
+                  <div className="w-full h-full p-3">
+                    {children}
+                  </div>
                 </div>
-              </div>
+              </WebSocketProvider>
             </AuthProvider>
         </ToastProvider>
       </body>

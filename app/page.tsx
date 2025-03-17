@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CardLayout from '../components/common/CardLayout';
 import GenericButton from '../components/common/GenericButton';
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Logo from '@/public/imgs/logo.png';
 import { useRouter } from 'next/navigation';
 import authApi from '@/api/authApi';
-import { createCookie } from '@/lib/utils';
+import { createCookie, getAccessToken } from '@/lib/utils';
 import { ToastContext } from '@/contexts/ToastContext';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -48,22 +48,11 @@ export default function App() {
 
   const onSubmit: SubmitHandler<LoginInputs> = (user) => login(user);
 
-  const socket = new WebSocket("wss://wss.ferragemavila.com.br/message");
-
-  socket.onopen = function () {
-      console.log("Conectado ao servidor WebSocket!");
-      // socket.send("Olá, servidor!");
-  };
-
-  socket.onmessage = function (event) {
-      console.log("Mensagem recebida: " + event.data);
-  };
-
-  socket.onclose = function () {
-      console.log("Conexão fechada.");
-  };
-
-
+  useEffect(() => {
+    const accessToken  = getAccessToken();
+    if(accessToken) router.push('/vendas');
+  },[router]);
+  
   return (
     <div className="w-full min-h-full flex items-center justify-center flex-col">
       <Image src={Logo} width={150} height={150} alt={'logo'} />
@@ -81,13 +70,11 @@ export default function App() {
                 <label className="text-[18px]">Senha</label>
                 <input type='password' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-6 p-2 bg-secundaria' {...register("password")} />
               </div>
-              <div className="h-[45px]">
                 <Button className='text-[18px] w-full' disabled={loading}>
                   {
                     loading ? <Spinner /> : 'Entrar'
                   }
                 </Button>
-              </div>
               <div className="w-full h-[1px] border my-6"></div>
               <Link href="/reset-password/request">
                 <p className="text-center text-terciaria hover:underline cursor-pointer hover:text-terciaria2">Esqueceu a senha?</p>

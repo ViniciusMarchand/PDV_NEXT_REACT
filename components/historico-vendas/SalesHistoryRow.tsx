@@ -2,6 +2,7 @@ import { Sale } from "@/global/Types";
 import Table from "../common/Table.";
 import CupomButton from "./CupomButton";
 import { format } from "date-fns";
+import { FaPrint } from "react-icons/fa";
 
 interface Props {
     sale: Sale
@@ -21,7 +22,9 @@ export default function SalesHistoryRow({ sale }:  Props ) {
         <Table.Cell>{sale.formaPagamento || "Pagamento não efetuado"}</Table.Cell>
         <Table.Cell>{sale.vendedorNome}</Table.Cell>
         <Table.Cell>
-            <CupomButton saleId={sale.id} />
+            <CupomButton saleId={sale.id}>
+                <FaPrint />
+            </CupomButton>
         </Table.Cell>
         
     </Table.Row>

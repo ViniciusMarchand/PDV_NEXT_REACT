@@ -12,8 +12,8 @@ const authApi = {
             })
     },
     refreshToken: async (accessToken:string, refreshToken:string) => {
-        const URL = "auth/refresh-token";
-        return await Axios.post(URL, {accessToken, refreshToken})
+        const URL = apiLink + "auth/refresh-token";
+        return await axios.post(URL, {accessToken, refreshToken})
             .then((res) => res)
             .catch(error => {
                 throw new Error(error.response.data.error)

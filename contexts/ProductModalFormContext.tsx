@@ -73,7 +73,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     
     const onSubmit: SubmitHandler<ProductInputs> = (product) => {
         const formData = new FormData();
-        console.warn(product)
+
         if(loading) 
             return;
 

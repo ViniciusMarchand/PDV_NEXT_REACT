@@ -1,28 +1,31 @@
-"use client";
-import React, { useCallback, useEffect, useId, useState } from "react";
+'use client'
+import React, { ReactNode, useCallback, useEffect, useId, useState } from "react";
 import Cupom from "./Cupom";
-import { FaPrint } from "react-icons/fa";
 import salesApi from "@/api/salesApi";
 import { Sale } from "@/global/Types";
 
 interface Props {
-  saleId: number;
+  saleId?: number;
+  saleProp?: Sale;
+  children:ReactNode;
 }
 
-const PrintButton = ({ saleId }: Props) => {
+const PrintButton = ({ saleId, saleProp, children } : Props) => {
   const [sale, setSale] = useState<Sale>();
-
+  
   const cupomId = useId();
 
   const getSale = useCallback(async () => {
-    const res = await salesApi.getSaleById(saleId);
-    setSale(res.data);
-  }, [saleId]);
-
+    if(saleId) {
+        const res = await salesApi.getSaleById(saleId);
+        setSale(res.data);
+    } else if(saleProp) {
+        setSale(saleProp);
+    }
+}, [saleId, saleProp]);
   useEffect(() => {
     if (sale) {
       const printWindow = window.open("", "", "width=800,height=600");
-
       if (printWindow) {
         printWindow.document.write(
           "<html><head><style>@page { size: auto; margin: 0; } body { margin: 0; padding: 0; width: 100vw; font-family: monospace; }</style></head><body>"
@@ -53,21 +56,22 @@ const PrintButton = ({ saleId }: Props) => {
     }
   }, [sale]);
 
-  return (
-    <div>
-      {sale && (
-        <div id={cupomId} style={{ display: "none" }}>
-          <Cupom sale={sale} />
+
+    return (
+        <div>
+            {
+                sale &&
+                <div id={cupomId} style={{ display: "none" }}>
+                    <Cupom sale={sale} />
+                </div>
+            }
+
+            <button onClick={getSale}>
+                <div className="w-full flex justify-center">
+                    {children}
+                </div>
+            </button>
         </div>
       )}
-
-      <button onClick={getSale}>
-        <div className="w-full flex justify-center">
-          <FaPrint />
-        </div>
-      </button>
-    </div>
-  );
-};
 
 export default PrintButton;

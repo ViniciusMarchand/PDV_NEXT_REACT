@@ -1,5 +1,5 @@
 import { apiLink } from "@/constants/env";
-import { getAccessToken, getRefreshToken, setAccessToken, setRefreshToken } from "@/lib/utils";
+import { clearCookies, getAccessToken, getRefreshToken, setAccessToken, setRefreshToken } from "@/lib/utils";
 import axios from "axios";
 import authApi from "./authApi";
 
@@ -39,14 +39,16 @@ Axios.interceptors.response.use(
                         setAccessToken(res.data.accessToken);
                         setRefreshToken(res.data.refreshToken);
                         return Axios(originalRequest);
+                    } else {
+                        window.location.href = "/";
                     }
 
                 } catch (error: any) {
-                    // if(error.response.status = 401) {
-                    //         window.location.href = "/";
+                    clearCookies();
+                    if(error.response.status = 401) {
+                            window.location.href = "/";
                         
-                    // };
-
+                    };
                     if (typeof window !== "undefined") {
                         window.location.href = "/";
                     }

@@ -121,3 +121,19 @@ export type FormValues = {
     placeholder?: string,
     type?: string,
 }
+
+export type RequestXML = {
+    chaveAcessoNfe: string,
+    porcentagemAumentoPreco: number
+}
+
+export type ImportProductResult = {
+    descricao: string,
+    codigoBarras: string,
+    erro: string
+}
+
+export type ImportReulst = {
+    produtosComErro: ImportProductResult[],
+    produtosSalvos: number,
+}

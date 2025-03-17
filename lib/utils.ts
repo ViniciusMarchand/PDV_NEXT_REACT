@@ -53,6 +53,11 @@ const clearCookies = () => {
   Cookies.remove('refreshToken');
 };
 
+function delay(ms:number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 export {
   cn,
   getAccessToken,
@@ -61,5 +66,6 @@ export {
   setAccessToken,
   setRefreshToken,
   getUserInfo,
-  clearCookies
+  clearCookies,
+  delay
 }
