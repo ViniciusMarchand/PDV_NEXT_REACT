@@ -15,6 +15,7 @@ export default function SearchBar(props: {setValue: Function, setSearchedName?: 
     const search = () => {
         setSearchedName && setSearchedName(valorInput);
     }
+    
     return <div className="flex gap-2">
         <div className="flex">
             <Input placeholder="Pesquisar" className="w-[200px] h-[35px] focus-visible:ring-0 focus-visible:ring-offset-0 rounded-[0px] rounded-l-md border-r-0" value={valorInput} onChange={(e) => setValorInput(e.target.value)}/>
@@ -29,7 +30,7 @@ export default function SearchBar(props: {setValue: Function, setSearchedName?: 
                 </div>
             </PopoverTrigger>
             <PopoverContent className="w-[200px]">
-                <h1 className="font-bold">Ordenar por:</h1>
+                <h1 className="font-semibold">Ordenar por:</h1>
                 <RadioGroup value={selectedValue} className="mt-2" onValueChange={(e) => {
                     setSelectedValue(e);
                     setValue(e);
@@ -54,10 +55,6 @@ export default function SearchBar(props: {setValue: Function, setSearchedName?: 
                         <RadioGroupItem value="preco" id="preco" />
                         <Label htmlFor="preco">Preço</Label>
                     </div>
-                    {/* <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="codigoBarrasEAN13" id="codigoBarrasEAN13" />
-                        <Label htmlFor="codigoBarrasEAN13">Código de Barras</Label>
-                    </div> */}
                 </RadioGroup>
 
             </PopoverContent>

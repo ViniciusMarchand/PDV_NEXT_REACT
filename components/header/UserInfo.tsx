@@ -30,11 +30,11 @@ export default function UserInfo() {
         </PopoverTrigger>
         <PopoverContent className="z-[1000]">
             <div className="flex flex-col items-center z-[1000]">
-                <p className="font-bold">USUÁRIO:</p>
+                <p className="font-semibold">USUÁRIO:</p>
                 <p>{userInfo?.nome}</p>
                 <div className="border-t w-full my-2"></div>
                 <p 
-                    className="transition hover:bg-red-500 hover:text-textoContraste font-bold w-full text-center cursor-pointer h-[37px] flex items-center justify-center"
+                    className="transition hover:bg-red-500 hover:text-textoContraste font-semibold w-full text-center cursor-pointer h-[37px] flex items-center justify-center"
                     onClick={logout}
                 >
                     SAIR

@@ -1,7 +1,7 @@
 'use client'
 import { ProductInputs } from "@/global/Types";
 import CardLayout from "../common/CardLayout";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import dashboardApi from "@/api/dashboardApi";
 import { DatePicker } from "../common/DatePicker";
 import Table from "../common/Table.";
@@ -22,7 +22,7 @@ export default function BestSellers() {
     return (
         <CardLayout>
             <div className="flex flex-col items-center w-full p-2">
-                <h2 className="mb-3 font-bold">MAIS VENDIDOS</h2>
+                <h2 className="mb-3 font-semibold">MAIS VENDIDOS</h2>
                 <div className="mb-1">
                     <DatePicker onSearchDate={getData}/>
                 </div>
