@@ -1,4 +1,4 @@
-import { Item, ProductInputs } from "@/global/Types";
+import { Item } from "@/global/Types";
 import { DialogContent, DialogDescription, DialogFooter, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { useContext } from "react";
 import { ToastContext } from "@/contexts/ToastContext";
@@ -26,7 +26,7 @@ export default function DeleteProductFromSalesDialog(itemInput: DeleteProductDia
 
     return <>
         <DialogContent>
-            <DialogTitle className="text-[20px] font-bold">
+            <DialogTitle className="text-[20px] font-semibold">
                 Remover produto da venda
             </DialogTitle>
             <DialogDescription className="text-[18px]">

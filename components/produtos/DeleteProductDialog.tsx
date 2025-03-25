@@ -24,7 +24,7 @@ export default function DeleteProductDialog(productInput: DeleteProductDialogPro
 
     return <>
         <DialogContent>
-            <DialogTitle className="text-[20px] font-bold">
+            <DialogTitle className="text-[20px] font-semibold">
                 Remover produto
             </DialogTitle>
             <DialogDescription className="text-[18px]">

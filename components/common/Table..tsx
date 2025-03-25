@@ -20,7 +20,7 @@ const Table: React.FC<TableComponentProps> & {
 };
 
 Table.Header = ({ children }) => {
-  return <thead className='font-bold'>{children}</thead>;
+  return <thead className='font-semibold'>{children}</thead>;
 };
 Table.Header.displayName = 'Table.Header';
 

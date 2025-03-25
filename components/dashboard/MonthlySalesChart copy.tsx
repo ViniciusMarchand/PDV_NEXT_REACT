@@ -12,11 +12,11 @@ import Spinner from "../common/Spinner"
 const chartConfig = {
     vendaTotal: {
         label: "Valor Total",
-        color: "#2563eb",
+        color: "#A9A9A9",
     },
     lucro: {
         label: "Lucro",
-        color: "#60a5fa",
+        color: "#F5CB28",
     },
 } satisfies ChartConfig
 
@@ -41,7 +41,7 @@ export function MonthlySalesChart() {
                 {
                     data.length > 0 ? (
                         <>
-                            <h2 className="font-bold">VENDAS MENSAIS</h2>
+                            <h2 className="font-semibold">VENDAS MENSAIS</h2>
                             <ChartContainer config={chartConfig} className="h-[250px] w-full">
                                 <BarChart accessibilityLayer data={data}>
                                     <CartesianGrid vertical={false} />
@@ -60,7 +60,7 @@ export function MonthlySalesChart() {
                                         }}
                                     />
                                     <ChartTooltip content={<ChartTooltipContent />} />
-                                    <Bar dataKey="totalVendas" name={"Vendas totais"} fill="var(--color-valorTotal)" radius={4} />
+                                    <Bar dataKey="totalVendas" name={"Vendas totais"} fill="var(--color-vendaTotal)" radius={4} />
                                     <Bar dataKey="totalLucro" name={"Lucros totais"} fill="var(--color-lucro)" radius={4} />
                                 </BarChart>
                             </ChartContainer>
