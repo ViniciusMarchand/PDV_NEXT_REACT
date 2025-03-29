@@ -10,6 +10,7 @@ import FaRegPenCustom from "../icons/FaRegPenCustom";
 import FaRegTrashCanCustom from "../icons/FaRegTrashCanCustom";
 import GiCancelCustom from "../icons/GiCancelCustom";
 import GiConfirmedCustom from "../icons/GiConfirmedCustom";
+import TableProductImage from "../common/TableProductImage";
 
 export default function ProductsTableSales() {
 
@@ -50,6 +51,7 @@ export default function ProductsTableSales() {
                 <thead className="w-full [&>th]:py-2 sticky top-0 bg-[#fdfdfd] border-b">
                     <tr className="[&>th]:py-1">
                         <th>ITEM</th>
+                        <th>IMAGEM</th>
                         <th>DESCRIÇÃO</th>
                         <th>ESTOQUE</th>
                         <th>UNIDADE DE MEDIDA</th>
@@ -62,9 +64,17 @@ export default function ProductsTableSales() {
                     {
                         selectedProductsOnSalesPage.map((item:Item, i: number) => (
                             
-                            <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste">
+                            <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] [&>td>div>span]:hover:text-textoContraste hover:bg-terciaria hover:text-textoContraste">
                                 <td>{i + 1}</td>
-                                <td>{item.product.descricao}</td>
+                                <td><TableProductImage src={
+                                    typeof item.product?.imagem === 'string' || 
+                                    item.product?.imagem === undefined || 
+                                    item.product.imagem === null ? 
+                                    item.product.imagem : undefined}/>
+                                </td>
+                                <td>
+                                        <span className=" text-left ">{item.product.descricao}</span>
+                                </td>
                                 <td>{item.product.estoque}</td>
                                 <td>{item.product.unidadeMedida}</td>
                                 <td>R$ {item.product.preco}</td>

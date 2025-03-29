@@ -9,6 +9,7 @@ import salesApi from "@/api/salesApi";
 import { ToastContext } from "@/contexts/ToastContext";
 import PaginationBarSinglePage from "../common/PaginationBarSinglePage";
 import SearchBar from "../common/SearchBar";
+import TableProductImage from "../common/TableProductImage";
 
 export default function ProductSelectorModalContent(props: { children: React.ReactNode, setSelectedProductsOnSalesPage: Function, selectedProductsOnSalesPage: Item[], updateProductsFromSales: Function}) {
    const { children, selectedProductsOnSalesPage, updateProductsFromSales } = props;
@@ -121,6 +122,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                     <thead className="w-full [&>th]:py-2 sticky top-0 bg-[#fdfdfd] border-b">
                                        <tr className="[&>th]:py-1">
                                           <th>ID</th>
+                                          <th>IMAGEM</th>
                                           <th>DESCRIÇÃO</th>
                                           <th>ESTOQUE</th>
                                           <th>UNIDADE DE MEDIDA</th>
@@ -134,7 +136,15 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
 
                                              <tr key={i} className={`border-t [&>td]:py-1 hover:bg-terciaria hover:text-textoContraste ${isOutOfStock(product.estoque) || isAlreadySelected(product.id) && "bg-gray-200"} `}>
                                                 <td>{product.id}</td>
-                                                <td>{product.descricao}</td>
+                                                <td>
+                                                   <TableProductImage src={
+                                                   typeof product?.imagem === 'string' || 
+                                                   product?.imagem === undefined || 
+                                                   product.imagem === null ? 
+                                                   product.imagem : undefined
+                                                }
+                                                   />
+                                                </td>                                                <td>{product.descricao}</td>
                                                 <td>{product.estoque}</td>
                                                 <td>{product.unidadeMedida}</td>
                                                 <td>R$ {product.preco}</td>

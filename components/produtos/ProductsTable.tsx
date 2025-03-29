@@ -13,6 +13,7 @@ import FaRegPenCustom from "../icons/FaRegPenCustom";
 import FaRegTrashCanCustom from "../icons/FaRegTrashCanCustom";
 import GiConfirmedCustom from "../icons/GiConfirmedCustom";
 import GiCancelCustom from "../icons/GiCancelCustom";
+import TableProductImage from "../common/TableProductImage";
 
 export default function ProductTable() {
 
@@ -54,6 +55,7 @@ export default function ProductTable() {
           <thead className="w-full [&>th]:py-2">
             <tr className="[&>th]:py-1">
               <th>CÓDIGO</th>
+              <th>IMAGEM</th>
               <th>DESCRIÇÃO</th>
               <th>ESTOQUE</th>
               <th>UNIDADE DE MEDIDA</th>
@@ -65,8 +67,14 @@ export default function ProductTable() {
             {
               products?.map((product, i) => (
 
-                <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste">
+                <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste [&>td>div>span]:hover:text-textoContraste">
                   <td>{product.id}</td>
+                  <td><TableProductImage src={
+                    typeof product?.imagem === 'string' || 
+                    product?.imagem === undefined || 
+                    product.imagem === null ? 
+                    product.imagem : undefined}/>
+                  </td>
                   <td>
                     <HighlightText text={product.descricao} term={searchedName}/>
                     </td>

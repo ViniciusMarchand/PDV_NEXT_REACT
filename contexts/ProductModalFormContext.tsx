@@ -12,6 +12,7 @@ import { productFormStatus } from "@/constants/enums";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Spinner from "@/components/common/Spinner";
+import { Input } from "@/components/ui/input";
 export const ProductModalFormContext = createContext<any>(null);
 
 export const ProductModalFormProvider = (props: { children: React.ReactNode}) => {
@@ -26,7 +27,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     const [pagination, setPagination] = useState();
     const { successToast, errorToast } = useContext(ToastContext);
     const [page, setPage] = useState<number | undefined>(undefined);
-    const [image, setImage] = useState<File | undefined>(undefined);
+    const [image, setImage] = useState<File | null>();
     const searchParams = useSearchParams();
     const [loading, setLoading] = useState(false);
     
@@ -71,6 +72,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         }
     });
     
+
     const onSubmit: SubmitHandler<ProductInputs> = (product) => {
         const formData = new FormData();
 
@@ -78,13 +80,17 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
             return;
 
         Object.entries(product).forEach(([key, value]) => {
-            if (value !== undefined && value !== null) {
+            if (value !== undefined && value !== null && key !== "imagem") {
                 formData.append(key, value.toString());
             }
         });
-
+        
+        if(image) {
+            formData.append("imagem", image);
+        }
+        
         setLoading(true);
-
+            
         if (formStatus === productFormStatus.Adicionar) {
             productApi.post(formData)
             .then(res => {
@@ -204,6 +210,10 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                             <div className="w-full">
                                 <label className="text-[18px]">Código de Barras</label>
                                 <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("codigoBarrasEAN13")} required minLength={13} maxLength={13} />
+                            </div>
+                            <div className="w-full mb-5">
+                                <label className="text-[18px]">Imagem</label>
+                                <Input id="image" type="file" className="cursor-pointer" onChange={(e) => { if (e.target.files) setImage(e.target.files[0]); }}/>
                             </div>
                         </div>
                         <AlertDialogFooter>
