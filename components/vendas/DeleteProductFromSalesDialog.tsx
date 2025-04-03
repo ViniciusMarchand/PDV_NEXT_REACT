@@ -19,7 +19,7 @@ export default function DeleteProductFromSalesDialog(itemInput: DeleteProductDia
     function deleteProduct() {
         if(id !== undefined)
         salesApi.removeProduct(id)
-        .then(res => successToast(descricao + " deletado com sucesso!"))
+        .then(res => successToast(descricao + " removido da venda"))
         .catch(error => errorToast(error.message))
         .finally(() => updateProductsFromSales());
     }

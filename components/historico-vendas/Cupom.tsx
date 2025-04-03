@@ -72,15 +72,17 @@ const Cupom = ({ sale }: Props) => {
         </table>
   
         <table style={{ width: "100%", fontSize: "14px" }}>
-          <tr>
-            <td style={{ textAlign: "left" }}>Total:</td>
-            <td></td>
-            <td style={{ textAlign: "right", paddingRight: "20px" }}>
-            R$ {sale.precoTotal.toLocaleString('pt-BR', {
-            maximumFractionDigits: 2,
-            })}
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td style={{ textAlign: "left" }}>Total:</td>
+              <td></td>
+              <td style={{ textAlign: "right", paddingRight: "20px" }}>
+              R$ {sale.precoTotal.toLocaleString('pt-BR', {
+              maximumFractionDigits: 2,
+              })}
+              </td>
+            </tr>
+          </tbody>
         </table>
   
         <p style={{ textAlign: "center", fontWeight: "bold", fontSize: "14px" }}>Forma de pagamento: {sale.formaPagamento}</p>

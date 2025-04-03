@@ -162,7 +162,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                 <AlertDialogContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <AlertDialogHeader>
-                            <h1 className="text-[20px]">{formStatus} Produto</h1>
+                            <h1 className="text-[20px] font-semibold px-5 mb-1">{formStatus} Produto</h1>
                         </AlertDialogHeader>
                         <div className="flex justify-between px-5 w-full flex-wrap">
                             <div className="w-full">
@@ -216,7 +216,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                 <Input id="image" type="file" className="cursor-pointer" onChange={(e) => { if (e.target.files) setImage(e.target.files[0]); }}/>
                             </div>
                         </div>
-                        <AlertDialogFooter>
+                        <AlertDialogFooter className="flex px-5">
                             <AlertDialogCancel>
                                 Cancelar
                             </AlertDialogCancel>
