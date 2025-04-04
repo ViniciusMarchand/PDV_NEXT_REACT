@@ -59,8 +59,10 @@ export function WeeklySalesChart() {
                                             });
                                         }}
                                     />
-                                    <ChartTooltip content={<ChartTooltipContent />} />
-                                    <Bar dataKey="totalVendas" name={"Vendas totais"} fill="var(--color-vendaTotal)" radius={4} />
+                                    <ChartTooltip
+                                        cursor={false}
+                                        content={<ChartTooltipContent  labelClassName="w-full text-center"/>} />                          
+                                        <Bar dataKey="totalVendas" name={"Vendas totais"} fill="var(--color-vendaTotal)" radius={4} />
                                     <Bar dataKey="totalLucro" name={"Lucros totais"} fill="var(--color-lucro)" radius={4} />
                                 </BarChart>
                             </ChartContainer>

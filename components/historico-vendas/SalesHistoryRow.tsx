@@ -17,8 +17,8 @@ export default function SalesHistoryRow({ sale }:  Props ) {
 		        maximumFractionDigits: 2,
 	        })}
         </Table.Cell>
-        <Table.Cell>{format(new Date(sale.dataHoraInicio), "dd/MM/yyyy hh:mm:ss")}</Table.Cell>
-        <Table.Cell>{format(new Date(sale?.dataHoraConclusao), "dd/MM/yyyy hh:mm:ss") || "Venda não concluída"}</Table.Cell>
+        <Table.Cell>{format(new Date(sale.dataHoraInicio), "dd/MM/yyyy HH:mm:ss")}</Table.Cell>
+        <Table.Cell>{format(new Date(sale?.dataHoraConclusao), "dd/MM/yyyy HH:mm:ss") || "Venda não concluída"}</Table.Cell>
         <Table.Cell>{sale.formaPagamento || "Pagamento não efetuado"}</Table.Cell>
         <Table.Cell>{sale.vendedorNome}</Table.Cell>
         <Table.Cell>
