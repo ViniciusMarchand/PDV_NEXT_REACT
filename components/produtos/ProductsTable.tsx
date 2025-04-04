@@ -68,7 +68,7 @@ export default function ProductTable() {
               products?.map((product, i) => (
 
                 <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste [&>td>div>span]:hover:text-textoContraste">
-                  <td>{product.id}</td>
+                  <td className="tabular-numbers">{product.id}</td>
                   <td><TableProductImage src={
                     typeof product?.imagem === 'string' || 
                     product?.imagem === undefined || 
@@ -91,7 +91,7 @@ export default function ProductTable() {
                         />
                       </div>
                       :
-                      <div className="flex items-center h-full justify-center">
+                      <div className="flex items-center h-full justify-center tabular-numbers">
                         {product.estoque}
                         <FaRegPenCustom onClick={() => setEditingProductId(product.id || 0)} />
                       </div>
@@ -100,12 +100,12 @@ export default function ProductTable() {
                     }
                   </td>
                   <td>{product.unidadeMedida}</td>
-                  <td>
+                  <td className="tabular-numbers">
                     R$ {product.preco.toLocaleString('pt-BR', {
                       maximumFractionDigits: 2,
                     })}
                   </td>
-                  <td>{product.codigoBarrasEAN13}</td>
+                  <td className="tabular-numbers">{product.codigoBarrasEAN13 || '-------------'}</td>
                   <td onClick={() => setChosenProduct(product)} className="flex w-full h-full">
                     <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>
                       <FaRegPenCustom />

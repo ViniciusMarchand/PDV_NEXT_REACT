@@ -1,25 +1,24 @@
-import path from "path";
-import { FaBoxes, FaChartBar } from "react-icons/fa";
-import { FaCashRegister } from "react-icons/fa";
+import { MdPointOfSale } from "react-icons/md";
 import { TiUserAdd } from "react-icons/ti";
 import { FaHistory } from "react-icons/fa";
-
+import { FaBoxesStacked } from "react-icons/fa6";
+import { FaChartColumn } from "react-icons/fa6";
 
 export const SideBarData = [
     {
         title: "Vendas",
         path: "/vendas",
-        icon: <FaCashRegister size={30}/>
+        icon: <MdPointOfSale size={30}/>
     },
     {
         title: "Produtos",
         path: "/produtos?page=1",
-        icon: <FaBoxes size={30}/>
+        icon: <FaBoxesStacked size={30}/>
     },
     {
-        title: "Dashboard",
+        title: "Indicadores",
         path: "/dashboard",
-        icon: <FaChartBar size={30} />,
+        icon: <FaChartColumn size={30} />,
         access: 'ADMIN'
     },
     {

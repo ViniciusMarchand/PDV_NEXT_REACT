@@ -13,8 +13,8 @@ export default function SalesHistoryRow({ sale }:  Props ) {
     return <Table.Row>
         <Table.Cell>{sale.id}</Table.Cell>
         <Table.Cell>
-            {sale.precoTotal.toLocaleString('pt-BR', {
-		    maximumFractionDigits: 2,
+            R$ {sale.precoTotal.toLocaleString('pt-BR', {
+		        maximumFractionDigits: 2,
 	        })}
         </Table.Cell>
         <Table.Cell>{format(new Date(sale.dataHoraInicio), "dd/MM/yyyy hh:mm:ss")}</Table.Cell>

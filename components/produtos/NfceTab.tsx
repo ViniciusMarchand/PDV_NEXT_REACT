@@ -9,7 +9,7 @@ interface Props {
   closePopover: () => void;
 }
 
-export default function NfceTab({closePopover} : Props) {
+export default function NfeTab({closePopover} : Props) {
 
   const { successToast, errorToast } = useToast();
   const { connect } = useWebSocket();
@@ -34,11 +34,11 @@ export default function NfceTab({closePopover} : Props) {
   return <form className="flex flex-col gap-y-5" onSubmit={sendFile}>
     <div>
       <label htmlFor="percentage">Porcentagem do aumento de preço</label>
-      <Input id="percentage" placeholder="porcentagem do aumento de preço" type="number" required/>
+      <Input id="percentage" placeholder="Insira a porcentagem..." type="number" required/>
     </div>
     <div>
-      <label htmlFor="key">Chave de acesso nfce</label>
-      <Input id="key" placeholder="chave de acesso nfce" required/>
+      <label htmlFor="key">Chave de acesso NF-e</label>
+      <Input id="key" placeholder="Insira a chave de acesso..." required/>
     </div>
       <Button type="submit" className="w-full">Importar produtos</Button>
     </form>
