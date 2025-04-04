@@ -39,6 +39,9 @@ const config = {
                     ...defaultTheme.fontFamily.sans
                 ]
   		},
+		fontFeatureSettings: {
+		tabular: "'tnum'",
+		},
   		dropShadow: {
   			'1xl': '0px 1px 2px rgba(0, 0, 0, 1)',
   			'2xl': '0px 1px 10px rgba(0, 0, 0, 0.1)',

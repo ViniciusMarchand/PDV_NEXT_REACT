@@ -1,12 +1,12 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import CsvTab from "./CsvTab";
-import NfceTab from "./NfceTab";
+import NfeTab from "./NfceTab";
 
 export default function ImportOptions({ closePopover }: { closePopover: () => void }) {
     return <Tabs defaultValue="nfce" className="w-[400px]">
     <TabsList className="grid w-full grid-cols-2">
-      <TabsTrigger value="nfce">NFCe</TabsTrigger>
+      <TabsTrigger value="nfce">NF-e</TabsTrigger>
       <TabsTrigger value="csv">CSV</TabsTrigger>
     </TabsList>
     <TabsContent value="nfce">
@@ -14,11 +14,11 @@ export default function ImportOptions({ closePopover }: { closePopover: () => vo
         <CardHeader>
           {/* <CardTitle>NFCe</CardTitle> */}
           <CardDescription>
-            Importar  nfce.
+            Importar  NF-e.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
-          <NfceTab closePopover={closePopover}/>
+          <NfeTab closePopover={closePopover}/>
         </CardContent>
       </Card>
     </TabsContent>
@@ -27,7 +27,7 @@ export default function ImportOptions({ closePopover }: { closePopover: () => vo
         <CardHeader>
           {/* <CardTitle>CSV</CardTitle> */}
           <CardDescription>
-            Importar arquivo csv.
+            Importar arquivo CSV.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">

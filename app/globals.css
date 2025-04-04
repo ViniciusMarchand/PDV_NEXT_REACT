@@ -152,3 +152,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .tabular-numbers {
+    font-feature-settings: "tnum";
+  }
+}

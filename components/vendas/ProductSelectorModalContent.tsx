@@ -103,7 +103,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    return <AlertDialog>
          <AlertDialogContent className="max-w-none w-[1450px] h-[600px] flex flex-col bg-primaria z-[100]">
             <AlertDialogHeader className="max-h-[30px]">
-               <h1 className="text-[20px]"> Produto</h1>
+               <h1 className="text-[20px] font-semibold"> Adicionar Produto</h1>
             </AlertDialogHeader>
                <div className="max-h-full h-full grow flex justify-between">
                   <div className="grow max-h-full h-full flex flex-col mr-3">
@@ -147,8 +147,12 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                                 </td>                                                <td>{product.descricao}</td>
                                                 <td>{product.estoque}</td>
                                                 <td>{product.unidadeMedida}</td>
-                                                <td>R$ {product.preco}</td>
-                                                <td>{product.codigoBarrasEAN13}</td>
+                                                <td >
+                                                   R$ {product.preco.toLocaleString('pt-BR', {
+                                                         maximumFractionDigits: 2,
+                                                      })}
+                                                </td>
+                                                <td>{product.codigoBarrasEAN13 || '-------------'}</td>
                                                 <td>
                                                    <FaBasketShopping title="Adicionar no carrinho de compra" size={18} className="cursor-pointer transition" onClick={() => !isAlreadySelected(product.id) && selectProduct(product)} />
                                                 </td>
