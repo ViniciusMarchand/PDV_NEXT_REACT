@@ -5,24 +5,29 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { FaGear } from "react-icons/fa6";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function SearchBar(props: {setValue: Function, setSearchedName?: Function, onClick?: Function}) {
     const {setValue, setSearchedName} = props;
     const [valorInput, setValorInput] = useState<string>("");
     const [selectedValue, setSelectedValue] = useState<string>("id");
 
-    const search = () => {
+    const search = (e?: FormEvent) => {
+        if(e)
+            e.preventDefault();
+
         setSearchedName && setSearchedName(valorInput);
     }
     
     return <div className="flex gap-2">
-        <div className="flex">
-            <Input placeholder="Pesquisar" className="w-[200px] h-[35px] focus-visible:ring-0 focus-visible:ring-offset-0 rounded-[0px] rounded-l-md border-r-0" value={valorInput} onChange={(e) => setValorInput(e.target.value)}/>
-            <div title="pesquisar" className="bg-terciaria hover:bg-terciaria2 transition w-[35px] h-[35px] rounded-r-sm cursor-pointer shadow-md flex justify-center items-center" onClick={() => search()}>
-                <FaSearch className="text-textoContraste" size={20} />
+        <form onSubmit={(e) => search(e)}>
+            <div className="flex">
+                <Input placeholder="Pesquisar" className="w-[200px] h-[35px] focus-visible:ring-0 focus-visible:ring-offset-0 rounded-[0px] rounded-l-md border-r-0" value={valorInput} onChange={(e) => setValorInput(e.target.value)}/>
+                <div title="pesquisar" className="bg-terciaria hover:bg-terciaria2 transition w-[35px] h-[35px] rounded-r-sm cursor-pointer shadow-md flex justify-center items-center" onClick={() => search()}>
+                    <FaSearch className="text-textoContraste" size={20} />
+                </div>
             </div>
-        </div>
+        </form>
         <Popover>
             <PopoverTrigger>
                 <div title="pesquisar" className="bg-terciaria hover:bg-terciaria2 transition w-[35px] h-[35px] rounded-sm cursor-pointer shadow-md flex justify-center items-center">
