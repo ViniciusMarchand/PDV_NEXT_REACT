@@ -14,7 +14,7 @@ export default function SalesHistoryTable({ salesHistory, pagination }: Props) {
 
     return <div className="flex flex-col w-full h-full max-h-full">
         <CardLayout>
-            <div className="px-3 pt-3 flex flex-col justify-between h-full">
+            <div className="px-3 pt-3 flex flex-col justify-between h-full overflow-auto">
                 <Table>
                     <Table.Header>
                         <Table.Row>
