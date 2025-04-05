@@ -1,5 +1,4 @@
-import { FaFileExcel } from "react-icons/fa6";
-
+import { FaFileDownload } from "react-icons/fa";
 interface FaRegPenProps {
   onClick?: () => void;
   className?: string;
@@ -12,7 +11,7 @@ export default function FaRegFileExcelCustom({
   title,
 }: FaRegPenProps) {
   return (
-    <FaFileExcel
+    <FaFileDownload
       title={title || "Editar"}
       className={`text-textoContraste transition cursor-pointer  ${className}`}
       size={18}
