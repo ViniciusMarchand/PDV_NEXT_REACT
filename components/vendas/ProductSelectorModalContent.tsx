@@ -31,7 +31,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
             })
             .catch(error => console.error("Erro no servidor"));
       else
-         productApi.searchProduct(pageNumber, sortBy, searchedName)
+         productApi.searchProduct(sortBy, searchedName)
             .then(res => {
                setProductList(res.data.content);
                setPagination(res.data);

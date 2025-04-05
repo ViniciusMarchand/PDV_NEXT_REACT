@@ -46,7 +46,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
 
     const searchItems = useCallback(() => {
         if(searchedName !== "") {
-            productApi.searchProduct(page || 0, sortBy, searchedName)
+            productApi.searchProduct(sortBy, searchedName)
             .then(res => {
                 setPagination(res.data);
             })

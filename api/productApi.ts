@@ -79,8 +79,8 @@ const productApi = {
                 throw new Error(error);
             })
     },
-    searchProduct: async (page: number, sort: string, searchedName: string) => {
-        const URL = `produto/buscar?page=${page}&size=22&sort=${sort}&parametro=${searchedName}`;
+    searchProduct: async (sort: string, searchedName: string) => {
+        const URL = `produto/buscar?size=22&sort=${sort}&parametro=${searchedName}`;
         return await Axios.get(URL)
             .then((res) => res)
             .catch(error => {
