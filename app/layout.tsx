@@ -22,6 +22,9 @@ export default function RootLayout({
   if (pathname && (publicPages.some((page) => pathname.includes(page)) || pathname === "/")) {
     return (
       <html lang="pt-br">
+        <head>
+          <title>Ferragem Ávila | PDV</title>
+        </head>
         <body className={`${inter.className} bg-primaria max-h-screen`} suppressHydrationWarning={true}>
           <Suspense fallback={<div>Carregando...</div>}>
           <ToastProvider>
@@ -35,6 +38,9 @@ export default function RootLayout({
     );
   } else {
     return <html lang="pt-br">
+        <head>
+        <title>Ferragem Ávila | PDV</title>
+      </head>
       <body className={`${inter.className} bg-primaria  h-screen max-h-screen overflow-hidden`} suppressHydrationWarning={true}>
         <ToastProvider>
             <AuthProvider>
