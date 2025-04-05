@@ -62,10 +62,6 @@ export function WebSocketProvider({ children }: PopoverContextProps) {
 
       const { status, content, operation } = message;
 
-      console.warn(content);
-      console.warn(operation);
-
-
       if(status === "SUCCESS"){
         successToastNoAutoClose(content);
       } else {
