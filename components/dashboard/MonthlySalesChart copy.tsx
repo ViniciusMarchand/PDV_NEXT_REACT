@@ -51,7 +51,7 @@ export function MonthlySalesChart() {
                                         tickMargin={10}
                                         axisLine={false}
                                         tickFormatter={(value) => {
-                                            const date = new Date(value); // Converte o valor para um objeto Date
+                                            const date = new Date(value + "T00:00:00"); // Converte o valor para um objeto Date
                                             return date.toLocaleDateString('pt-BR', {
                                                 day: '2-digit',
                                                 month: '2-digit',

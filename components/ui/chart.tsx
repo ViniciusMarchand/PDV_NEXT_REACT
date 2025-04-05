@@ -160,7 +160,7 @@ const ChartTooltipContent = React.forwardRef<
         return null
       }
 
-      return <div className={cn("font-medium", labelClassName)}>{typeof(value) === 'string' ? format(new Date(value), "dd/MM/yyyy") : value}</div>
+      return <div className={cn("font-medium", labelClassName)}>{typeof(value) === 'string' ? format(new Date(value + "T00:00:00"), "dd/MM/yyyy") : value}</div>
     }, [
       label,
       labelFormatter,

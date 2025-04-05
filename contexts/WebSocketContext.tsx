@@ -28,7 +28,7 @@ export function WebSocketProvider({ children }: PopoverContextProps) {
     const [message, setMessage] = useState<any>();
     const [importResult, setImportResult] = useState<ImportReulst>();
     const socketRef = useRef<WebSocket | null>(null);
-    const { successToastNoAutoClose, warningToastNoAutoClose } = useToast();
+    const { successToastNoAutoClose, warningToastNoAutoClose, successToast } = useToast();
     const [isOpen, setIsOpen] = useState(false);
     const [isLoadingExcel, setIsLoadingExcel] = useState(false);
   
@@ -76,7 +76,7 @@ export function WebSocketProvider({ children }: PopoverContextProps) {
           } else if(operation === "XML") {
             res = await productApi.importXMLResult();
           } else if(operation === "RELATORIO_PRODUTOS") {
-            successToastNoAutoClose("Excel pronto para download. Clique no botão de exportar produtos novamente para baixar o arquivo.");
+            successToast("Excel pronto para download. Clique no botão de exportar produtos novamente para baixar o arquivo.");
             setIsLoadingExcel(false);
           } else {
             throw new Error("Error ao tentar identificar a operação")
