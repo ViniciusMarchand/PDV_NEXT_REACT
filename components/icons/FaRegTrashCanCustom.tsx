@@ -14,7 +14,7 @@ export default function FaRegTrashCanCustom({
   return (
     <FaRegTrashCan
       title={title || "Deletar"}
-      className={`text-red-700 group-hover:text-textoContraste transition cursor-pointer ml-2 ${className}`}
+      className={`text-red-700 group-hover:text-textoContraste transition cursor-pointer ${className}`}
       size={18}
       onClick={onClick}
     />

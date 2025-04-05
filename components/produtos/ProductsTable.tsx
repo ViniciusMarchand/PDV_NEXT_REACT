@@ -7,46 +7,32 @@ import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductDialog from "./DeleteProductDialog";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
 import HighlightText from "../common/HighlightText";
-import EditableQuantity from "./EditableQuantity";
 import productApi from "@/api/productApi";
 import FaRegPenCustom from "../icons/FaRegPenCustom";
 import FaRegTrashCanCustom from "../icons/FaRegTrashCanCustom";
-import GiConfirmedCustom from "../icons/GiConfirmedCustom";
-import GiCancelCustom from "../icons/GiCancelCustom";
 import TableProductImage from "../common/TableProductImage";
+import EditStockModal from "./EditStockModal";
 
 export default function ProductTable() {
 
   const [chosenProduct, setChosenProduct] = useState<ProductInputs>();
   const { statusToEdit, pagination, searchedName } = useContext(ProductModalFormContext);
-  const [editingProductId, setEditingProductId] = useState<number>(0);
-  const [newQuantity, setNewQuantity] = useState('0');
   const [products, setProducts] = useState<ProductInputs[]>([]);
 
   useEffect(() => {
-    setProducts(pagination?.content || []);    
+    setProducts(pagination?.content || []);
   }, [pagination]);
 
-  const updateQuantity = async (id: number, newQuantity: string) => {
+  const updateTable = (number:Number, id: number) => {
+    const updatedProducts = products.map(product => {
+      if (product.id === id) {
+        product.estoque = Number(number);
+      }
+      return product;
+    });
 
-    if(newQuantity === '0') return;
-
-    try {
-      await productApi.editQuantity(id, newQuantity);
-      const updatedProducts = products.map(product => {
-        if(product.id === id) {
-          product.estoque = Number(newQuantity);
-        }
-        return product;
-      });
-
-      setProducts(updatedProducts);
-    } catch (error: any) {
-      console.error(error.message);
-    }
+    setProducts(updatedProducts);
   }
-    
-
 
   return <div className="w-full px-3  pt-3 max-h-full overflow-y-auto flex flex-col justify-between h-full">
     <div>
@@ -70,34 +56,16 @@ export default function ProductTable() {
                 <tr key={i} className="group border-t [&>td]:py-1 [&>td>input]:hover:text-[#333] hover:bg-terciaria hover:text-textoContraste [&>td>div>span]:hover:text-textoContraste">
                   <td className="tabular-numbers">{product.id}</td>
                   <td><TableProductImage src={
-                    typeof product?.imagem === 'string' || 
-                    product?.imagem === undefined || 
-                    product.imagem === null ? 
-                    product.imagem : undefined}/>
+                    typeof product?.imagem === 'string' ||
+                      product?.imagem === undefined ||
+                      product.imagem === null ?
+                      product.imagem : undefined} />
                   </td>
                   <td>
-                    <HighlightText text={product.descricao} term={searchedName}/>
-                    </td>
+                    <HighlightText text={product.descricao} term={searchedName} />
+                  </td>
                   <td >
-                    {
-                      editingProductId === product.id ?
-                      <div className="flex items-center justify-center">
-                        <EditableQuantity product={product} setNewQuantity={setNewQuantity}/>
-                        <GiCancelCustom  
-                            onClick={() => setEditingProductId(0)}
-                        />
-                        <GiConfirmedCustom
-                            onClick={() => {product.id && updateQuantity(product.id, newQuantity); setEditingProductId(0)}}
-                        />
-                      </div>
-                      :
-                      <div className="flex items-center h-full justify-center tabular-numbers">
-                        {product.estoque}
-                        <FaRegPenCustom onClick={() => setEditingProductId(product.id || 0)} />
-                      </div>
-
-
-                    }
+                    {product.estoque}
                   </td>
                   <td>{product.unidadeMedida}</td>
                   <td className="tabular-numbers">
@@ -106,8 +74,10 @@ export default function ProductTable() {
                     })}
                   </td>
                   <td className="tabular-numbers">{product.codigoBarrasEAN13 || '-------------'}</td>
-                  <td onClick={() => setChosenProduct(product)} className="flex w-full h-full">
-                    <AlertDialogTrigger className="mr-1" title="Editar" onClick={() => statusToEdit(product)}>
+
+                  <td onClick={() => setChosenProduct(product)} className="flex w-full h-full gap-2">
+                    <EditStockModal product={product} updateTable={updateTable} oldStock={product.estoque}/>
+                    <AlertDialogTrigger title="Editar" onClick={() => statusToEdit(product)}>
                       <FaRegPenCustom />
                     </AlertDialogTrigger>
                     <DialogTrigger title="Deletar">
@@ -119,10 +89,10 @@ export default function ProductTable() {
             }
           </tbody>
         </table>
-          <DeleteProductDialog product={chosenProduct} />
+        <DeleteProductDialog product={chosenProduct} />
       </Dialog>
     </div>
-    <div className="w-full border-t flex justify-center items-center pb-1 sticky bottom-0 bg-secundaria">      
+    <div className="w-full border-t flex justify-center items-center pb-1 sticky bottom-0 bg-secundaria">
       {
         pagination !== undefined &&
         <PaginationBar pagination={pagination} />

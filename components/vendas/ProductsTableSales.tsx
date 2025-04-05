@@ -122,7 +122,7 @@ export default function ProductsTableSales() {
                       )}
                     </td>
                     <td>
-                      <div className="flex justify-center ">
+                      <div className="flex justify-center gap-1">
                         {editingProductId === item.product.id ? (
                           <>
                             <GiCancelCustom

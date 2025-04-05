@@ -1,4 +1,4 @@
-import { FaRegPenToSquare } from "react-icons/fa6";
+import { FaBoxOpen } from "react-icons/fa6";
 
 interface FaRegPenProps {
   onClick?: () => void;
@@ -6,15 +6,15 @@ interface FaRegPenProps {
   title?: string;
 }
 
-export default function FaRegPenCustom({
+export default function FaBoxOpenCustom({
   onClick,
   className,
   title,
 }: FaRegPenProps) {
   return (
-    <FaRegPenToSquare
+    <FaBoxOpen
       title={title || "Editar"}
-      className={`text-terciaria group-hover:text-textoContraste transition cursor-pointer ${className}`}
+      className={`text-terciaria group-hover:text-textoContraste transition cursor-pointer ml-2 ${className}`}
       size={18}
       onClick={onClick}
     />
