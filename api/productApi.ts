@@ -94,6 +94,18 @@ const productApi = {
             .catch(error => {
                 throw new Error(error);
             })
+    },
+
+    exportProducts: async () => {
+        const URL = 'dashboard/produtos/relatorio-produtos';
+        return await Axios.get(URL, {
+            responseType: 'blob',
+        }
+        )
+            .then((res) => res)
+            .catch(error => {
+                throw new Error(error);
+            })  
     }
 }
 
