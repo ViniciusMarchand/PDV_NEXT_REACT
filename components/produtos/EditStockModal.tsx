@@ -64,7 +64,7 @@ export default function EditStockModal({product, updateTable, oldStock}: Props) 
         {
           flowNumber === 1 && 
           <>
-            <AlertDialogTitle className="font-normal">Você deseja alterar o estoque do produto: <span className="font-semibold">"{product.descricao}"</span>, para: {newQuantity}?</AlertDialogTitle>
+            <AlertDialogTitle className="font-normal">Você deseja alterar o estoque do produto: <span className="font-semibold">&quot;{product.descricao}&quot;</span>, para: {newQuantity}?</AlertDialogTitle>
             <AlertDialogFooter>
               <Button className="bg-red-400 text-textoContraste hover:bg-red-600" onClick={(e) => {setFlowNumber(0)}}>Voltar</Button>
               <Button onClick={() => !IsLoading && updateQuantity(product.id, newQuantity)}>{IsLoading ? <Spinner /> : "Salvar"}</Button>
