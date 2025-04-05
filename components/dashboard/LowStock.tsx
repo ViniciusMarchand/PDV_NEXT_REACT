@@ -28,7 +28,7 @@ export default function LowStock() {
             <div className="h-[300px] w-full flex flex-col justify-center items-center p-5">
                 {
                     data ? (
-                        <div className="w-full h-[300px] flex flex-col justify-between items-center">
+                        <div className="w-full h-[300px] flex flex-col justify-start items-center">
                             <h2 className="font-semibold">PRODUTOS COM ESTOQUE BAIXO</h2>
                             <table className="w-full text-center">
                                 <thead className="w-full py-2 sticky top-0 bg-[#fdfdfd] border-b">
@@ -53,7 +53,9 @@ export default function LowStock() {
                                                 <td>{product.codigoBarrasEAN13}</td>
                                             </tr>
                                         ))
+                                        
                                     }
+                                    
                                 </tbody>
                             </table>
                             <PaginationBarSinglePage pagination={data} changePage={changePage} />
