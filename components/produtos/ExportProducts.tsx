@@ -41,8 +41,6 @@ export default function ExportProducts() {
                 return;
             }
 
-            successToast("Exportando produtos para Excel");
-
         } catch (error) {
             errorToast("Erro ao exportar produtos");
         }
