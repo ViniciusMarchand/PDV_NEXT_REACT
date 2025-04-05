@@ -209,7 +209,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                             </div>
                             <div className="w-full">
                                 <label className="text-[18px]">Código de Barras</label>
-                                <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("codigoBarrasEAN13")} required minLength={13} maxLength={13} />
+                                <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("codigoBarrasEAN13")} minLength={13} maxLength={13} />
                             </div>
                             <div className="w-full mb-5">
                                 <label className="text-[18px]">Imagem</label>
