@@ -31,7 +31,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
             })
             .catch(error => console.error("Erro no servidor"));
       else
-         productApi.searchProduct(pageNumber, sortBy, searchedName)
+         productApi.searchProduct(sortBy, searchedName)
             .then(res => {
                setProductList(res.data.content);
                setPagination(res.data);
@@ -87,7 +87,6 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
          }
       });
       salesApi.postItems(formattedItems).then(res => {
-         // setSelectedProductsOnSalesPage((current: Item[]) => [...current.concat(selectedItems)]);
          successToast("Item adicionado com sucesso!");
          setSelectedItems([]);
          updateProductsFromSales();
@@ -99,7 +98,7 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
    function isOutOfStock(stockNumber: number) {
       return stockNumber === 0 ? true : false;
    }
-
+   // TODO: ARRUMAR ESSA CAGANÇA DO LAYOUT
    return <AlertDialog>
          <AlertDialogContent className="max-w-none w-[1450px] h-[600px] flex flex-col bg-primaria z-[100]">
             <AlertDialogHeader className="max-h-[30px]">
@@ -122,32 +121,31 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                                     <thead className="w-full [&>th]:py-2 sticky top-0 bg-[#fdfdfd] border-b">
                                        <tr className="[&>th]:py-1">
                                           <th>ID</th>
-                                          <th>IMAGEM</th>
+                                          <th className="pl-4">IMAGEM</th>
                                           <th>DESCRIÇÃO</th>
                                           <th>ESTOQUE</th>
-                                          <th>UNIDADE DE MEDIDA</th>
+                                          <th>UN. DE MEDIDA</th>
                                           <th>PREÇO</th>
-                                          <th>CÓDIGO DE BARRAS</th>
+                                          <th>CÓD. DE BARRAS</th>
                                        </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody className="w-full overflow-auto">
                                        {
                                           productList.map((product: ProductInputs, i: number) => (
-
                                              <tr key={i} className={`border-t [&>td]:py-1 hover:bg-terciaria hover:text-textoContraste ${isOutOfStock(product.estoque) || isAlreadySelected(product.id) && "bg-gray-200"} `}>
                                                 <td>{product.id}</td>
-                                                <td>
+                                                <td className="pl-8">
                                                    <TableProductImage src={
-                                                   typeof product?.imagem === 'string' || 
-                                                   product?.imagem === undefined || 
-                                                   product.imagem === null ? 
-                                                   product.imagem : undefined
-                                                }
-                                                   />
-                                                </td>                                                <td>{product.descricao}</td>
+                                                      typeof product?.imagem === 'string' || 
+                                                      product?.imagem === undefined || 
+                                                      product.imagem === null ? 
+                                                      product.imagem : undefined
+                                                   }/>
+                                                </td>
+                                                <td>{product.descricao}</td>
                                                 <td>{product.estoque}</td>
                                                 <td>{product.unidadeMedida}</td>
-                                                <td >
+                                                <td className="min-w-[100px]">
                                                    R$ {product.preco.toLocaleString('pt-BR', {
                                                          maximumFractionDigits: 2,
                                                       })}
@@ -175,8 +173,8 @@ export default function ProductSelectorModalContent(props: { children: React.Rea
                   </div>
                   <div className="h-full">
                      <CardLayout>
-                        <div className="max-h-full h-full w-[300px] p-5">
-                           <div className="overflow-auto pr-1">
+                        <div className="max-h-full h-full w-[300px] p-5 overflow-x-scroll">
+                           <div className="pr-1">
                               <div className="flex w-full justify-between mb-3">
                                  <p className="flex items-center">Descrição</p>
                                  <div>

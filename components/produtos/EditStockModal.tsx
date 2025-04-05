@@ -2,7 +2,6 @@
 import { Button } from "../ui/button";
 import FaBoxOpenCustom from "../icons/FaBoxOpenCustom";
 import { AlertDialog, AlertDialogContent, AlertDialogFooter, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
-import { FaBoxOpen } from "react-icons/fa";
 import { Input } from "../ui/input";
 import { useState } from "react";
 import productApi from "@/api/productApi";
@@ -41,15 +40,13 @@ export default function EditStockModal({product, updateTable, oldStock}: Props) 
     setFlowNumber(0);
   }
 
-
-
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger>
         <FaBoxOpenCustom title="Editar estoque" />
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="w-[300px]">
+      <AlertDialogContent className="w-[800px] flex flex-col justify-evenly">
         {
           flowNumber === 0 &&
           <>
@@ -67,7 +64,7 @@ export default function EditStockModal({product, updateTable, oldStock}: Props) 
         {
           flowNumber === 1 && 
           <>
-            <AlertDialogTitle>Você deseja alterar o estoque de {product.descricao} para {newQuantity}?</AlertDialogTitle>
+            <AlertDialogTitle className="font-normal">Você deseja alterar o estoque do produto: <span className="font-semibold">&quot;{product.descricao}&quot;</span>, para: {newQuantity}?</AlertDialogTitle>
             <AlertDialogFooter>
               <Button className="bg-red-400 text-textoContraste hover:bg-red-600" onClick={(e) => {setFlowNumber(0)}}>Voltar</Button>
               <Button onClick={() => !IsLoading && updateQuantity(product.id, newQuantity)}>{IsLoading ? <Spinner /> : "Salvar"}</Button>

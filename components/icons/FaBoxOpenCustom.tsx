@@ -14,8 +14,8 @@ export default function FaBoxOpenCustom({
   return (
     <FaBoxOpen
       title={title || "Editar"}
-      className={`text-terciaria group-hover:text-textoContraste transition cursor-pointer ml-2 ${className}`}
-      size={18}
+      className={`text-terciaria group-hover:text-textoContraste transition cursor-pointer ${className}`}
+      size={20}
       onClick={onClick}
     />
   );
