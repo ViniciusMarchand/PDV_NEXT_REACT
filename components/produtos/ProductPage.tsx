@@ -8,6 +8,7 @@ import productApi from "@/api/productApi";
 import { ToastContext } from "@/contexts/ToastContext";
 import SearchBar from "../common/SearchBar";
 import ImportPopOver from "./ImportPopOver";
+import ExportProducts from "./ExportProducts";
 
 export default function ProductPage() {
     const { key, statusToAdd, setSortBy, setSearchedName, searchItems } = useContext(ProductModalFormContext);
@@ -15,14 +16,19 @@ export default function ProductPage() {
     return <>
         <div className="w-full h-[80px] mb-3">
             <CardLayout>
-                <div className="h-full w-full flex justify-start items-center px-3 gap-3">
-                    <AlertDialogTrigger onClick={() => statusToAdd()}>
-                        <div className="w-[200px] h-[35px]">
-                            <ModalButton value="Adicionar Produto"  />
-                        </div>
-                    </AlertDialogTrigger>
-                    <ImportPopOver />
-                    <SearchBar setValue={setSortBy} setSearchedName={setSearchedName} onClick={() => searchItems()}/>
+                <div className="h-full w-full flex justify-between items-center px-3 gap-3">
+                    <div className="flex justify-start items-center w-full gap-4">
+                        <AlertDialogTrigger onClick={() => statusToAdd()}>
+                            <div className="w-[200px] h-[35px]">
+                                <ModalButton value="Adicionar Produto"  />
+                            </div>
+                        </AlertDialogTrigger>
+                        <ImportPopOver />
+                        <SearchBar setValue={setSortBy} setSearchedName={setSearchedName} onClick={() => searchItems()}/>
+                    </div>
+                    <div>
+                        <ExportProducts/>
+                    </div>
                 </div>
             </CardLayout>
         </div>
