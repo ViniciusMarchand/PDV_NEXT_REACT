@@ -7,7 +7,6 @@ import { Dialog, DialogTrigger } from "../ui/dialog";
 import DeleteProductDialog from "./DeleteProductDialog";
 import { AlertDialogTrigger } from "../ui/alert-dialog";
 import HighlightText from "../common/HighlightText";
-import productApi from "@/api/productApi";
 import FaRegPenCustom from "../icons/FaRegPenCustom";
 import FaRegTrashCanCustom from "../icons/FaRegTrashCanCustom";
 import TableProductImage from "../common/TableProductImage";
@@ -75,7 +74,7 @@ export default function ProductTable() {
                   </td>
                   <td className="tabular-numbers">{product.codigoBarrasEAN13 || '-------------'}</td>
 
-                  <td onClick={() => setChosenProduct(product)} className="flex w-full h-full gap-2">
+                  <td onClick={() => setChosenProduct(product)} className="flex w-full h-full gap-3">
                     <EditStockModal product={product} updateTable={updateTable} oldStock={product.estoque}/>
                     <AlertDialogTrigger title="Editar" onClick={() => statusToEdit(product)}>
                       <FaRegPenCustom />

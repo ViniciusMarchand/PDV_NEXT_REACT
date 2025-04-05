@@ -6,23 +6,40 @@ import { FaGear } from "react-icons/fa6";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { FormEvent, useState } from "react";
+import { X } from "lucide-react";
 
 export default function SearchBar(props: {setValue: Function, setSearchedName?: Function, onClick?: Function}) {
     const {setValue, setSearchedName} = props;
     const [valorInput, setValorInput] = useState<string>("");
     const [selectedValue, setSelectedValue] = useState<string>("id");
 
-    const search = (e?: FormEvent) => {
-        if(e)
-            e.preventDefault();
-
-        setSearchedName && setSearchedName(valorInput);
+    const search = (e?: FormEvent, valor?: string) => {
+        if(e) e.preventDefault();
+        setSearchedName && setSearchedName(valor ?? valorInput);
     }
     
     return <div className="flex gap-2">
         <form onSubmit={(e) => search(e)}>
             <div className="flex">
-                <Input placeholder="Pesquisar" className="w-[200px] h-[35px] focus-visible:ring-0 focus-visible:ring-offset-0 rounded-[0px] rounded-l-md border-r-0" value={valorInput} onChange={(e) => setValorInput(e.target.value)}/>
+                <div className="relative flex-grow">
+                    <Input 
+                        placeholder="Pesquisar"
+                        className="w-[200px] h-[35px] focus-visible:ring-0 focus-visible:ring-offset-0 rounded-[0px] rounded-l-md border-r-0"
+                        value={valorInput}
+                        onChange={(e) => setValorInput(e.target.value)}
+                    />
+                    {valorInput && (
+                        <div
+                            className="flex justify-center items-center rounded-r-none rounded-l-md bg-transparent hover:bg-gray-100 absolute right-0 top-0 h-full w-10 p-2 focus:outline-none focus:ring-0 border-0 outline-none shadow-none"
+                            onClick={() => {
+                                setValorInput("")
+                                search(undefined, "")
+                            }}
+                        >
+                            <X color="gray" className="h-4 w-4" />
+                        </div>
+                    )}
+                </div>
                 <div title="pesquisar" className="bg-terciaria hover:bg-terciaria2 transition w-[35px] h-[35px] rounded-r-sm cursor-pointer shadow-md flex justify-center items-center" onClick={() => search()}>
                     <FaSearch className="text-textoContraste" size={20} />
                 </div>

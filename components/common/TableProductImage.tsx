@@ -7,9 +7,9 @@ interface Props {
 }
 
 export default function TableProductImage({ src, alt = "" }: Props) {
-  return src ? (
-    <div className="rounded-md outline outline-2 outline-solid outline-[rgba(0,0,0,0.8)] items-center w-8 h-8">
-      {
+  return (
+    <div className="flex justify-center items-center rounded-md w-8 h-8 outline outline-2 outline-solid outline-black/80 group-hover:outline-white/70">
+      {src ? (
         <Image
           src={src}
           alt={alt}
@@ -17,15 +17,11 @@ export default function TableProductImage({ src, alt = "" }: Props) {
           height={32}
           className="rounded-md object-contain max-w-full max-h-full"
         />
-      }
-    </div>
-  ) : (
-    <div className="rounded-md outline outline-2 outline-solid outline-[rgba(0,0,0,0.8)] items-center w-8 h-8">
-      {
+      ) : (
         <span className="text-sm text-gray-900 italic">
           <CiImageOff size={32} />
         </span>
-      }
+      )}
     </div>
-  )
+  );
 }
