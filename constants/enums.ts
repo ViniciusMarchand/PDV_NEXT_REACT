@@ -1,4 +1,4 @@
 export enum productFormStatus {
-    Adicionar = "Adicionar",
+    Cadastrar = "Cadastrar",
     Editar = "Editar",
 }
