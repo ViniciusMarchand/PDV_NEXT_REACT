@@ -20,7 +20,7 @@ export default function ProductPage() {
                     <div className="flex justify-start items-center w-full gap-4">
                         <AlertDialogTrigger onClick={() => statusToAdd()}>
                             <div className="w-[200px] h-[35px]">
-                                <ModalButton value="Adicionar Produto"  />
+                                <ModalButton value="Cadastrar Produto"  />
                             </div>
                         </AlertDialogTrigger>
                         <ImportPopOver />

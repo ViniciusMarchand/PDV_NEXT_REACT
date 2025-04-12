@@ -7,18 +7,18 @@ import { ProductInputs } from "@/global/Types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import productApi from "@/api/productApi";
 import { CurrencyInput } from "react-currency-mask";
-import GenericButton from "@/components/common/GenericButton";
 import { productFormStatus } from "@/constants/enums";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Spinner from "@/components/common/Spinner";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 export const ProductModalFormContext = createContext<any>(null);
 
 export const ProductModalFormProvider = (props: { children: React.ReactNode}) => {
     const { children } = props;
     const [open, setOpen] = useState(false);
-    const [formStatus, setFormStatus] = useState(productFormStatus.Adicionar);
+    const [formStatus, setFormStatus] = useState(productFormStatus.Cadastrar);
     const [maskedPrecoValue, setMaskedPrecoValue] = useState<number | string>('0');
     const [maskedPrecoFornecedorValue, setMaskedPrecoFornecedorValue] = useState<number | string>('0');
     const [sortBy, setSortBy] = useState("id");
@@ -30,6 +30,8 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     const [image, setImage] = useState<File | null>();
     const searchParams = useSearchParams();
     const [loading, setLoading] = useState(false);
+    const [autoGenerateBarcode, setAutoGenerateBarcode] = useState(true);
+    const [isBarcodeDisabled, setIsBarcodeDisabled] = useState(false);
     
     useEffect(() => {
         const newPage = searchParams?.get('page') || '';
@@ -81,7 +83,11 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
 
         Object.entries(product).forEach(([key, value]) => {
             if (value !== undefined && value !== null && key !== "imagem") {
-                formData.append(key, value.toString());
+                if (key === "codigoBarrasEAN13" && value) {
+                    return;
+                } else {
+                    formData.append(key, value.toString());
+                }
             }
         });
         
@@ -90,8 +96,13 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         }
         
         setLoading(true);
-            
-        if (formStatus === productFormStatus.Adicionar) {
+
+        if(autoGenerateBarcode) {
+            formData.append("gerarCodigoBarrasEAN13", "true");
+            formData.delete("codigoBarrasEAN13");
+        }
+
+        if (formStatus === productFormStatus.Cadastrar) {
             productApi.post(formData)
             .then(res => {
                 successToast("Produto adicionado com sucesso!");
@@ -128,7 +139,11 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
 
     const statusToAdd = () => {
         reset();
-        setFormStatus(productFormStatus.Adicionar);
+        setFormStatus(productFormStatus.Cadastrar);
+        setMaskedPrecoValue('0');
+        setMaskedPrecoFornecedorValue('0');
+        setAutoGenerateBarcode(true);
+        setIsBarcodeDisabled(false);
         setOpen(true);
     };
     
@@ -144,6 +159,8 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         setValue("preco", preco);
         setMaskedPrecoValue(preco);
         setValue("codigoBarrasEAN13", codigoBarrasEAN13);
+        setAutoGenerateBarcode(!codigoBarrasEAN13);
+        setIsBarcodeDisabled(autoGenerateBarcode);
         setSelectedProduct(product);
         setOpen(true);
     };
@@ -176,7 +193,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                     <input type='number' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("estoque")} required />
                                 </div>
                             }
-                            <div className={ formStatus === productFormStatus.Adicionar ? "w-[200px]" : "w-full"}>
+                            <div className={ formStatus === productFormStatus.Cadastrar ? "w-[200px]" : "w-full"}>
                                 <label className="text-[18px]">Unidade de Medida</label>
                                 <select className='text-[17px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("unidadeMedida")} required defaultValue={""}>
                                     <option value="" disabled>Selecione...</option>
@@ -209,7 +226,41 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                             </div>
                             <div className="w-full">
                                 <label className="text-[18px]">Código de Barras</label>
-                                <input type='text' className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria' {...register("codigoBarrasEAN13")} minLength={13} maxLength={13} />
+                                <input 
+                                    type='text'
+                                    className='text-[18px] border w-full h-[45px] focus:outline-none rounded-md mb-5 p-2 bg-secundaria'
+                                    {...register("codigoBarrasEAN13")}
+                                    minLength={13} 
+                                    maxLength={13}
+                                    onChange={(e) => {
+                                        const value = e.target.value;
+                                        setValue("codigoBarrasEAN13", value);
+                                
+                                        if (value.trim() === "") {
+                                            setAutoGenerateBarcode(true);
+                                            setIsBarcodeDisabled(false);
+                                        } else {
+                                            setAutoGenerateBarcode(false);
+                                            setIsBarcodeDisabled(true);
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div className="flex items-center space-x-2 mb-5">
+                                <Checkbox
+                                    id="terms"
+                                    checked={autoGenerateBarcode}
+                                    disabled={isBarcodeDisabled}
+                                    onCheckedChange={(checked) => {
+                                        if (!isBarcodeDisabled) setAutoGenerateBarcode(!!checked);
+                                    }}
+                                />
+                                <label
+                                    htmlFor="terms"
+                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                >
+                                    Gerar código de barras automaticamente
+                                </label>
                             </div>
                             <div className="w-full mb-5">
                                 <label className="text-[18px]">Imagem</label>
