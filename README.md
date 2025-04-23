@@ -1,4 +1,4 @@
-## POS project (🚧 in development!)
+## POS project
 This project is a point-of-sale (POS) system developed using modern technologies to ensure a smooth and efficient user experience. Below are the main technologies and libraries used in the project.
 
 Technologies used
