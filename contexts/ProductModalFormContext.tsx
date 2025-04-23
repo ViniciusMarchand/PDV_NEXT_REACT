@@ -67,6 +67,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         handleSubmit,
         setValue,
         reset,
+        watch,
     } = useForm<ProductInputs>({
         defaultValues: {
             precoFornecedor: 0,
@@ -74,20 +75,21 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         }
     });
     
+    useEffect(() => {
+        
+    },[]);
 
     const onSubmit: SubmitHandler<ProductInputs> = (product) => {
         const formData = new FormData();
+
+        const { codigoBarrasEAN13 } = product;
 
         if(loading) 
             return;
 
         Object.entries(product).forEach(([key, value]) => {
-            if (value !== undefined && value !== null && key !== "imagem") {
-                if (key === "codigoBarrasEAN13" && value) {
-                    return;
-                } else {
-                    formData.append(key, value.toString());
-                }
+            if (value !== undefined && value !== null && key !== "imagem" && key !== "codigoBarrasEAN13") {
+                formData.append(key, value.toString());
             }
         });
         
@@ -97,16 +99,20 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         
         setLoading(true);
 
-        if(autoGenerateBarcode) {
+        if(autoGenerateBarcode && !codigoBarrasEAN13) {
             formData.append("gerarCodigoBarrasEAN13", "true");
-            formData.delete("codigoBarrasEAN13");
+            // formData.delete("codigoBarrasEAN13");
+        } 
+
+        if(codigoBarrasEAN13) {
+            formData.append("codigoBarrasEAN13", codigoBarrasEAN13)
         }
 
         if (formStatus === productFormStatus.Cadastrar) {
             productApi.post(formData)
             .then(res => {
                 successToast("Produto adicionado com sucesso!");
-                reset();
+                clearForm();
                 searchItems();
                 setOpen(false);
             })
@@ -123,7 +129,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                 productApi.put(selectedProduct.id, formData)
             .then(res => {
                 successToast("Produto editado com sucesso!");
-                reset();
+                clearForm();
                 searchItems();
                 setOpen(false);
             })
@@ -138,17 +144,20 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     };
 
     const statusToAdd = () => {
+        clearForm();
+        setOpen(true);
+    };
+    
+    const clearForm = () => {
         reset();
         setFormStatus(productFormStatus.Cadastrar);
         setMaskedPrecoValue('0');
         setMaskedPrecoFornecedorValue('0');
-        setAutoGenerateBarcode(true);
-        setIsBarcodeDisabled(false);
-        setOpen(true);
-    };
-    
+        setImage(null);
+    }
     
     const statusToEdit = (product:ProductInputs) => {
+        clearForm();
         setFormStatus(productFormStatus.Editar);
         const {descricao, estoque, unidadeMedida, preco, precoFornecedor, codigoBarrasEAN13} = product;
         setValue("descricao", descricao);
@@ -159,11 +168,23 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
         setValue("preco", preco);
         setMaskedPrecoValue(preco);
         setValue("codigoBarrasEAN13", codigoBarrasEAN13);
-        setAutoGenerateBarcode(!codigoBarrasEAN13);
-        setIsBarcodeDisabled(autoGenerateBarcode);
         setSelectedProduct(product);
+        setAutoGenerateBarcode(true);
         setOpen(true);
     };
+
+    const codBarras = watch("codigoBarrasEAN13");
+
+    useEffect(() => {
+      if (codBarras) {
+        setIsBarcodeDisabled(true);
+        setAutoGenerateBarcode(false);
+        
+    } else {
+        setIsBarcodeDisabled(false);
+        setAutoGenerateBarcode(true);
+      }
+    }, [codBarras]);
     
     return (
         <ProductModalFormContext.Provider value={{
@@ -235,14 +256,6 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                     onChange={(e) => {
                                         const value = e.target.value;
                                         setValue("codigoBarrasEAN13", value);
-                                
-                                        if (value.trim() === "") {
-                                            setAutoGenerateBarcode(true);
-                                            setIsBarcodeDisabled(false);
-                                        } else {
-                                            setAutoGenerateBarcode(false);
-                                            setIsBarcodeDisabled(true);
-                                        }
                                     }}
                                 />
                             </div>
@@ -251,7 +264,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                     id="terms"
                                     checked={autoGenerateBarcode}
                                     disabled={isBarcodeDisabled}
-                                    onCheckedChange={(checked) => {
+                                    onCheckedChange={(checked: any) => {
                                         if (!isBarcodeDisabled) setAutoGenerateBarcode(!!checked);
                                     }}
                                 />
@@ -262,6 +275,7 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
                                     Gerar código de barras automaticamente
                                 </label>
                             </div>
+
                             <div className="w-full mb-5">
                                 <label className="text-[18px]">Imagem</label>
                                 <Input id="image" type="file" className="cursor-pointer" onChange={(e) => { if (e.target.files) setImage(e.target.files[0]); }}/>
