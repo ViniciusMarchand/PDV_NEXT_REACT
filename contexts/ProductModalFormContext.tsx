@@ -71,7 +71,8 @@ export const ProductModalFormProvider = (props: { children: React.ReactNode}) =>
     } = useForm<ProductInputs>({
         defaultValues: {
             precoFornecedor: 0,
-            preco: 0
+            preco: 0,
+            unidadeMedida: "UNIDADE"
         }
     });
     
