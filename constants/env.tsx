@@ -14,6 +14,6 @@ export const clientInfo = {
 export const pixInfo = {
     key: process.env.NEXT_PUBLIC_PIX_KEY || '',
     name: process.env.NEXT_PUBLIC_PIX_NAME || '',
-    city: process.env.NEXT_PUBLIC_PIX_CITY || '',
+    city: process.env.NEXT_PUBLIC_CIDADE || '',
     transactionId: process.env.NEXT_PUBLIC_PIX_TRANSACTION_ID || ''
 }
